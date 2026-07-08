@@ -41,6 +41,7 @@ function toFC(vendors: Vendor[]): GeoJSON.FeatureCollection {
       geometry: { type: "Point", coordinates: [v.lng, v.lat] },
       properties: {
         id: v.id,
+        slug: v.slug,
         name: v.name,
         city: v.city,
         price: pinPrice(v.price),
@@ -60,8 +61,10 @@ function popupContent(p: Record<string, string>): HTMLElement {
       <div class="name"></div>
       <div><span class="price"></span> · <span class="star">★</span> <span class="r"></span></div>
       <label><input type="checkbox" /> usporedi</label>
+      <a class="more" href="#">detalji →</a>
     </div>`;
   el.querySelector(".name")!.textContent = p.name;
+  (el.querySelector(".more") as HTMLAnchorElement).href = `/pruzatelj/${p.slug}`;
   el.querySelector(".price")!.textContent = p.priceFull;
   el.querySelector(".r")!.textContent = p.rating;
   const box = el.querySelector("input")! as HTMLInputElement;

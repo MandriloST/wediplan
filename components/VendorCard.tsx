@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { CATEGORY_BY_SLUG } from "@/lib/data";
 import { formatPrice, formatRating, euro } from "@/lib/format";
 import { estimateCost, isOverBudget, vendorGroup } from "@/lib/budget";
@@ -21,7 +22,10 @@ export default function VendorCard({ vendor }: { vendor: Vendor }) {
       <div className="ph thumb">foto</div>
       <div className="info">
         <div>
-          <span className="name">{vendor.name}</span> <span className="city">· {vendor.city}</span>
+          <Link href={`/pruzatelj/${vendor.slug}`} className="name" style={{ color: "inherit" }}>
+            {vendor.name}
+          </Link>{" "}
+          <span className="city">· {vendor.city}</span>
         </div>
         <div className="row2">
           <span className="price">{formatPrice(vendor.price)}</span>{" "}

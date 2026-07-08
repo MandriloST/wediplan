@@ -38,6 +38,13 @@ Vendor:
 { "region": "dalmacija", "shares": { "sala": 0.42, "catering": 0.24, "foto": 0.15, "glazba": 0.09, "ostalo": 0.1 } }
 ```
 
+## GET /api/vendors/{slug}
+Profil pružatelja (implementirano, mock):
+```json
+{ "vendor": {}, "about": "…", "services": ["…"],
+  "importedReviews": [{ "author": "Marija i Ivan", "rating": 5, "text": "…", "source": "Google recenzije", "year": 2025 }] }
+```
+
 ## Kasnije (Coming soon)
-- `GET /api/vendors/{id}/availability?date=` → `{ "status": "free|busy|onRequest" }`
+- `GET /api/vendors/{id}/availability?month=YYYY-MM` → `{ "days": { "2026-09-05": "free|busy" } }` — do tada frontend koristi deterministički mock iz `lib/availability.ts` (ista logika na profilu i u usporedbi)
 - `POST /api/plan` (sync plana uz auth), `POST /api/reviews` (registrirani korisnici)
