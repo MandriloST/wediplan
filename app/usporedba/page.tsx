@@ -3,18 +3,15 @@
 import Link from "next/link";
 import { CATEGORY_BY_SLUG, VENDORS } from "@/lib/data";
 import { formatPrice, formatRating } from "@/lib/format";
+import { dayStatus, statusLabel } from "@/lib/availability";
+import type { Vendor } from "@/lib/types";
 import { useCompare, useWeddingDate } from "@/stores";
 
-/** Mock availability until the live calendar (Coming soon) ships:
- *  deterministic per vendor+date so the UI is stable. */
-function availability(vendorId: string, liveCalendar: boolean, date: string | null) {
-  if (!liveCalendar) return { label: "na upit — kontaktirajte pružatelja", free: false };
+/** Ista logika kao kalendar na profilu (lib/availability) — konzistentno svugdje. */
+function availability(vendor: Vendor, date: string | null) {
+  if (!vendor.liveCalendar) return { label: "na upit — kontaktirajte pružatelja", free: false };
   if (!date) return { label: "✓ kalendar uživo — odaberite datum", free: false };
-  let h = 0;
-  for (const ch of vendorId + date) h = (h * 31 + ch.charCodeAt(0)) % 997;
-  return h % 3 === 0
-    ? { label: "zauzet na taj datum", free: false }
-    : { label: "✓ slobodan", free: true };
+  return statusLabel(dayStatus(vendor, date));
 }
 
 export default function ComparePage() {
@@ -63,7 +60,7 @@ export default function ComparePage() {
                   {vendors.map((v) => (
                     <th key={v.id} scope="col" className="col-head">
                       <div className="ph">foto</div>
-                      {v.name}
+                      <Link href={`/pruzatelj/${v.slug}`}>{v.name}</Link>
                       <div style={{ fontWeight: 400, color: "var(--muted)", fontSize: 13 }}>
                         {v.city}
                       </div>
@@ -99,7 +96,7 @@ export default function ComparePage() {
                 <tr>
                   <td>{date ? new Date(date).toLocaleDateString("hr-HR") : "Dostupnost"}</td>
                   {vendors.map((v) => {
-                    const a = availability(v.id, v.liveCalendar, date);
+                    const a = availability(v, date);
                     return (
                       <td key={v.id} className={a.free ? "free" : ""}>
                         {a.label}

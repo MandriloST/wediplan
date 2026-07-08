@@ -76,3 +76,20 @@ export interface Paged<T> {
   page: number;
   pageSize: number;
 }
+
+/** Feature #4 — dvojaka recenzija. Prenesene recenzije skuplja Wediplan od
+ *  pružatelja prije lansiranja (screenshotovi/izvori), uz vidljivu oznaku izvora. */
+export interface ImportedReview {
+  author: string;
+  rating: number;
+  text: string;
+  source: string; // npr. "Google recenzije"
+  year: number;
+}
+
+export interface VendorProfileData {
+  vendor: Vendor;
+  about: string;
+  services: string[];
+  importedReviews: ImportedReview[];
+}
