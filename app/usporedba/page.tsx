@@ -84,7 +84,7 @@ export default function ComparePage() {
                   <td>Recenzije</td>
                   {vendors.map((v) => (
                     <td key={v.id}>
-                      ★ {formatRating(v.rating)} · {v.reviewCount}
+                      {v.reviewCount > 0 ? <>★ {formatRating(v.rating)} · {v.reviewCount}</> : <span style={{ color: "var(--muted)" }}>još bez ocjene</span>}
                       {v.verified && (
                         <div>
                           <span className="badge verified">✓ provjereno</span>

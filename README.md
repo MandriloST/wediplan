@@ -31,6 +31,20 @@ public/data/          croatia-regions.geojson (5 regija)
 public/sw.js          service worker
 ```
 
+
+## Unos stvarnih podataka (zamjena mocka)
+
+1. Otvori `data/vendors-template.xlsx` (list **Upute** ima cijeli postupak; **Pružatelji** i **Recenzije** se popunjavaju, primjeri s „PRIMJER” se preskaču).
+2. Koordinate: Google Maps → desni klik na lokaciju → klik na koordinate → zalijepi (skripta tolerira i obrnuti redoslijed).
+3. Pokreni uvoz s validacijom:
+   ```bash
+   npm run import:vendors -- putanja/do/tvoje-datoteke.xlsx
+   ```
+   Greške se ispisuju s brojem retka; dok ih ima, ništa se ne piše. Uspješan uvoz generira `data/vendors.json` + `data/profiles.json` koje frontend čita (mock je samo početni sadržaj tih datoteka).
+4. `npm run dev` za pregled → `git commit data/` → podaci su na stranici.
+
+Kolone `web/telefon/email` su interna evidencija — import ih **ne** objavljuje (Direktan kontakt: zasad ne). Za prenesene ocjene i recenzije `izvor` je obavezan; prikazuje se uz ocjenu na profilu. Isti Excel kasnije postaje seed za .NET bazu — ugovor je isti (API.md).
+
 ## Prelazak na .NET backend
 
 Frontend zove isključivo `/api/*` preko fetch/TanStack Query. Zamjena: postavi Next.js `rewrites` prema ASP.NET Core servisu koji implementira ugovor iz `API.md` — komponente se ne mijenjaju. Za instant search u produkciji preporuka iz handoffa: Typesense/Meilisearch iza `/api/suggest` i `/api/vendors?q=`.

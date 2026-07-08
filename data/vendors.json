@@ -1,0 +1,1123 @@
+[
+  {
+    "id": "v44",
+    "slug": "zlatarna-aurum",
+    "name": "Zlatarna Aurum",
+    "category": "nakit-i-prstenje",
+    "region": "zagreb",
+    "city": "Zagreb",
+    "lng": 15.977,
+    "lat": 45.8135,
+    "price": {
+      "kind": "from",
+      "from": 350
+    },
+    "rating": 4.9,
+    "reviewCount": 71,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v16",
+    "slug": "makeup-by-petra",
+    "name": "Makeup by Petra",
+    "category": "sminka-nokti",
+    "region": "dalmacija",
+    "city": "Split",
+    "lng": 16.441,
+    "lat": 43.509,
+    "price": {
+      "kind": "from",
+      "from": 120
+    },
+    "rating": 4.9,
+    "reviewCount": 52,
+    "verified": false,
+    "liveCalendar": true,
+    "styleTags": []
+  },
+  {
+    "id": "v47",
+    "slug": "plesna-skola-korak",
+    "name": "Plesna škola Korak",
+    "category": "skole-plesa",
+    "region": "zagreb",
+    "city": "Zagreb",
+    "lng": 15.975,
+    "lat": 45.808,
+    "price": {
+      "kind": "from",
+      "from": 140
+    },
+    "rating": 4.9,
+    "reviewCount": 45,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v3",
+    "slug": "studio-mare",
+    "name": "Studio Mare",
+    "category": "foto-i-video",
+    "region": "dalmacija",
+    "city": "Dubrovnik",
+    "lng": 18.0944,
+    "lat": 42.6507,
+    "price": {
+      "kind": "from",
+      "from": 2400
+    },
+    "rating": 4.9,
+    "reviewCount": 44,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": [
+      "editorial",
+      "luksuzno"
+    ]
+  },
+  {
+    "id": "v53",
+    "slug": "tamburasi-zlatne-zice",
+    "name": "Tamburaši Zlatne žice",
+    "category": "glazba-bendovi",
+    "region": "slavonija",
+    "city": "Đakovo",
+    "lng": 18.4106,
+    "lat": 45.3097,
+    "price": {
+      "kind": "from",
+      "from": 900
+    },
+    "rating": 4.9,
+    "reviewCount": 39,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": [
+      "tamburaši"
+    ]
+  },
+  {
+    "id": "v36",
+    "slug": "dvorac-bezanec",
+    "name": "Dvorac Bežanec",
+    "category": "restorani-i-sale",
+    "region": "zagreb",
+    "city": "Pregrada",
+    "lng": 15.7503,
+    "lat": 46.1631,
+    "price": {
+      "kind": "perPerson",
+      "from": 75,
+      "to": 120
+    },
+    "rating": 4.9,
+    "reviewCount": 38,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": [
+      "dvorac"
+    ]
+  },
+  {
+    "id": "v9",
+    "slug": "klapa-kamen",
+    "name": "Klapa Kamen",
+    "category": "glazba-za-crkvu",
+    "region": "dalmacija",
+    "city": "Omiš",
+    "lng": 16.6889,
+    "lat": 43.4447,
+    "price": {
+      "kind": "from",
+      "from": 350
+    },
+    "rating": 4.9,
+    "reviewCount": 21,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v41",
+    "slug": "harmonika-stef",
+    "name": "Harmonika Štef",
+    "category": "harmonikasi",
+    "region": "zagreb",
+    "city": "Samobor",
+    "lng": 15.7181,
+    "lat": 45.8011,
+    "price": {
+      "kind": "from",
+      "from": 300
+    },
+    "rating": 4.9,
+    "reviewCount": 19,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v20",
+    "slug": "kastel-momjan",
+    "name": "Kaštel Momjan",
+    "category": "konobe-i-prostori",
+    "region": "istra",
+    "city": "Momjan",
+    "lng": 13.5539,
+    "lat": 45.4083,
+    "price": {
+      "kind": "perPerson",
+      "from": 70,
+      "to": 110
+    },
+    "rating": 4.9,
+    "reviewCount": 13,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": [
+      "kaštel",
+      "vinograd"
+    ]
+  },
+  {
+    "id": "v14",
+    "slug": "vila-lavanda",
+    "name": "Vila Lavanda",
+    "category": "najam-kuce",
+    "region": "dalmacija",
+    "city": "Hvar",
+    "lng": 16.4429,
+    "lat": 43.1729,
+    "price": {
+      "kind": "from",
+      "from": 3200
+    },
+    "rating": 4.9,
+    "reviewCount": 11,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": [
+      "s bazenom"
+    ]
+  },
+  {
+    "id": "v42",
+    "slug": "vjencanice-iva",
+    "name": "Vjenčanice Iva",
+    "category": "vjencanice",
+    "region": "zagreb",
+    "city": "Zagreb",
+    "lng": 15.976,
+    "lat": 45.813,
+    "price": {
+      "kind": "from",
+      "from": 750
+    },
+    "rating": 4.8,
+    "reviewCount": 63,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v4",
+    "slug": "villa-dalmacija",
+    "name": "Villa Dalmacija",
+    "category": "restorani-i-sale",
+    "region": "dalmacija",
+    "city": "Split",
+    "lng": 16.4102,
+    "lat": 43.5147,
+    "price": {
+      "kind": "perPerson",
+      "from": 65,
+      "to": 95
+    },
+    "rating": 4.8,
+    "reviewCount": 57,
+    "verified": true,
+    "liveCalendar": true,
+    "styleTags": [
+      "uz more",
+      "terasa"
+    ]
+  },
+  {
+    "id": "v28",
+    "slug": "villa-opatija",
+    "name": "Villa Opatija",
+    "category": "restorani-i-sale",
+    "region": "kvarner",
+    "city": "Opatija",
+    "lng": 14.3053,
+    "lat": 45.3376,
+    "price": {
+      "kind": "perPerson",
+      "from": 60,
+      "to": 92
+    },
+    "rating": 4.8,
+    "reviewCount": 41,
+    "verified": true,
+    "liveCalendar": true,
+    "styleTags": [
+      "belle époque"
+    ]
+  },
+  {
+    "id": "v40",
+    "slug": "dj-mint",
+    "name": "DJ Mint",
+    "category": "dj",
+    "region": "zagreb",
+    "city": "Zagreb",
+    "lng": 15.985,
+    "lat": 45.812,
+    "price": {
+      "kind": "from",
+      "from": 650
+    },
+    "rating": 4.8,
+    "reviewCount": 41,
+    "verified": false,
+    "liveCalendar": true,
+    "styleTags": []
+  },
+  {
+    "id": "v11",
+    "slug": "torte-lucija",
+    "name": "Torte Lucija",
+    "category": "torte-i-kolaci",
+    "region": "dalmacija",
+    "city": "Zadar",
+    "lng": 15.24,
+    "lat": 44.11,
+    "price": {
+      "kind": "from",
+      "from": 180
+    },
+    "rating": 4.8,
+    "reviewCount": 40,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v45",
+    "slug": "pozivnice-papir-tinta",
+    "name": "Pozivnice Papir & Tinta",
+    "category": "pozivnice",
+    "region": "zagreb",
+    "city": "Zagreb",
+    "lng": 15.98,
+    "lat": 45.816,
+    "price": {
+      "kind": "from",
+      "from": 2
+    },
+    "rating": 4.8,
+    "reviewCount": 36,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v1",
+    "slug": "foto-studio-anic",
+    "name": "Foto studio Anić",
+    "category": "foto-i-video",
+    "region": "dalmacija",
+    "city": "Split",
+    "lng": 16.4402,
+    "lat": 43.5081,
+    "price": {
+      "kind": "from",
+      "from": 850
+    },
+    "rating": 4.8,
+    "reviewCount": 31,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": [
+      "boho",
+      "film"
+    ]
+  },
+  {
+    "id": "v33",
+    "slug": "frizerski-salon-ela",
+    "name": "Frizerski salon Ela",
+    "category": "frizerski-saloni",
+    "region": "kvarner",
+    "city": "Rijeka",
+    "lng": 14.443,
+    "lat": 45.328,
+    "price": {
+      "kind": "from",
+      "from": 90
+    },
+    "rating": 4.8,
+    "reviewCount": 30,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v19",
+    "slug": "studio-rovinj",
+    "name": "Studio Rovinj",
+    "category": "foto-i-video",
+    "region": "istra",
+    "city": "Rovinj",
+    "lng": 13.6393,
+    "lat": 45.0812,
+    "price": {
+      "kind": "from",
+      "from": 1300
+    },
+    "rating": 4.8,
+    "reviewCount": 29,
+    "verified": true,
+    "liveCalendar": true,
+    "styleTags": [
+      "editorial"
+    ]
+  },
+  {
+    "id": "v55",
+    "slug": "torte-slavonka",
+    "name": "Torte Slavonka",
+    "category": "torte-i-kolaci",
+    "region": "slavonija",
+    "city": "Osijek",
+    "lng": 18.69,
+    "lat": 45.552,
+    "price": {
+      "kind": "from",
+      "from": 120
+    },
+    "rating": 4.8,
+    "reviewCount": 29,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v49",
+    "slug": "med-lavanda-putovanja",
+    "name": "Med & Lavanda putovanja",
+    "category": "bracna-putovanja",
+    "region": "zagreb",
+    "city": "Zagreb",
+    "lng": 15.979,
+    "lat": 45.815,
+    "price": {
+      "kind": "from",
+      "from": 1600
+    },
+    "rating": 4.8,
+    "reviewCount": 22,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v17",
+    "slug": "wedding-planner-ana",
+    "name": "Wedding planner Ana",
+    "category": "organizatori",
+    "region": "dalmacija",
+    "city": "Dubrovnik",
+    "lng": 18.09,
+    "lat": 42.65,
+    "price": {
+      "kind": "from",
+      "from": 1900
+    },
+    "rating": 4.8,
+    "reviewCount": 17,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v26",
+    "slug": "vila-histria",
+    "name": "Vila Histria",
+    "category": "najam-kuce",
+    "region": "istra",
+    "city": "Bale",
+    "lng": 13.7847,
+    "lat": 45.0411,
+    "price": {
+      "kind": "from",
+      "from": 2800
+    },
+    "rating": 4.8,
+    "reviewCount": 8,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v34",
+    "slug": "atelier-foto-zg",
+    "name": "Atelier Foto ZG",
+    "category": "foto-i-video",
+    "region": "zagreb",
+    "city": "Zagreb",
+    "lng": 15.9819,
+    "lat": 45.815,
+    "price": {
+      "kind": "from",
+      "from": 950
+    },
+    "rating": 4.7,
+    "reviewCount": 48,
+    "verified": true,
+    "liveCalendar": true,
+    "styleTags": [
+      "reportažni",
+      "film"
+    ]
+  },
+  {
+    "id": "v39",
+    "slug": "band-sjeverni-vjetar",
+    "name": "Band Sjeverni vjetar",
+    "category": "glazba-bendovi",
+    "region": "zagreb",
+    "city": "Zagreb",
+    "lng": 15.98,
+    "lat": 45.82,
+    "price": {
+      "kind": "from",
+      "from": 1300
+    },
+    "rating": 4.7,
+    "reviewCount": 34,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v43",
+    "slug": "odijela-gospodin",
+    "name": "Odijela Gospodin",
+    "category": "muska-odijela",
+    "region": "zagreb",
+    "city": "Zagreb",
+    "lng": 15.978,
+    "lat": 45.814,
+    "price": {
+      "kind": "from",
+      "from": 420
+    },
+    "rating": 4.7,
+    "reviewCount": 28,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v7",
+    "slug": "band-adriatic",
+    "name": "Band Adriatic",
+    "category": "glazba-bendovi",
+    "region": "dalmacija",
+    "city": "Split",
+    "lng": 16.45,
+    "lat": 43.51,
+    "price": {
+      "kind": "from",
+      "from": 1500
+    },
+    "rating": 4.7,
+    "reviewCount": 26,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": [
+      "pop",
+      "dalmatinske"
+    ]
+  },
+  {
+    "id": "v31",
+    "slug": "torte-nona",
+    "name": "Torte Nona",
+    "category": "torte-i-kolaci",
+    "region": "kvarner",
+    "city": "Opatija",
+    "lng": 14.31,
+    "lat": 45.34,
+    "price": {
+      "kind": "from",
+      "from": 160
+    },
+    "rating": 4.7,
+    "reviewCount": 25,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v51",
+    "slug": "salas-zlatno-klasje",
+    "name": "Salaš Zlatno klasje",
+    "category": "restorani-i-sale",
+    "region": "slavonija",
+    "city": "Osijek",
+    "lng": 18.68,
+    "lat": 45.55,
+    "price": {
+      "kind": "perPerson",
+      "from": 35,
+      "to": 55
+    },
+    "rating": 4.7,
+    "reviewCount": 24,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": [
+      "salaš",
+      "tradicionalno"
+    ]
+  },
+  {
+    "id": "v5",
+    "slug": "dvorana-perla",
+    "name": "Dvorana Perla",
+    "category": "restorani-i-sale",
+    "region": "dalmacija",
+    "city": "Zadar",
+    "lng": 15.2314,
+    "lat": 44.1194,
+    "price": {
+      "kind": "perPerson",
+      "from": 55,
+      "to": 80
+    },
+    "rating": 4.7,
+    "reviewCount": 23,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": [
+      "moderna",
+      "klimatizirano"
+    ]
+  },
+  {
+    "id": "v18",
+    "slug": "selfie-mirror-dalmacija",
+    "name": "Selfie mirror Dalmacija",
+    "category": "foto-kabine",
+    "region": "dalmacija",
+    "city": "Split",
+    "lng": 16.435,
+    "lat": 43.512,
+    "price": {
+      "kind": "from",
+      "from": 390
+    },
+    "rating": 4.7,
+    "reviewCount": 22,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v23",
+    "slug": "istria-catering",
+    "name": "Istria Catering",
+    "category": "catering",
+    "region": "istra",
+    "city": "Poreč",
+    "lng": 13.5932,
+    "lat": 45.2269,
+    "price": {
+      "kind": "perPerson",
+      "from": 42,
+      "to": 70
+    },
+    "rating": 4.7,
+    "reviewCount": 19,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v48",
+    "slug": "animacija-balonko",
+    "name": "Animacija Balonko",
+    "category": "cuvanje-djece",
+    "region": "zagreb",
+    "city": "Zagreb",
+    "lng": 15.982,
+    "lat": 45.81,
+    "price": {
+      "kind": "from",
+      "from": 220
+    },
+    "rating": 4.7,
+    "reviewCount": 18,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v12",
+    "slug": "cvjecarnica-oleander",
+    "name": "Cvjećarnica Oleander",
+    "category": "cvijece-i-dekoracije",
+    "region": "dalmacija",
+    "city": "Split",
+    "lng": 16.44,
+    "lat": 43.515,
+    "price": {
+      "kind": "from",
+      "from": 450
+    },
+    "rating": 4.7,
+    "reviewCount": 15,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v56",
+    "slug": "fijaker-baranja",
+    "name": "Fijaker Baranja",
+    "category": "najam-limuzina",
+    "region": "slavonija",
+    "city": "Osijek",
+    "lng": 18.7,
+    "lat": 45.55,
+    "price": {
+      "kind": "from",
+      "from": 200
+    },
+    "rating": 4.7,
+    "reviewCount": 6,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": [
+      "fijaker"
+    ]
+  },
+  {
+    "id": "v21",
+    "slug": "restoran-adriatica",
+    "name": "Restoran Adriatica",
+    "category": "restorani-i-sale",
+    "region": "istra",
+    "city": "Pula",
+    "lng": 13.8496,
+    "lat": 44.8666,
+    "price": {
+      "kind": "perPerson",
+      "from": 50,
+      "to": 78
+    },
+    "rating": 4.6,
+    "reviewCount": 35,
+    "verified": false,
+    "liveCalendar": true,
+    "styleTags": []
+  },
+  {
+    "id": "v10",
+    "slug": "catering-dalmata",
+    "name": "Catering Dalmata",
+    "category": "catering",
+    "region": "dalmacija",
+    "city": "Split",
+    "lng": 16.43,
+    "lat": 43.52,
+    "price": {
+      "kind": "perPerson",
+      "from": 38,
+      "to": 62
+    },
+    "rating": 4.6,
+    "reviewCount": 33,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v38",
+    "slug": "zagreb-events-catering",
+    "name": "Zagreb Events Catering",
+    "category": "catering",
+    "region": "zagreb",
+    "city": "Zagreb",
+    "lng": 15.99,
+    "lat": 45.81,
+    "price": {
+      "kind": "perPerson",
+      "from": 35,
+      "to": 65
+    },
+    "rating": 4.6,
+    "reviewCount": 27,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v6",
+    "slug": "konoba-stari-mlin",
+    "name": "Konoba Stari mlin",
+    "category": "konobe-i-prostori",
+    "region": "dalmacija",
+    "city": "Trogir",
+    "lng": 16.2515,
+    "lat": 43.5165,
+    "price": {
+      "kind": "perPerson",
+      "from": 45,
+      "to": 60
+    },
+    "rating": 4.6,
+    "reviewCount": 18,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": [
+      "rustikalno"
+    ]
+  },
+  {
+    "id": "v50",
+    "slug": "foto-panonija",
+    "name": "Foto Panonija",
+    "category": "foto-i-video",
+    "region": "slavonija",
+    "city": "Osijek",
+    "lng": 18.6955,
+    "lat": 45.5511,
+    "price": {
+      "kind": "from",
+      "from": 600
+    },
+    "rating": 4.6,
+    "reviewCount": 17,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v25",
+    "slug": "dj-adrian",
+    "name": "DJ Adrian",
+    "category": "dj",
+    "region": "istra",
+    "city": "Rovinj",
+    "lng": 13.64,
+    "lat": 45.08,
+    "price": {
+      "kind": "from",
+      "from": 550
+    },
+    "rating": 4.6,
+    "reviewCount": 16,
+    "verified": false,
+    "liveCalendar": true,
+    "styleTags": []
+  },
+  {
+    "id": "v35",
+    "slug": "studio-sjever",
+    "name": "Studio Sjever",
+    "category": "foto-i-video",
+    "region": "zagreb",
+    "city": "Varaždin",
+    "lng": 16.3378,
+    "lat": 46.3057,
+    "price": {
+      "kind": "from",
+      "from": 700
+    },
+    "rating": 4.6,
+    "reviewCount": 15,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v29",
+    "slug": "konoba-punat",
+    "name": "Konoba Punat",
+    "category": "konobe-i-prostori",
+    "region": "kvarner",
+    "city": "Krk",
+    "lng": 14.6296,
+    "lat": 45.0243,
+    "price": {
+      "kind": "perPerson",
+      "from": 40,
+      "to": 58
+    },
+    "rating": 4.6,
+    "reviewCount": 14,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v46",
+    "slug": "rasvjeta-lux",
+    "name": "Rasvjeta Lux",
+    "category": "rasvjeta-i-razglas",
+    "region": "zagreb",
+    "city": "Zagreb",
+    "lng": 15.99,
+    "lat": 45.8,
+    "price": {
+      "kind": "from",
+      "from": 480
+    },
+    "rating": 4.6,
+    "reviewCount": 13,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v2",
+    "slug": "lumen-weddings",
+    "name": "Lumen weddings",
+    "category": "foto-i-video",
+    "region": "dalmacija",
+    "city": "Šibenik",
+    "lng": 15.8952,
+    "lat": 43.7272,
+    "price": {
+      "kind": "from",
+      "from": 1100
+    },
+    "rating": 4.6,
+    "reviewCount": 12,
+    "verified": false,
+    "liveCalendar": true,
+    "styleTags": [
+      "reportažni"
+    ]
+  },
+  {
+    "id": "v24",
+    "slug": "cvijece-mia",
+    "name": "Cvijeće Mia",
+    "category": "cvijece-i-dekoracije",
+    "region": "istra",
+    "city": "Pula",
+    "lng": 13.85,
+    "lat": 44.87,
+    "price": {
+      "kind": "from",
+      "from": 380
+    },
+    "rating": 4.6,
+    "reviewCount": 12,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v13",
+    "slug": "oldtimer-adria",
+    "name": "Oldtimer Adria",
+    "category": "najam-limuzina",
+    "region": "dalmacija",
+    "city": "Split",
+    "lng": 16.42,
+    "lat": 43.5,
+    "price": {
+      "kind": "from",
+      "from": 280
+    },
+    "rating": 4.6,
+    "reviewCount": 9,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": [
+      "VW buba",
+      "kabriolet"
+    ]
+  },
+  {
+    "id": "v37",
+    "slug": "sala-panorama",
+    "name": "Sala Panorama",
+    "category": "restorani-i-sale",
+    "region": "zagreb",
+    "city": "Zagreb",
+    "lng": 15.97,
+    "lat": 45.8,
+    "price": {
+      "kind": "perPerson",
+      "from": 48,
+      "to": 72
+    },
+    "rating": 4.5,
+    "reviewCount": 52,
+    "verified": false,
+    "liveCalendar": true,
+    "styleTags": []
+  },
+  {
+    "id": "v27",
+    "slug": "foto-kvarner",
+    "name": "Foto Kvarner",
+    "category": "foto-i-video",
+    "region": "kvarner",
+    "city": "Rijeka",
+    "lng": 14.4422,
+    "lat": 45.3271,
+    "price": {
+      "kind": "from",
+      "from": 900
+    },
+    "rating": 4.5,
+    "reviewCount": 20,
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v8",
+    "slug": "dj-val",
+    "name": "DJ Val",
+    "category": "dj",
+    "region": "dalmacija",
+    "city": "Makarska",
+    "lng": 17.0178,
+    "lat": 43.2969,
+    "price": {
+      "kind": "from",
+      "from": 600
+    },
+    "rating": 4.5,
+    "reviewCount": 14,
+    "verified": false,
+    "liveCalendar": true,
+    "styleTags": []
+  },
+  {
+    "id": "v22",
+    "slug": "band-terra-magica",
+    "name": "Band Terra Magica",
+    "category": "glazba-bendovi",
+    "region": "istra",
+    "city": "Pazin",
+    "lng": 13.9366,
+    "lat": 45.2403,
+    "price": {
+      "kind": "from",
+      "from": 1200
+    },
+    "rating": 4.5,
+    "reviewCount": 10,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v54",
+    "slug": "dj-ravnica",
+    "name": "DJ Ravnica",
+    "category": "dj",
+    "region": "slavonija",
+    "city": "Vinkovci",
+    "lng": 18.8047,
+    "lat": 45.2881,
+    "price": {
+      "kind": "from",
+      "from": 400
+    },
+    "rating": 4.5,
+    "reviewCount": 8,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v52",
+    "slug": "sala-kristal",
+    "name": "Sala Kristal",
+    "category": "restorani-i-sale",
+    "region": "slavonija",
+    "city": "Slavonski Brod",
+    "lng": 18.0158,
+    "lat": 45.16,
+    "price": {
+      "kind": "perPerson",
+      "from": 30,
+      "to": 48
+    },
+    "rating": 4.4,
+    "reviewCount": 16,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v30",
+    "slug": "band-bura",
+    "name": "Band Bura",
+    "category": "glazba-bendovi",
+    "region": "kvarner",
+    "city": "Rijeka",
+    "lng": 14.44,
+    "lat": 45.33,
+    "price": {
+      "kind": "from",
+      "from": 1100
+    },
+    "rating": 4.4,
+    "reviewCount": 9,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v15",
+    "slug": "sator-centar-zadar",
+    "name": "Šator centar Zadar",
+    "category": "najam-satora",
+    "region": "dalmacija",
+    "city": "Zadar",
+    "lng": 15.22,
+    "lat": 44.12,
+    "price": {
+      "kind": "from",
+      "from": 1400
+    },
+    "rating": 4.4,
+    "reviewCount": 6,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": []
+  },
+  {
+    "id": "v32",
+    "slug": "dj-val-kvarnera",
+    "name": "DJ Val Kvarnera",
+    "category": "dj",
+    "region": "kvarner",
+    "city": "Crikvenica",
+    "lng": 14.6922,
+    "lat": 45.1747,
+    "price": {
+      "kind": "from",
+      "from": 500
+    },
+    "rating": 4.3,
+    "reviewCount": 7,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": []
+  }
+]

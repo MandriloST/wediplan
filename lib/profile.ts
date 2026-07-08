@@ -1,5 +1,12 @@
 import { CATEGORY_BY_SLUG, REGION_BY_ID, VENDORS } from "./data";
 import type { ImportedReview, Vendor, VendorProfileData } from "./types";
+import profilesJson from "@/data/profiles.json";
+
+/** Iz Excel predloška (scripts/import-vendors.mjs): slug → { about, services, reviews } */
+const PROFILES = profilesJson as Record<
+  string,
+  { about?: string; services?: string[]; reviews?: ImportedReview[] }
+>;
 
 export const VENDOR_BY_SLUG = Object.fromEntries(VENDORS.map((v) => [v.slug, v])) as Record<
   string,
@@ -68,11 +75,12 @@ export function getProfile(slug: string): VendorProfileData | null {
   const vendor = VENDOR_BY_SLUG[slug];
   if (!vendor) return null;
   const group = CATEGORY_BY_SLUG[vendor.category]?.group ?? "ostalo";
+  const p = PROFILES[slug];
   return {
     vendor,
-    about: ABOUT_OVERRIDES[slug] ?? ABOUT_BY_GROUP[group],
-    services: SERVICES_BY_GROUP[group],
-    importedReviews: IMPORTED_REVIEWS[slug] ?? [],
+    about: p?.about ?? ABOUT_OVERRIDES[slug] ?? ABOUT_BY_GROUP[group],
+    services: p?.services?.length ? p.services : SERVICES_BY_GROUP[group],
+    importedReviews: p?.reviews ?? IMPORTED_REVIEWS[slug] ?? [],
   };
 }
 

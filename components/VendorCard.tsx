@@ -29,10 +29,14 @@ export default function VendorCard({ vendor }: { vendor: Vendor }) {
         </div>
         <div className="row2">
           <span className="price">{formatPrice(vendor.price)}</span>{" "}
-          <span className="rating">
-            · <span className="star">★</span> {formatRating(vendor.rating)}
-            <span className="city"> ({vendor.reviewCount})</span>
-          </span>
+          {vendor.reviewCount > 0 ? (
+            <span className="rating">
+              · <span className="star">★</span> {formatRating(vendor.rating)}
+              <span className="city"> ({vendor.reviewCount})</span>
+            </span>
+          ) : (
+            <span className="city">· novo na Wediplanu</span>
+          )}
         </div>
         <div className="badges">
           {vendor.verified && <span className="badge verified">✓ provjereno</span>}

@@ -13,7 +13,7 @@ export default function MapPageShell() {
   const openDrawer = useBudget((s) => s.openDrawer);
   const { data } = useQuery<Paged<Vendor>>({
     queryKey: ["vendors", "all"],
-    queryFn: () => fetch("/api/vendors?pageSize=50").then((r) => r.json()),
+    queryFn: () => fetch("/api/vendors?pageSize=200").then((r) => r.json()),
   });
 
   return (

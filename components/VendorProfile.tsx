@@ -63,10 +63,16 @@ export default function VendorProfile({ data }: { data: VendorProfileData }) {
             </div>
             <div className="head-price">
               <div className="price big">{formatPrice(vendor.price)}</div>
-              <div className="rating">
-                <span className="star">★</span> {formatRating(vendor.rating)}{" "}
-                <span className="muted">({vendor.reviewCount})</span>
-              </div>
+              {vendor.reviewCount > 0 ? (
+                <div className="rating">
+                  <span className="star">★</span> {formatRating(vendor.rating)}{" "}
+                  <span className="muted">
+                    ({vendor.reviewCount}){vendor.ratingSource ? ` · ${vendor.ratingSource}` : ""}
+                  </span>
+                </div>
+              ) : (
+                <div className="muted" style={{ fontSize: 13.5 }}>novo na Wediplanu</div>
+              )}
             </div>
           </header>
 

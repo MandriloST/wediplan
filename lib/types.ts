@@ -35,6 +35,8 @@ export interface Vendor {
   price: PriceModel;
   rating: number;
   reviewCount: number;
+  /** izvor prenesene ocjene (npr. "Google recenzije") — obavezno uz prenesenu ocjenu */
+  ratingSource?: string;
   /** platform verification — "✓ provjereno" */
   verified: boolean;
   /** vendor keeps a live availability calendar — "✓ kalendar uživo" */
