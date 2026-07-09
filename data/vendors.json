@@ -16,7 +16,8 @@
     "reviewCount": 71,
     "verified": true,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v16",
@@ -35,7 +36,8 @@
     "reviewCount": 52,
     "verified": false,
     "liveCalendar": true,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v47",
@@ -54,7 +56,8 @@
     "reviewCount": 45,
     "verified": true,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v3",
@@ -76,7 +79,8 @@
     "styleTags": [
       "editorial",
       "luksuzno"
-    ]
+    ],
+    "photos": []
   },
   {
     "id": "v53",
@@ -97,7 +101,8 @@
     "liveCalendar": false,
     "styleTags": [
       "tamburaši"
-    ]
+    ],
+    "photos": []
   },
   {
     "id": "v36",
@@ -119,7 +124,8 @@
     "liveCalendar": false,
     "styleTags": [
       "dvorac"
-    ]
+    ],
+    "photos": []
   },
   {
     "id": "v9",
@@ -138,7 +144,8 @@
     "reviewCount": 21,
     "verified": true,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v41",
@@ -157,7 +164,8 @@
     "reviewCount": 19,
     "verified": true,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v20",
@@ -180,7 +188,8 @@
     "styleTags": [
       "kaštel",
       "vinograd"
-    ]
+    ],
+    "photos": []
   },
   {
     "id": "v14",
@@ -201,7 +210,8 @@
     "liveCalendar": false,
     "styleTags": [
       "s bazenom"
-    ]
+    ],
+    "photos": []
   },
   {
     "id": "v42",
@@ -220,7 +230,8 @@
     "reviewCount": 63,
     "verified": true,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v4",
@@ -243,6 +254,9 @@
     "styleTags": [
       "uz more",
       "terasa"
+    ],
+    "photos": [
+      "01.jpg"
     ]
   },
   {
@@ -265,7 +279,8 @@
     "liveCalendar": true,
     "styleTags": [
       "belle époque"
-    ]
+    ],
+    "photos": []
   },
   {
     "id": "v40",
@@ -284,7 +299,8 @@
     "reviewCount": 41,
     "verified": false,
     "liveCalendar": true,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v11",
@@ -303,7 +319,8 @@
     "reviewCount": 40,
     "verified": true,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v45",
@@ -322,7 +339,8 @@
     "reviewCount": 36,
     "verified": false,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v1",
@@ -344,7 +362,8 @@
     "styleTags": [
       "boho",
       "film"
-    ]
+    ],
+    "photos": []
   },
   {
     "id": "v33",
@@ -363,7 +382,8 @@
     "reviewCount": 30,
     "verified": false,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v19",
@@ -384,7 +404,8 @@
     "liveCalendar": true,
     "styleTags": [
       "editorial"
-    ]
+    ],
+    "photos": []
   },
   {
     "id": "v55",
@@ -403,7 +424,8 @@
     "reviewCount": 29,
     "verified": true,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v49",
@@ -422,7 +444,8 @@
     "reviewCount": 22,
     "verified": true,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v17",
@@ -441,7 +464,8 @@
     "reviewCount": 17,
     "verified": true,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v26",
@@ -460,7 +484,8 @@
     "reviewCount": 8,
     "verified": true,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v34",
@@ -482,7 +507,8 @@
     "styleTags": [
       "reportažni",
       "film"
-    ]
+    ],
+    "photos": []
   },
   {
     "id": "v39",
@@ -501,7 +527,8 @@
     "reviewCount": 34,
     "verified": true,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v43",
@@ -520,7 +547,8 @@
     "reviewCount": 28,
     "verified": false,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v7",
@@ -542,7 +570,8 @@
     "styleTags": [
       "pop",
       "dalmatinske"
-    ]
+    ],
+    "photos": []
   },
   {
     "id": "v31",
@@ -561,7 +590,8 @@
     "reviewCount": 25,
     "verified": true,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v51",
@@ -584,7 +614,8 @@
     "styleTags": [
       "salaš",
       "tradicionalno"
-    ]
+    ],
+    "photos": []
   },
   {
     "id": "v5",
@@ -607,7 +638,8 @@
     "styleTags": [
       "moderna",
       "klimatizirano"
-    ]
+    ],
+    "photos": []
   },
   {
     "id": "v18",
@@ -626,7 +658,8 @@
     "reviewCount": 22,
     "verified": false,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v23",
@@ -646,7 +679,8 @@
     "reviewCount": 19,
     "verified": true,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v48",
@@ -665,7 +699,8 @@
     "reviewCount": 18,
     "verified": false,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v12",
@@ -684,7 +719,8 @@
     "reviewCount": 15,
     "verified": false,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v56",
@@ -705,7 +741,8 @@
     "liveCalendar": false,
     "styleTags": [
       "fijaker"
-    ]
+    ],
+    "photos": []
   },
   {
     "id": "v21",
@@ -725,7 +762,8 @@
     "reviewCount": 35,
     "verified": false,
     "liveCalendar": true,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v10",
@@ -745,7 +783,8 @@
     "reviewCount": 33,
     "verified": true,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v38",
@@ -765,7 +804,8 @@
     "reviewCount": 27,
     "verified": true,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v6",
@@ -787,7 +827,8 @@
     "liveCalendar": false,
     "styleTags": [
       "rustikalno"
-    ]
+    ],
+    "photos": []
   },
   {
     "id": "v50",
@@ -806,7 +847,8 @@
     "reviewCount": 17,
     "verified": true,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v25",
@@ -825,7 +867,8 @@
     "reviewCount": 16,
     "verified": false,
     "liveCalendar": true,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v35",
@@ -844,7 +887,8 @@
     "reviewCount": 15,
     "verified": true,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v29",
@@ -864,7 +908,8 @@
     "reviewCount": 14,
     "verified": false,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v46",
@@ -883,7 +928,8 @@
     "reviewCount": 13,
     "verified": false,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v2",
@@ -904,7 +950,8 @@
     "liveCalendar": true,
     "styleTags": [
       "reportažni"
-    ]
+    ],
+    "photos": []
   },
   {
     "id": "v24",
@@ -923,7 +970,8 @@
     "reviewCount": 12,
     "verified": false,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v13",
@@ -945,7 +993,8 @@
     "styleTags": [
       "VW buba",
       "kabriolet"
-    ]
+    ],
+    "photos": []
   },
   {
     "id": "v37",
@@ -965,7 +1014,8 @@
     "reviewCount": 52,
     "verified": false,
     "liveCalendar": true,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v27",
@@ -984,7 +1034,8 @@
     "reviewCount": 20,
     "verified": true,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v8",
@@ -1003,7 +1054,8 @@
     "reviewCount": 14,
     "verified": false,
     "liveCalendar": true,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v22",
@@ -1022,7 +1074,8 @@
     "reviewCount": 10,
     "verified": false,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v54",
@@ -1041,7 +1094,8 @@
     "reviewCount": 8,
     "verified": false,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v52",
@@ -1061,7 +1115,8 @@
     "reviewCount": 16,
     "verified": false,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v30",
@@ -1080,7 +1135,8 @@
     "reviewCount": 9,
     "verified": false,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v15",
@@ -1099,7 +1155,8 @@
     "reviewCount": 6,
     "verified": false,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   },
   {
     "id": "v32",
@@ -1118,6 +1175,7 @@
     "reviewCount": 7,
     "verified": false,
     "liveCalendar": false,
-    "styleTags": []
+    "styleTags": [],
+    "photos": []
   }
 ]

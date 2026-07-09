@@ -11,6 +11,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import xlsx from "xlsx";
+import { applyImages } from "./sync-images.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const file = process.argv[2] ?? path.join(ROOT, "data", "vendors-template.xlsx");
@@ -197,7 +198,6 @@ rows.forEach((row, i) => {
     verified: yn(col(row, "provjereno")),
     liveCalendar: yn(col(row, "kalendar_uzivo")),
     styleTags,
-    photo: null,
     // web/telefon/email NAMJERNO izostavljeni — interni podaci (feature #7: zasad ne)
   });
   if (about || services.length) {
@@ -249,12 +249,18 @@ if (!vendors.length) {
   process.exit(1);
 }
 
+const img = applyImages(vendors);
+if (img.warnings.length) {
+  console.log("⚠ Slike:");
+  img.warnings.forEach((w) => console.log(w));
+}
+
 writeFileSync(path.join(ROOT, "data", "vendors.json"), JSON.stringify(vendors, null, 2) + "\n");
 writeFileSync(path.join(ROOT, "data", "profiles.json"), JSON.stringify(profiles, null, 2) + "\n");
 
 const perRegion = {};
 for (const v of vendors) perRegion[v.region] = (perRegion[v.region] ?? 0) + 1;
-console.log(`\n✓ Uvezeno ${vendors.length} pružatelja → data/vendors.json`);
+console.log(`\n✓ Uvezeno ${vendors.length} pružatelja → data/vendors.json (${img.withPhotos} sa stvarnim slikama)`);
 console.log(`✓ Profili (o pružatelju/usluge/recenzije): ${Object.keys(profiles).length} → data/profiles.json`);
 console.log("  Po regijama:", Object.entries(perRegion).map(([r, n]) => `${REGIONS[r]} ${n}`).join(" · "));
 console.log("\nSljedeće: pregledaj `npm run dev`, pa git commit data/*.json");

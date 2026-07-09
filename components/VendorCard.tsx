@@ -1,11 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { CATEGORY_BY_SLUG } from "@/lib/data";
 import { formatPrice, formatRating, euro } from "@/lib/format";
 import { estimateCost, isOverBudget, vendorGroup } from "@/lib/budget";
 import type { Vendor } from "@/lib/types";
 import { useBudget, useCompare, useFavorites } from "@/stores";
+import { coverImage } from "@/lib/images";
 import { GROUP_LABELS } from "@/lib/data";
 
 export default function VendorCard({ vendor }: { vendor: Vendor }) {
@@ -16,10 +18,13 @@ export default function VendorCard({ vendor }: { vendor: Vendor }) {
   const cat = CATEGORY_BY_SLUG[vendor.category];
   const checked = ids.includes(vendor.id);
   const fav = favorites.ids.includes(vendor.id);
+  const img = coverImage(vendor);
 
   return (
     <article className={`vcard${over ? " over" : ""}`}>
-      <div className="ph thumb">foto</div>
+      <div className="thumb-img">
+        <Image src={img.src} alt={vendor.name} fill sizes="86px" style={{ objectFit: "cover" }} />
+      </div>
       <div className="info">
         <div>
           <Link href={`/pruzatelj/${vendor.slug}`} className="name" style={{ color: "inherit" }}>

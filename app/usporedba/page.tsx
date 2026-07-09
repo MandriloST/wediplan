@@ -1,11 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { CATEGORY_BY_SLUG, VENDORS } from "@/lib/data";
 import { formatPrice, formatRating } from "@/lib/format";
 import { dayStatus, statusLabel } from "@/lib/availability";
 import type { Vendor } from "@/lib/types";
 import { useCompare, useWeddingDate } from "@/stores";
+import { coverImage } from "@/lib/images";
 
 /** Ista logika kao kalendar na profilu (lib/availability) — konzistentno svugdje. */
 function availability(vendor: Vendor, date: string | null) {
@@ -59,7 +61,9 @@ export default function ComparePage() {
                   </th>
                   {vendors.map((v) => (
                     <th key={v.id} scope="col" className="col-head">
-                      <div className="ph">foto</div>
+                      <div className="cmp-img">
+                        <Image src={coverImage(v).src} alt={v.name} fill sizes="160px" style={{ objectFit: "cover" }} />
+                      </div>
                       <Link href={`/pruzatelj/${v.slug}`}>{v.name}</Link>
                       <div style={{ fontWeight: 400, color: "var(--muted)", fontSize: 13 }}>
                         {v.city}

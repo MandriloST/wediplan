@@ -42,7 +42,8 @@ export interface Vendor {
   /** vendor keeps a live availability calendar — "✓ kalendar uživo" */
   liveCalendar: boolean;
   styleTags: string[];
-  photo?: string;
+  /** imena datoteka u public/images/vendors/<slug>/ — puni ih import/sync skripta */
+  photos?: string[];
 }
 
 export interface RegionWithCount extends Region {

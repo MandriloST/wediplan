@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "import:vendors": "node scripts/import-vendors.mjs"
+    "import:vendors": "node scripts/import-vendors.mjs",
+    "sync:images": "node scripts/sync-images.mjs"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.51.0",
