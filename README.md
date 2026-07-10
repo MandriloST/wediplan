@@ -53,8 +53,9 @@ Konvencija (ista danas u repou i sutra na Bunny CDN-u):
 public/images/vendors/<slug>/01.jpg   ← stvarne slike, max 3 (02.jpg, 03.jpg), UZ IZRIČITU DOZVOLU
 public/images/defaults/<grupa>.jpg    ← default dok stvarne ne stignu (sala/catering/foto/glazba/ostalo)
 ```
-1. Ubaci sliku u folder sluga (slug vidiš u data/vendors.json ili URL-u profila) — jpg/png/webp, preporuka max ~1600 px širine.
-2. `npm run sync:images` — upiše `photos` u data/vendors.json (import to radi i sam). Skripta upozorava na tipfelere u imenu foldera i višak slika.
+1. `npm run scaffold:images` — napravi folder za SVAKOG pružatelja iz data/vendors.json (ne dira postojeće). Svaki prazan folder sadrži `STAVI_SLIKE_OVDJE.txt` s podsjetnikom (slobodno obriši tu datoteku).
+2. Ubaci `01.jpg` (glavna slika), po želji `02.jpg`, `03.jpg` — jpg/png/webp, preporuka max ~1600 px širine.
+3. `npm run sync:images` — upiše `photos` u data/vendors.json (import to radi i sam). Skripta upozorava na tipfelere u imenu foldera i višak slika.
 3. `next/image` sam radi sve veličine i formate (na Vercelu automatski). Bez stvarnih slika prikazuje se default grupe (alt: „ilustracija”).
 
 **Selidba na Bunny kasnije:** preslikaj `public/images/` strukturu u storage zonu i postavi `NEXT_PUBLIC_IMAGE_BASE=https://<zona>.b-cdn.net` (env na Vercelu) — `next.config.mjs` automatski dodaje remotePattern, kod se ne mijenja.
