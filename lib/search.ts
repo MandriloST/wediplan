@@ -25,7 +25,7 @@ export function queryVendors(q: VendorQuery): Paged<Vendor> {
   items.sort((a, b) => b.rating - a.rating || b.reviewCount - a.reviewCount);
 
   const page = Math.max(1, q.page ?? 1);
-  const pageSize = Math.min(50, q.pageSize ?? 24);
+  const pageSize = Math.min(200, q.pageSize ?? 24);
   return {
     items: items.slice((page - 1) * pageSize, page * pageSize),
     total: items.length,

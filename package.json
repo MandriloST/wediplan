@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "import:vendors": "node scripts/import-vendors.mjs",
+    "sync:images": "node scripts/sync-images.mjs"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.51.0",
@@ -20,6 +22,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "typescript": "^5"
+    "typescript": "^5",
+    "xlsx": "^0.18.5"
   }
 }

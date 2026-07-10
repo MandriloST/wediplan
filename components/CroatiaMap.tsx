@@ -6,6 +6,7 @@ import { REGION_BY_ID } from "@/lib/data";
 import { pinPrice, formatPrice, formatRating } from "@/lib/format";
 import type { RegionId, Vendor } from "@/lib/types";
 import { useCompare } from "@/stores";
+import { coverImage } from "@/lib/images";
 
 const CROATIA_BOUNDS: LngLatBoundsLike = [
   [13.0, 42.2],
@@ -47,6 +48,7 @@ function toFC(vendors: Vendor[]): GeoJSON.FeatureCollection {
         price: pinPrice(v.price),
         priceFull: formatPrice(v.price),
         rating: formatRating(v.rating),
+        cover: coverImage(v).src,
       },
     })),
   };
@@ -56,7 +58,7 @@ function popupContent(p: Record<string, string>): HTMLElement {
   const el = document.createElement("div");
   el.className = "popup-card";
   el.innerHTML = `
-    <div class="ph">foto</div>
+    <img class="pimg" alt="" />
     <div class="body">
       <div class="name"></div>
       <div><span class="price"></span> · <span class="star">★</span> <span class="r"></span></div>
@@ -64,6 +66,7 @@ function popupContent(p: Record<string, string>): HTMLElement {
       <a class="more" href="#">detalji →</a>
     </div>`;
   el.querySelector(".name")!.textContent = p.name;
+  (el.querySelector(".pimg") as HTMLImageElement).src = p.cover;
   (el.querySelector(".more") as HTMLAnchorElement).href = `/pruzatelj/${p.slug}`;
   el.querySelector(".price")!.textContent = p.priceFull;
   el.querySelector(".r")!.textContent = p.rating;

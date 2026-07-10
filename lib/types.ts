@@ -35,12 +35,15 @@ export interface Vendor {
   price: PriceModel;
   rating: number;
   reviewCount: number;
+  /** izvor prenesene ocjene (npr. "Google recenzije") — obavezno uz prenesenu ocjenu */
+  ratingSource?: string;
   /** platform verification — "✓ provjereno" */
   verified: boolean;
   /** vendor keeps a live availability calendar — "✓ kalendar uživo" */
   liveCalendar: boolean;
   styleTags: string[];
-  photo?: string;
+  /** imena datoteka u public/images/vendors/<slug>/ — puni ih import/sync skripta */
+  photos?: string[];
 }
 
 export interface RegionWithCount extends Region {

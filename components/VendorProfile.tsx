@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { CATEGORY_BY_SLUG, GROUP_LABELS, REGION_BY_ID } from "@/lib/data";
 import { breadcrumb, similarVendors } from "@/lib/profile";
@@ -8,6 +9,7 @@ import { estimateCost, isOverBudget, vendorGroup } from "@/lib/budget";
 import type { VendorProfileData } from "@/lib/types";
 import { useBudget, useCompare, useFavorites } from "@/stores";
 import AvailabilityCalendar from "./AvailabilityCalendar";
+import { vendorImages } from "@/lib/images";
 import VendorCard from "./VendorCard";
 
 export default function VendorProfile({ data }: { data: VendorProfileData }) {
@@ -21,6 +23,7 @@ export default function VendorProfile({ data }: { data: VendorProfileData }) {
   const over = isOverBudget(vendor, plan);
   const fav = favorites.ids.includes(vendor.id);
   const similar = similarVendors(vendor);
+  const images = vendorImages(vendor);
 
   return (
     <main className="container page profile">
@@ -33,10 +36,19 @@ export default function VendorProfile({ data }: { data: VendorProfileData }) {
         <span aria-current="page">{vendor.name}</span>
       </nav>
 
-      <div className="gallery" aria-label="Fotografije (uskoro)">
-        <div className="ph main">foto</div>
-        <div className="ph">foto</div>
-        <div className="ph">foto</div>
+      <div className={`gallery g${images.length}`} aria-label="Fotografije">
+        {images.map((im, i) => (
+          <div key={im.src} className={`gimg${i === 0 ? " main" : ""}`}>
+            <Image
+              src={im.src}
+              alt={im.isDefault ? `${vendor.name} — ilustracija` : vendor.name}
+              fill
+              priority={i === 0}
+              sizes="(max-width: 900px) 100vw, 60vw"
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+        ))}
       </div>
 
       <div className="profile-grid">
@@ -63,10 +75,16 @@ export default function VendorProfile({ data }: { data: VendorProfileData }) {
             </div>
             <div className="head-price">
               <div className="price big">{formatPrice(vendor.price)}</div>
-              <div className="rating">
-                <span className="star">★</span> {formatRating(vendor.rating)}{" "}
-                <span className="muted">({vendor.reviewCount})</span>
-              </div>
+              {vendor.reviewCount > 0 ? (
+                <div className="rating">
+                  <span className="star">★</span> {formatRating(vendor.rating)}{" "}
+                  <span className="muted">
+                    ({vendor.reviewCount}){vendor.ratingSource ? ` · ${vendor.ratingSource}` : ""}
+                  </span>
+                </div>
+              ) : (
+                <div className="muted" style={{ fontSize: 13.5 }}>novo na Wediplanu</div>
+              )}
             </div>
           </header>
 

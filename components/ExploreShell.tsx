@@ -36,7 +36,7 @@ export default function ExploreShell({ filters }: { filters: ExploreFilters }) {
     queryFn: () => fetch("/api/regions").then((r) => r.json()),
   });
 
-  const vendorParams = new URLSearchParams({ pageSize: "50" });
+  const vendorParams = new URLSearchParams({ pageSize: "200" });
   if (filters.region) vendorParams.set("region", filters.region);
   if (filters.category) vendorParams.set("category", filters.category);
   if (filters.q) vendorParams.set("q", filters.q);

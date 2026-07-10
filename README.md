@@ -31,6 +31,34 @@ public/data/          croatia-regions.geojson (5 regija)
 public/sw.js          service worker
 ```
 
+
+## Unos stvarnih podataka (zamjena mocka)
+
+1. Otvori `data/vendors-template.xlsx` (list **Upute** ima cijeli postupak; **Pružatelji** i **Recenzije** se popunjavaju, primjeri s „PRIMJER” se preskaču).
+2. Koordinate: Google Maps → desni klik na lokaciju → klik na koordinate → zalijepi (skripta tolerira i obrnuti redoslijed).
+3. Pokreni uvoz s validacijom:
+   ```bash
+   npm run import:vendors -- putanja/do/tvoje-datoteke.xlsx
+   ```
+   Greške se ispisuju s brojem retka; dok ih ima, ništa se ne piše. Uspješan uvoz generira `data/vendors.json` + `data/profiles.json` koje frontend čita (mock je samo početni sadržaj tih datoteka).
+4. `npm run dev` za pregled → `git commit data/` → podaci su na stranici.
+
+Kolone `web/telefon/email` su interna evidencija — import ih **ne** objavljuje (Direktan kontakt: zasad ne). Za prenesene ocjene i recenzije `izvor` je obavezan; prikazuje se uz ocjenu na profilu. Isti Excel kasnije postaje seed za .NET bazu — ugovor je isti (API.md).
+
+
+## Slike pružatelja
+
+Konvencija (ista danas u repou i sutra na Bunny CDN-u):
+```
+public/images/vendors/<slug>/01.jpg   ← stvarne slike, max 3 (02.jpg, 03.jpg), UZ IZRIČITU DOZVOLU
+public/images/defaults/<grupa>.jpg    ← default dok stvarne ne stignu (sala/catering/foto/glazba/ostalo)
+```
+1. Ubaci sliku u folder sluga (slug vidiš u data/vendors.json ili URL-u profila) — jpg/png/webp, preporuka max ~1600 px širine.
+2. `npm run sync:images` — upiše `photos` u data/vendors.json (import to radi i sam). Skripta upozorava na tipfelere u imenu foldera i višak slika.
+3. `next/image` sam radi sve veličine i formate (na Vercelu automatski). Bez stvarnih slika prikazuje se default grupe (alt: „ilustracija”).
+
+**Selidba na Bunny kasnije:** preslikaj `public/images/` strukturu u storage zonu i postavi `NEXT_PUBLIC_IMAGE_BASE=https://<zona>.b-cdn.net` (env na Vercelu) — `next.config.mjs` automatski dodaje remotePattern, kod se ne mijenja.
+
 ## Prelazak na .NET backend
 
 Frontend zove isključivo `/api/*` preko fetch/TanStack Query. Zamjena: postavi Next.js `rewrites` prema ASP.NET Core servisu koji implementira ugovor iz `API.md` — komponente se ne mijenjaju. Za instant search u produkciji preporuka iz handoffa: Typesense/Meilisearch iza `/api/suggest` i `/api/vendors?q=`.

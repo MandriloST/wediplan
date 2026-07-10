@@ -458,3 +458,17 @@ input, select { font-family: inherit; font-size: inherit; color: inherit; }
   .services { grid-template-columns: 1fr; }
 }
 .popup-card .more { display: inline-block; margin-top: 6px; font-size: 13px; font-weight: 600; }
+
+/* ---------------- slike (public/images, kasnije Bunny CDN) ---------------- */
+.thumb-img { width: 86px; height: 86px; border-radius: 9px; flex: none; position: relative; overflow: hidden; background: var(--surface-2); }
+.gallery .gimg { position: relative; height: 220px; border-radius: var(--r-card); overflow: hidden; background: var(--surface-2); }
+.gallery.g1 { grid-template-columns: 1fr; }
+.gallery.g1 .gimg { height: 300px; }
+.gallery.g2 { grid-template-columns: 2fr 1fr; }
+.cmp-img { position: relative; height: 74px; border-radius: 8px; overflow: hidden; margin-bottom: 8px; min-width: 130px; background: var(--surface-2); }
+.popup-card .pimg { width: 100%; height: 84px; object-fit: cover; display: block; background: var(--surface-2); }
+@media (max-width: 900px) {
+  .gallery.g1 .gimg, .gallery .gimg { height: 200px; }
+  .gallery.g2 { grid-template-columns: 1fr 1fr; }
+  .gallery.g2 .gimg.main { grid-column: span 2; }
+}
