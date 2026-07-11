@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { SITE_URL } from "@/lib/site";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./globals.css";
 import Providers from "./providers";
@@ -10,6 +11,7 @@ import BudgetDrawer from "@/components/BudgetDrawer";
 import SWRegister from "@/components/SWRegister";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Wediplan — sve za vjenčanje u Hrvatskoj",
   description:
     "Pronađite dvorane, fotografe, bendove i sve za vjenčanje u Hrvatskoj. Transparentne cijene, usporedba i kalkulator budžeta.",

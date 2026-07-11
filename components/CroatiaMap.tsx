@@ -18,7 +18,9 @@ const OSM_STYLE: maplibregl.StyleSpecification = {
   sources: {
     osm: {
       type: "raster",
-      tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+      // OSM javni tile server je OK za demo; za produkciju postavi
+      // NEXT_PUBLIC_TILE_URL (npr. MapTiler/Stadia s API ključem) — vidi DEPLOY.md
+      tiles: [process.env.NEXT_PUBLIC_TILE_URL ?? "https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
       tileSize: 256,
       attribution: "© OpenStreetMap contributors",
       maxzoom: 19,
