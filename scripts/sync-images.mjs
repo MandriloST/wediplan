@@ -13,6 +13,8 @@ import path from "node:path";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const IMG_DIR = path.join(ROOT, "public", "images", "vendors");
+const DEFAULTS_DIR = path.join(ROOT, "public", "images", "defaults");
+const DEFAULT_EXT = ".jpg"; // mora pratiti lib/images.ts
 const IMG_RE = /\.(jpe?g|png|webp|avif)$/i;
 const MAX_PHOTOS = 3;
 
@@ -45,6 +47,13 @@ export function applyImages(vendors) {
   if (orphans.length) {
     warnings.push(`  folderi bez pružatelja (tipfeler u imenu?): ${orphans.join(", ")}`);
   }
+  // default slika mora postojati za svaku kategoriju koju netko bez slika koristi
+  const needDefault = new Set(vendors.filter((v) => !v.photos.length).map((v) => v.category));
+  for (const cat of needDefault) {
+    if (!existsSync(path.join(DEFAULTS_DIR, cat + DEFAULT_EXT))) {
+      warnings.push(`  NEDOSTAJE default slika: public/images/defaults/${cat}${DEFAULT_EXT} (vendori te kategorije bez slika prikazat će razbijenu sliku!)`);
+    }
+  }
   const withPhotos = vendors.filter((v) => v.photos.length).length;
   return { warnings, withPhotos };
 }
@@ -60,5 +69,5 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   }
   writeFileSync(file, JSON.stringify(vendors, null, 2) + "\n");
   console.log(`✓ ${withPhotos}/${vendors.length} pružatelja ima stvarne slike → data/vendors.json ažuriran`);
-  console.log("  Ostali prikazuju default sliku svoje grupe (public/images/defaults/).");
+  console.log("  Ostali prikazuju default sliku svoje kategorije (public/images/defaults/).");
 }
