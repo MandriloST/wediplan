@@ -148,7 +148,10 @@ rows.forEach((row, i) => {
   const from = Number(col(row, "cijena_od"));
   const to = Number(col(row, "cijena_do"));
   let price = null;
-  if (modeRaw.startsWith("po osobi")) {
+  if (modeRaw.startsWith("na upit")) {
+    price = { kind: "onRequest" };
+    if (from || to) warn("cijena_od/cijena_do se ignoriraju uz \u201ena upit\u201d");
+  } else if (modeRaw.startsWith("po osobi")) {
     if (!from || !to) err("po osobi (raspon) traži cijena_od i cijena_do");
     else if (from >= to) err(`cijena_od (${from}) mora biti manja od cijena_do (${to})`);
     else price = { kind: "perPerson", from, to };

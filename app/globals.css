@@ -6,6 +6,7 @@
    ================================================================ */
 
 :root {
+  color-scheme: light; /* stranica (zasad) ima samo svijetlu temu — spriječi browser auto-dark izobličenja */
   /* color */
   --bg: #f7f5f0;
   --surface: #ffffff;
@@ -86,10 +87,28 @@ input, select { font-family: inherit; font-size: inherit; color: inherit; }
 /* ---------------- header ---------------- */
 .header { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 40; }
 .header-in { display: flex; align-items: center; gap: 26px; height: 62px; }
-.logo { font-family: var(--font-display); font-weight: 600; font-size: 21px; color: var(--ink); letter-spacing: 0.01em; display: flex; align-items: center; gap: 8px; }
-.logo .mark { color: var(--primary); font-size: 15px; }
-.nav { display: flex; gap: 20px; font-size: 14.5px; }
+.logo { display: flex; align-items: center; color: var(--ink); }
+.logo:hover { color: var(--ink); }
+/* Wordmark je tekst, ne slika: boja i okvir koriste currentColor pa se
+   automatski prilagode svakoj budućoj temi (dark ili custom). */
+.wordmark {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.3em;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+}
+.wordmark .boxed {
+  border: 2px solid currentColor;
+  border-radius: 2px;
+  padding: 3px 1px 3px 6px; /* desno manje: letter-spacing dodaje razmak iza zadnjeg slova */
+  margin-left: 4px;
+}
+.nav { display: flex; align-items: center; gap: 20px; font-size: 14.5px; }
 .nav > a, .nav-more > button { color: var(--muted); font-weight: 500; }
+.nav > a { display: inline-flex; align-items: center; min-height: 44px; }
 .nav > a:hover { color: var(--ink); }
 .nav-more { position: relative; }
 .nav-more > button { background: none; border: 0; padding: 0; min-height: 44px; }
@@ -126,6 +145,17 @@ input, select { font-family: inherit; font-size: inherit; color: inherit; }
   border: 0; background: none; padding: 2px 0 0; font-size: 15px; width: 100%; outline: none; appearance: none;
 }
 .searchbar .field select { cursor: pointer; }
+/* Nativni popup <select>-a pod forsiranim dark modom (Chrome auto-dark,
+   Dark Reader…): tekst opcija se posvijetli, a popup ostane svijetao →
+   nečitljivo. Eksplicitne boje na option su standardna obrana. */
+select option {
+  color: #21252c !important;
+  background: #ffffff !important;
+}
+select option:checked {
+  color: #ffffff !important;
+  background: #2470cc !important;
+}
 .searchbar .submit {
   border: 0; background: var(--primary); color: #fff; font-weight: 700; font-size: 15.5px;
   padding: 0 30px; border-radius: 0 13px 13px 0; min-height: 60px;
@@ -472,3 +502,7 @@ input, select { font-family: inherit; font-size: inherit; color: inherit; }
   .gallery.g2 { grid-template-columns: 1fr 1fr; }
   .gallery.g2 .gimg.main { grid-column: span 2; }
 }
+
+/* cijena na upit — namjerno prigušena da se razlikuje od objavljene cijene */
+.price-upit { color: var(--muted); font-weight: 600; font-style: italic; }
+.price-upit.big { font-size: 19px; }

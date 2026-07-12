@@ -21,7 +21,9 @@ export default function Header() {
     <header className="header">
       <div className="container header-in">
         <Link href="/" className="logo" aria-label="Wediplan — početna">
-          <span className="mark">◆</span>Wediplan
+          <span className="wordmark">
+            WEDI<span className="boxed">PLAN</span>
+          </span>
         </Link>
         <nav className="nav" aria-label="Kategorije">
           <Link href="/restorani-i-sale">Dvorane</Link>

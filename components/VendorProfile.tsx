@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CATEGORY_BY_SLUG, GROUP_LABELS, REGION_BY_ID } from "@/lib/data";
 import { breadcrumb, similarVendors } from "@/lib/profile";
-import { euro, formatPrice, formatRating } from "@/lib/format";
+import { euro, formatPrice, formatRating, isOnRequest } from "@/lib/format";
 import { estimateCost, isOverBudget, vendorGroup } from "@/lib/budget";
 import type { VendorProfileData } from "@/lib/types";
 import { useBudget, useCompare, useFavorites } from "@/stores";
@@ -74,7 +74,7 @@ export default function VendorProfile({ data }: { data: VendorProfileData }) {
               </div>
             </div>
             <div className="head-price">
-              <div className="price big">{formatPrice(vendor.price)}</div>
+              <div className={isOnRequest(vendor.price) ? "price-upit big" : "price big"}>{formatPrice(vendor.price)}</div>
               {vendor.reviewCount > 0 ? (
                 <div className="rating">
                   <span className="star">★</span> {formatRating(vendor.rating)}{" "}
@@ -88,7 +88,7 @@ export default function VendorProfile({ data }: { data: VendorProfileData }) {
             </div>
           </header>
 
-          {plan && (
+          {plan && !isOnRequest(vendor.price) && (
             <p className={`fit ${over ? "bad" : "good"}`}>
               {over ? (
                 <>

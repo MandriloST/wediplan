@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CATEGORY_BY_SLUG } from "@/lib/data";
-import { formatPrice, formatRating, euro } from "@/lib/format";
+import { formatPrice, formatRating, euro, isOnRequest } from "@/lib/format";
 import { estimateCost, isOverBudget, vendorGroup } from "@/lib/budget";
 import type { Vendor } from "@/lib/types";
 import { useBudget, useCompare, useFavorites } from "@/stores";
@@ -33,7 +33,7 @@ export default function VendorCard({ vendor }: { vendor: Vendor }) {
           <span className="city">· {vendor.city}</span>
         </div>
         <div className="row2">
-          <span className="price">{formatPrice(vendor.price)}</span>{" "}
+          <span className={isOnRequest(vendor.price) ? "price-upit" : "price"}>{formatPrice(vendor.price)}</span>{" "}
           {vendor.reviewCount > 0 ? (
             <span className="rating">
               · <span className="star">★</span> {formatRating(vendor.rating)}
