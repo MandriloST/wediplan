@@ -1,10 +1,10 @@
 import type { Vendor } from "./types";
-import { vendorGroup } from "./budget";
 
 /**
  * Konvencija slika:
  *   {BASE}/vendors/<slug>/01.jpg, 02.jpg, 03.jpg   ← stvarne slike (max 3, uz dozvolu!)
- *   {BASE}/defaults/<grupa>.jpg                    ← default dok stvarne ne stignu
+ *   {BASE}/defaults/<kategorija-slug>.jpg          ← default kategorije kad vendor nema slika
+ *                                                      (npr. defaults/foto-i-video.jpg)
  *
  * BASE je danas /images (public/ u repou). Selidba na Bunny CDN = postaviti
  * NEXT_PUBLIC_IMAGE_BASE=https://wediplan.b-cdn.net s istom strukturom foldera
@@ -14,6 +14,9 @@ import { vendorGroup } from "./budget";
  * skeniranjem public/images/vendors/<slug>/ — vidi scripts/import-vendors.mjs
  * i `npm run sync:images`.
  */
+/** Ekstenzija default slika — sve default slike moraju biti u ovom formatu. */
+export const DEFAULT_EXT = ".jpg";
+
 export const IMAGE_BASE = process.env.NEXT_PUBLIC_IMAGE_BASE ?? "/images";
 
 export interface VendorImage {
@@ -28,7 +31,7 @@ export function vendorImages(vendor: Vendor): VendorImage[] {
       isDefault: false,
     }));
   }
-  return [{ src: `${IMAGE_BASE}/defaults/${vendorGroup(vendor)}.jpg`, isDefault: true }];
+  return [{ src: `${IMAGE_BASE}/defaults/${vendor.category}${DEFAULT_EXT}`, isDefault: true }];
 }
 
 export function coverImage(vendor: Vendor): VendorImage {

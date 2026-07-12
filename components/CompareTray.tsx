@@ -2,13 +2,21 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 import { VENDORS } from "@/lib/data";
-import { useCompare } from "@/stores";
+import { useCompare, useFavorites } from "@/stores";
 
 /** Sticky pill — appears only after the first vendor is checked (README). */
 export default function CompareTray() {
   const { ids, dismissed, dismissTray } = useCompare();
   const pathname = usePathname();
+
+  // localStorage može sadržavati ID-jeve iz starijih verzija kataloga — očisti ih
+  useEffect(() => {
+    const valid = new Set(VENDORS.map((v) => v.id));
+    useCompare.getState().prune(valid);
+    useFavorites.getState().prune(valid);
+  }, []);
   if (ids.length === 0 || dismissed || pathname === "/usporedba") return null;
 
   const initials = (id: string) => {
