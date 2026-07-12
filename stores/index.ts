@@ -14,6 +14,8 @@ interface CompareState {
   toggle: (id: string) => void;
   remove: (id: string) => void;
   clear: () => void;
+  /** makni ID-jeve koji više ne postoje u katalogu (promjena podataka, zatvoreni vendori) */
+  prune: (valid: Set<string>) => void;
   dismissTray: () => void;
   clearToast: () => void;
 }
@@ -43,6 +45,11 @@ export const useCompare = create<CompareState>()(
       },
       remove: (id) => set((s) => ({ ids: s.ids.filter((x) => x !== id) })),
       clear: () => set({ ids: [] }),
+      prune: (valid) =>
+        set((s) => {
+          const ids = s.ids.filter((id) => valid.has(id));
+          return ids.length === s.ids.length ? {} : { ids };
+        }),
       dismissTray: () => set({ dismissed: true }),
       clearToast: () => set({ toast: null }),
     }),
@@ -81,6 +88,7 @@ export const useBudget = create<BudgetState>()(
 interface FavoritesState {
   ids: string[];
   toggle: (id: string) => void;
+  prune: (valid: Set<string>) => void;
 }
 
 export const useFavorites = create<FavoritesState>()(
@@ -90,6 +98,11 @@ export const useFavorites = create<FavoritesState>()(
       toggle: (id) =>
         set({
           ids: get().ids.includes(id) ? get().ids.filter((x) => x !== id) : [...get().ids, id],
+        }),
+      prune: (valid) =>
+        set((s) => {
+          const ids = s.ids.filter((id) => valid.has(id));
+          return ids.length === s.ids.length ? {} : { ids };
         }),
     }),
     { name: "wediplan.favorites" }
