@@ -11,7 +11,7 @@ CATEGORIES = [
     "Audio, foto kabine i selfie mirror", "Glazba — bendovi", "DJ", "Glazba za crkvu",
     "Harmonikaši", "Cvijeće, dekoracije i baloni", "Vjenčanice i dodaci",
     "Muška odijela i dodaci", "Nakit i prstenje", "Frizerski saloni",
-    "Šminka, nokti i trepavice", "Auto za mladence (rent a car)",
+    "Šminka, nokti i trepavice",
     "Najam auta, limuzina i oldtimera", "Prijevoz i transferi", "Organizatori vjenčanja",
     "Pozivnice, zahvalnice i popis gostiju", "Rasvjeta, razglas i efekti",
     "Čuvanje i animacija djece", "Škole plesa", "Bračna putovanja",

@@ -17,5 +17,12 @@ if (imageBase && imageBase.startsWith("http")) {
 const nextConfig = {
   reactStrictMode: true,
   images: { remotePatterns },
+  async redirects() {
+    // ukinuta kategorija "Auto za mladence" -> spojena u najam-limuzina
+    return [
+      { source: "/auto-za-mladence", destination: "/najam-limuzina", permanent: true },
+      { source: "/:region/auto-za-mladence", destination: "/:region/najam-limuzina", permanent: true },
+    ];
+  },
 };
 export default nextConfig;

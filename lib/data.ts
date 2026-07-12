@@ -38,7 +38,6 @@ export const CATEGORIES: Category[] = [
   { slug: "nakit-i-prstenje", name: "Nakit i prstenje", short: "Nakit", group: "ostalo" },
   { slug: "frizerski-saloni", name: "Frizerski saloni", short: "Frizeri", group: "ostalo" },
   { slug: "sminka-nokti", name: "Šminka, nokti i trepavice", short: "Šminka", group: "ostalo" },
-  { slug: "auto-za-mladence", name: "Auto za mladence (rent a car)", short: "Auto", group: "ostalo" },
   { slug: "najam-limuzina", name: "Najam auta, limuzina i oldtimera", short: "Oldtimeri", group: "ostalo" },
   { slug: "prijevoz-i-transferi", name: "Prijevoz i transferi", short: "Transferi", group: "ostalo" },
   { slug: "organizatori", name: "Organizatori vjenčanja", short: "Organizatori", group: "ostalo" },

@@ -40,7 +40,6 @@ const CATEGORIES = {
   "nakit-i-prstenje": "Nakit i prstenje",
   "frizerski-saloni": "Frizerski saloni",
   "sminka-nokti": "Šminka, nokti i trepavice",
-  "auto-za-mladence": "Auto za mladence (rent a car)",
   "najam-limuzina": "Najam auta, limuzina i oldtimera",
   "prijevoz-i-transferi": "Prijevoz i transferi",
   "organizatori": "Organizatori vjenčanja",
@@ -68,6 +67,8 @@ for (const [slug, name] of Object.entries(CATEGORIES)) {
 CAT_LOOKUP.set(norm("Glazba - bendovi"), "glazba-bendovi");
 CAT_LOOKUP.set(norm("Glazba bendovi"), "glazba-bendovi");
 CAT_LOOKUP.set(norm("Čuvanje i animacije djece"), "cuvanje-djece");
+// spojene/ukinute kategorije -> nasljednica (stari Excel redci i dalje rade)
+const MERGED = new Map([[norm("Auto za mladence (rent a car)"), "najam-limuzina"], [norm("Auto za mladence"), "najam-limuzina"]]);
 
 const REG_LOOKUP = new Map();
 for (const [id, name] of Object.entries(REGIONS)) {
@@ -130,7 +131,11 @@ rows.forEach((row, i) => {
   const warn = (msg) => warnings.push(`  red ${rowNo} (${name}): ${msg}`);
 
   const catRaw = col(row, "kategorija");
-  const category = CAT_LOOKUP.get(norm(catRaw));
+  let category = CAT_LOOKUP.get(norm(catRaw));
+  if (!category && MERGED.has(norm(catRaw))) {
+    category = MERGED.get(norm(catRaw));
+    warn(`kategorija „${catRaw}” je spojena u „Najam auta, limuzina i oldtimera” — automatski preusmjereno`);
+  }
   if (!category) err(`nepoznata kategorija „${catRaw}”`);
 
   const regRaw = col(row, "regija");
