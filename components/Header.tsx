@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { CATEGORIES } from "@/lib/data";
@@ -21,7 +22,7 @@ export default function Header() {
     <header className="header">
       <div className="container header-in">
         <Link href="/" className="logo" aria-label="Wediplan — početna">
-          <span className="mark">◆</span>Wediplan
+          <Image src="/brand/wediplan-logo.png" alt="Wediplan" width={102} height={34} priority />
         </Link>
         <nav className="nav" aria-label="Kategorije">
           <Link href="/restorani-i-sale">Dvorane</Link>
