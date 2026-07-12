@@ -11,7 +11,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -32,7 +32,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -53,7 +53,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -74,7 +74,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -95,7 +95,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -116,7 +116,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -137,7 +137,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -158,7 +158,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -179,7 +179,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -200,7 +200,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -221,7 +221,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -242,7 +242,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -263,7 +263,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -284,7 +284,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -305,7 +305,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -326,7 +326,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -347,7 +347,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -368,7 +368,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -389,7 +389,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -410,7 +410,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -431,7 +431,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -452,7 +452,7 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 1000
+      "to": 500
     },
     "rating": 0,
     "reviewCount": 0,
@@ -465,19 +465,20 @@
     "id": "restoran-kampus-catering-sc",
     "slug": "restoran-kampus-catering-sc",
     "name": "Restoran Kampus – Catering SC",
-    "category": "catering",
+    "category": "restorani-i-sale",
     "region": "dalmacija",
     "city": "Split",
     "lng": 16.466460176268544,
     "lat": 43.51181423129992,
     "price": {
       "kind": "perPerson",
-      "from": 1,
-      "to": 1000
+      "from": 40,
+      "to": 100
     },
-    "rating": 0,
-    "reviewCount": 0,
-    "verified": false,
+    "rating": 4.4,
+    "reviewCount": 132,
+    "ratingSource": "Google recenzije",
+    "verified": true,
     "liveCalendar": false,
     "styleTags": [],
     "photos": []
@@ -493,7 +494,7 @@
     "lat": 45.7138411403686,
     "price": {
       "kind": "from",
-      "from": 1000
+      "from": 1
     },
     "rating": 0,
     "reviewCount": 0,
@@ -513,7 +514,249 @@
     "lat": 45.554711004652255,
     "price": {
       "kind": "from",
-      "from": 1000
+      "from": 1
+    },
+    "rating": 0,
+    "reviewCount": 0,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": [],
+    "photos": []
+  },
+  {
+    "id": "studio-simba",
+    "slug": "studio-simba",
+    "name": "Studio Simba",
+    "category": "foto-i-video",
+    "region": "slavonija",
+    "city": "Osijek",
+    "lng": 18.718577623695705,
+    "lat": 45.551380188878355,
+    "price": {
+      "kind": "from",
+      "from": 1250
+    },
+    "rating": 5,
+    "reviewCount": 42,
+    "ratingSource": "Google recenzije",
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": [],
+    "photos": []
+  },
+  {
+    "id": "studio-c",
+    "slug": "studio-c",
+    "name": "Studio C",
+    "category": "foto-i-video",
+    "region": "slavonija",
+    "city": "Osijek",
+    "lng": 18.695779367539384,
+    "lat": 45.554711004652255,
+    "price": {
+      "kind": "from",
+      "from": 1
+    },
+    "rating": 4.8,
+    "reviewCount": 259,
+    "ratingSource": "Google recenzije",
+    "verified": true,
+    "liveCalendar": false,
+    "styleTags": [],
+    "photos": []
+  },
+  {
+    "id": "classic-cars-for-rent-split-croatia",
+    "slug": "classic-cars-for-rent-split-croatia",
+    "name": "Classic Cars for Rent Split Croatia",
+    "category": "najam-limuzina",
+    "region": "dalmacija",
+    "city": "Split",
+    "lng": 16.45184871258262,
+    "lat": 43.51459542665039,
+    "price": {
+      "kind": "from",
+      "from": 1
+    },
+    "rating": 0,
+    "reviewCount": 0,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": [],
+    "photos": []
+  },
+  {
+    "id": "catering-kvatric",
+    "slug": "catering-kvatric",
+    "name": "Catering Kvatrić",
+    "category": "catering",
+    "region": "zagreb",
+    "city": "Zagreb",
+    "lng": 16.024483982000998,
+    "lat": 45.82191026154278,
+    "price": {
+      "kind": "from",
+      "from": 1
+    },
+    "rating": 0,
+    "reviewCount": 0,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": [],
+    "photos": []
+  },
+  {
+    "id": "zvona-catering",
+    "slug": "zvona-catering",
+    "name": "Zvona Catering",
+    "category": "catering",
+    "region": "zagreb",
+    "city": "Zagreb",
+    "lng": 15.928551068506366,
+    "lat": 45.79494581931543,
+    "price": {
+      "kind": "from",
+      "from": 1
+    },
+    "rating": 0,
+    "reviewCount": 0,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": [],
+    "photos": []
+  },
+  {
+    "id": "seven-wedding-events-catering-split",
+    "slug": "seven-wedding-events-catering-split",
+    "name": "Seven Wedding & Events / Catering Split",
+    "category": "catering",
+    "region": "dalmacija",
+    "city": "Split",
+    "lng": 16.42931474326798,
+    "lat": 43.55070395768302,
+    "price": {
+      "kind": "from",
+      "from": 1
+    },
+    "rating": 0,
+    "reviewCount": 0,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": [],
+    "photos": []
+  },
+  {
+    "id": "vintage-empire-zagreb",
+    "slug": "vintage-empire-zagreb",
+    "name": "Vintage Empire Zagreb",
+    "category": "najam-limuzina",
+    "region": "zagreb",
+    "city": "Zagreb",
+    "lng": 15.982214314044352,
+    "lat": 45.81355897369877,
+    "price": {
+      "kind": "from",
+      "from": 1
+    },
+    "rating": 0,
+    "reviewCount": 0,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": [],
+    "photos": []
+  },
+  {
+    "id": "grupa-prvi-plan",
+    "slug": "grupa-prvi-plan",
+    "name": "Grupa Prvi Plan",
+    "category": "glazba-bendovi",
+    "region": "dalmacija",
+    "city": "Zadar",
+    "lng": 15.230044684671324,
+    "lat": 44.11904198700834,
+    "price": {
+      "kind": "from",
+      "from": 1
+    },
+    "rating": 0,
+    "reviewCount": 0,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": [],
+    "photos": []
+  },
+  {
+    "id": "m2-band-novska",
+    "slug": "m2-band-novska",
+    "name": "M2 Band Novska",
+    "category": "glazba-bendovi",
+    "region": "zagreb",
+    "city": "Novska",
+    "lng": 16.979213718988955,
+    "lat": 45.33936602408229,
+    "price": {
+      "kind": "from",
+      "from": 1
+    },
+    "rating": 0,
+    "reviewCount": 0,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": [],
+    "photos": []
+  },
+  {
+    "id": "click-band",
+    "slug": "click-band",
+    "name": "Click Band",
+    "category": "glazba-bendovi",
+    "region": "dalmacija",
+    "city": "Split",
+    "lng": 16.44449541179862,
+    "lat": 43.51476954211381,
+    "price": {
+      "kind": "from",
+      "from": 1
+    },
+    "rating": 0,
+    "reviewCount": 0,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": [],
+    "photos": []
+  },
+  {
+    "id": "grupa-status-zagreb",
+    "slug": "grupa-status-zagreb",
+    "name": "Grupa Status Zagreb",
+    "category": "glazba-bendovi",
+    "region": "zagreb",
+    "city": "Zagreb",
+    "lng": 15.982214314044352,
+    "lat": 45.81355897369877,
+    "price": {
+      "kind": "from",
+      "from": 1
+    },
+    "rating": 0,
+    "reviewCount": 0,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": [],
+    "photos": []
+  },
+  {
+    "id": "showtime-band-vinkovci",
+    "slug": "showtime-band-vinkovci",
+    "name": "Showtime Band Vinkovci",
+    "category": "glazba-bendovi",
+    "region": "slavonija",
+    "city": "Vinkovci",
+    "lng": 18.806884700099072,
+    "lat": 45.288048367359096,
+    "price": {
+      "kind": "from",
+      "from": 1
     },
     "rating": 0,
     "reviewCount": 0,
