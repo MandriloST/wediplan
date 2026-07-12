@@ -11,16 +11,14 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "guranis",
@@ -34,16 +32,14 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "monte-rosso",
@@ -57,16 +53,14 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "restoran-joker",
@@ -80,16 +74,14 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "restoran-ljubas",
@@ -103,16 +95,14 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "villa-calussovo",
@@ -126,16 +116,14 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "villa-lav",
@@ -149,16 +137,14 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "corner-osijek-wedding-hall",
@@ -172,16 +158,14 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "gardens-vjencanja",
@@ -195,16 +179,14 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "svecane-dvorane-gracia",
@@ -218,16 +200,14 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "grand-hotel-park-dubrovnik",
@@ -241,16 +221,14 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "lazareti-complex",
@@ -264,16 +242,14 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "museum-of-modern-art-dubrovnik",
@@ -287,16 +263,14 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "palace-natali",
@@ -310,16 +284,14 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "matis-absolut-lounge",
@@ -333,16 +305,14 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "novinarski-dom",
@@ -356,16 +326,14 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "phoenix",
@@ -379,16 +347,14 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "restoran-casablanca",
@@ -402,16 +368,14 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "restoran-muzej",
@@ -425,16 +389,14 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "bolero-restaurant-weddings",
@@ -448,16 +410,14 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "dolis-wedding-event",
@@ -471,16 +431,14 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "galerija-mestrovic-split",
@@ -494,22 +452,20 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
   },
   {
     "id": "restoran-kampus-catering-sc",
     "slug": "restoran-kampus-catering-sc",
     "name": "Restoran Kampus – Catering SC",
-    "category": "restorani-i-sale",
+    "category": "catering",
     "region": "dalmacija",
     "city": "Split",
     "lng": 16.466460176268544,
@@ -517,15 +473,53 @@
     "price": {
       "kind": "perPerson",
       "from": 1,
-      "to": 200
+      "to": 1000
     },
     "rating": 0,
     "reviewCount": 0,
     "verified": false,
     "liveCalendar": false,
     "styleTags": [],
-    "photos": [
-      "01.webp"
-    ]
+    "photos": []
+  },
+  {
+    "id": "river-band",
+    "slug": "river-band",
+    "name": "River Band",
+    "category": "glazba-bendovi",
+    "region": "zagreb",
+    "city": "Velika Gorica",
+    "lng": 16.079855934335264,
+    "lat": 45.7138411403686,
+    "price": {
+      "kind": "from",
+      "from": 1000
+    },
+    "rating": 0,
+    "reviewCount": 0,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": [],
+    "photos": []
+  },
+  {
+    "id": "myweday-films",
+    "slug": "myweday-films",
+    "name": "MyWeDay Films",
+    "category": "foto-i-video",
+    "region": "slavonija",
+    "city": "Osijek",
+    "lng": 18.695779367539384,
+    "lat": 45.554711004652255,
+    "price": {
+      "kind": "from",
+      "from": 1000
+    },
+    "rating": 0,
+    "reviewCount": 0,
+    "verified": false,
+    "liveCalendar": false,
+    "styleTags": [],
+    "photos": []
   }
 ]
