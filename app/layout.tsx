@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Wediplan — sve za vjenčanje u Hrvatskoj",
   description:
-    "Pronađite dvorane, fotografe, bendove i sve za vjenčanje u Hrvatskoj. Transparentne cijene, usporedba i kalkulator budžeta.",
+    "Pronađite restorane, fotografe, bendove i sve za vjenčanje u Hrvatskoj. Transparentne cijene, usporedba i kalkulator budžeta.",
   manifest: "/manifest.webmanifest",
   icons: { icon: "/icons/icon-192.png", apple: "/icons/icon-192.png" },
 };
