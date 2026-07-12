@@ -103,8 +103,8 @@ input, select { font-family: inherit; font-size: inherit; color: inherit; }
 .wordmark .boxed {
   border: 2px solid currentColor;
   border-radius: 2px;
-  padding: 3px 1px 3px 9px; /* desno manje: letter-spacing dodaje razmak iza zadnjeg slova */
-  margin-left: 9px;
+  padding: 3px 1px 3px 6px; /* desno manje: letter-spacing dodaje razmak iza zadnjeg slova */
+  margin-left: 4px;
 }
 .nav { display: flex; align-items: center; gap: 20px; font-size: 14.5px; }
 .nav > a, .nav-more > button { color: var(--muted); font-weight: 500; }
