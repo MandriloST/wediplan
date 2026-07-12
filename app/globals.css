@@ -502,3 +502,7 @@ select option:checked {
   .gallery.g2 { grid-template-columns: 1fr 1fr; }
   .gallery.g2 .gimg.main { grid-column: span 2; }
 }
+
+/* cijena na upit — namjerno prigušena da se razlikuje od objavljene cijene */
+.price-upit { color: var(--muted); font-weight: 600; font-style: italic; }
+.price-upit.big { font-size: 19px; }

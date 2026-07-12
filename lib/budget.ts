@@ -17,6 +17,7 @@ export function computeCaps(total: number, region: RegionId): Record<BudgetGroup
 
 /** Lower-bound cost estimate for comparing against a category cap. */
 export function estimateCost(vendor: Vendor, guests: number): number {
+  if (vendor.price.kind === "onRequest") return 0; // nepoznato → ne isključuj iz budžeta
   return vendor.price.kind === "perPerson" ? vendor.price.from * guests : vendor.price.from;
 }
 

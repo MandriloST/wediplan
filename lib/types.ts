@@ -21,7 +21,8 @@ export interface Category {
 
 export type PriceModel =
   | { kind: "from"; from: number } // "od 850 €"
-  | { kind: "perPerson"; from: number; to: number }; // "55–80 €/os."
+  | { kind: "perPerson"; from: number; to: number } // "55–80 €/os."
+  | { kind: "onRequest" }; // pružatelj ne objavljuje cijenu — "cijena na upit"
 
 export interface Vendor {
   id: string;

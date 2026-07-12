@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CATEGORY_BY_SLUG, VENDORS } from "@/lib/data";
-import { formatPrice, formatRating } from "@/lib/format";
+import { formatPrice, formatRating, isOnRequest } from "@/lib/format";
 import { dayStatus, statusLabel } from "@/lib/availability";
 import type { Vendor } from "@/lib/types";
 import { useCompare, useWeddingDate } from "@/stores";
@@ -80,7 +80,7 @@ export default function ComparePage() {
                   <td>Cijena</td>
                   {vendors.map((v) => (
                     <td key={v.id}>
-                      <span className="price">{formatPrice(v.price)}</span>
+                      <span className={isOnRequest(v.price) ? "price-upit" : "price"}>{formatPrice(v.price)}</span>
                     </td>
                   ))}
                 </tr>

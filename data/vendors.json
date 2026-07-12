@@ -9,9 +9,7 @@
     "lng": 16.451171229873047,
     "lat": 43.508496471742916,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -30,9 +28,7 @@
     "lng": 13.8908782,
     "lat": 44.9660021,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -51,9 +47,7 @@
     "lng": 13.5388,
     "lat": 45.4905,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -72,9 +66,7 @@
     "lng": 14.39306,
     "lat": 44.64075,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -93,9 +85,7 @@
     "lng": 14.3950008,
     "lat": 45.3722697,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -114,9 +104,7 @@
     "lng": 14.15041,
     "lat": 45.101773,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -135,9 +123,7 @@
     "lng": 13.785952668472635,
     "lat": 45.04539441878593,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -156,9 +142,7 @@
     "lng": 18.72846487034348,
     "lat": 45.545812603029475,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -177,9 +161,7 @@
     "lng": 18.63734,
     "lat": 45.56467,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -198,9 +180,7 @@
     "lng": 18.6772784,
     "lat": 45.5518091,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -219,9 +199,7 @@
     "lng": 18.074506,
     "lat": 42.656403,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -240,9 +218,7 @@
     "lng": 18.113048,
     "lat": 42.641748,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -261,9 +237,7 @@
     "lng": 18.1141502,
     "lat": 42.6408496,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -282,9 +256,7 @@
     "lng": 18.102918,
     "lat": 42.6481827,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -303,9 +275,7 @@
     "lng": 15.9800529,
     "lat": 45.8015174,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -324,9 +294,7 @@
     "lng": 15.9682261,
     "lat": 45.8077261,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -345,9 +313,7 @@
     "lng": 16.112291026172564,
     "lat": 45.688773412150866,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -366,9 +332,7 @@
     "lng": 16.0084345,
     "lat": 45.8029051,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -387,9 +351,7 @@
     "lng": 15.96870042617802,
     "lat": 45.8095387840522,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -408,9 +370,7 @@
     "lng": 16.47222836821845,
     "lat": 43.51328102301298,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -429,9 +389,7 @@
     "lng": 16.4534387,
     "lat": 43.546399,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -450,9 +408,7 @@
     "lng": 16.388611,
     "lat": 43.508333,
     "price": {
-      "kind": "perPerson",
-      "from": 1,
-      "to": 500
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -493,8 +449,7 @@
     "lng": 16.079855934335264,
     "lat": 45.7138411403686,
     "price": {
-      "kind": "from",
-      "from": 1
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -513,8 +468,7 @@
     "lng": 18.695779367539384,
     "lat": 45.554711004652255,
     "price": {
-      "kind": "from",
-      "from": 1
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -554,8 +508,7 @@
     "lng": 18.695779367539384,
     "lat": 45.554711004652255,
     "price": {
-      "kind": "from",
-      "from": 1
+      "kind": "onRequest"
     },
     "rating": 4.8,
     "reviewCount": 259,
@@ -575,8 +528,7 @@
     "lng": 16.45184871258262,
     "lat": 43.51459542665039,
     "price": {
-      "kind": "from",
-      "from": 1
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -595,8 +547,7 @@
     "lng": 16.024483982000998,
     "lat": 45.82191026154278,
     "price": {
-      "kind": "from",
-      "from": 1
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -615,8 +566,7 @@
     "lng": 15.928551068506366,
     "lat": 45.79494581931543,
     "price": {
-      "kind": "from",
-      "from": 1
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -635,8 +585,7 @@
     "lng": 16.42931474326798,
     "lat": 43.55070395768302,
     "price": {
-      "kind": "from",
-      "from": 1
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -655,8 +604,7 @@
     "lng": 15.982214314044352,
     "lat": 45.81355897369877,
     "price": {
-      "kind": "from",
-      "from": 1
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -675,8 +623,7 @@
     "lng": 15.230044684671324,
     "lat": 44.11904198700834,
     "price": {
-      "kind": "from",
-      "from": 1
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -695,8 +642,7 @@
     "lng": 16.979213718988955,
     "lat": 45.33936602408229,
     "price": {
-      "kind": "from",
-      "from": 1
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -715,8 +661,7 @@
     "lng": 16.44449541179862,
     "lat": 43.51476954211381,
     "price": {
-      "kind": "from",
-      "from": 1
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -735,8 +680,7 @@
     "lng": 15.982214314044352,
     "lat": 45.81355897369877,
     "price": {
-      "kind": "from",
-      "from": 1
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
@@ -755,8 +699,7 @@
     "lng": 18.806884700099072,
     "lat": 45.288048367359096,
     "price": {
-      "kind": "from",
-      "from": 1
+      "kind": "onRequest"
     },
     "rating": 0,
     "reviewCount": 0,
