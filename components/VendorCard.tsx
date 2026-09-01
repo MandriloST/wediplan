@@ -23,7 +23,9 @@ export default function VendorCard({ vendor }: { vendor: Vendor }) {
   return (
     <article className={`vcard${over ? " over" : ""}`}>
       <div className="thumb-img">
-        <Image src={img.src} alt={vendor.name} fill sizes="86px" style={{ objectFit: "cover" }} />
+        <Link href={`/pruzatelj/${vendor.slug}`} style={{ position: 'relative', width: '86px', height: '86px', display: 'block' }}>
+            <Image src={img.src} alt={vendor.name} fill sizes="86px" style={{ objectFit: "cover" }} />
+         </Link>
       </div>
       <div className="info">
         <div>
