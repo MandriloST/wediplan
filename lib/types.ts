@@ -52,6 +52,8 @@ export interface Vendor {
   /** vendor keeps a live availability calendar — "✓ kalendar uživo" */
   liveCalendar: boolean;
   styleTags: string[];
+  /** javne društvene poveznice (portfolio) — normalizirani URL-ovi, prikazuju se kao ikone */
+  social?: { instagram?: string; facebook?: string };
   /** imena datoteka u public/images/vendors/<slug>/ — puni ih import/sync skripta */
   photos?: string[];
 }

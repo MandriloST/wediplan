@@ -19,7 +19,8 @@ Vendor:
   "price": { "kind": "from", "from": 850 },
   "rating": 4.8, "reviewCount": 31,
   "verified": true, "liveCalendar": false,
-  "styleTags": ["boho", "film"], "photo": null
+  "styleTags": ["boho", "film"], "photo": null,
+  "social": { "instagram": "https://instagram.com/foto.anic", "facebook": "https://facebook.com/fotoanic" }
 }
 ```
 (`price` alternativa: `{ "kind": "perPerson", "from": 55, "to": 80 }`)
@@ -30,6 +31,9 @@ Lokacija i pokrivanje (sjedište ≠ područje rada):
 - `coverage`: regije u kojima pružatelj radi UZ svoju — polje slugova ili `"hr"` (cijela Hrvatska). Opcionalno; izostanak = radi samo u `region`.
 - Filtar `region=X` vraća pružatelje gdje `region == X` ILI `coverage` sadrži `X` ILI `coverage == "hr"`. Pin ostaje samo na sjedištu (jedan pružatelj = jedan pin).
 - Kategorije dvorana (`restorani-i-sale`, `konobe-i-prostori`, `najam-kuce`) uvijek imaju `city` + koordinate — import to garantira.
+
+Društvene poveznice:
+- `social` (opcionalno): `{ instagram?, facebook? }`, normalizirani `https://` URL-ovi — JAVNO, prikazuju se kao ikone na profilu. Za razliku od `web`/`telefon`/`email` koji ostaju interni ("Direktan kontakt: zasad ne").
 
 ## GET /api/regions
 ```json
