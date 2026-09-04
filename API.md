@@ -13,6 +13,9 @@ Vendor:
   "id": "v1", "slug": "foto-studio-anic", "name": "Foto studio Anić",
   "category": "foto-i-video", "region": "dalmacija", "city": "Split",
   "lng": 16.44, "lat": 43.51,
+  "locationPrecision": "exact",
+  "coverage": ["dalmacija", "kvarner"],
+  "coverageNote": "radi u Splitu, Zadru i Šibeniku",
   "price": { "kind": "from", "from": 850 },
   "rating": 4.8, "reviewCount": 31,
   "verified": true, "liveCalendar": false,
@@ -20,6 +23,13 @@ Vendor:
 }
 ```
 (`price` alternativa: `{ "kind": "perPerson", "from": 55, "to": 80 }`)
+
+Lokacija i pokrivanje (sjedište ≠ područje rada):
+- `city`, `lng`, `lat` opisuju SJEDIŠTE. `lng`/`lat` mogu biti `null` (koordinate nepoznate) — klijent tada NE crta pin; `city` može biti `""` (poznata samo regija).
+- `locationPrecision`: `"exact"` (koordinate) | `"city"` (grad bez koordinata — čeka geokodiranje) | `"region"` (samo regija). Opcionalno (stariji zapisi ga nemaju → tretirati kao `"exact"`).
+- `coverage`: regije u kojima pružatelj radi UZ svoju — polje slugova ili `"hr"` (cijela Hrvatska). Opcionalno; izostanak = radi samo u `region`.
+- Filtar `region=X` vraća pružatelje gdje `region == X` ILI `coverage` sadrži `X` ILI `coverage == "hr"`. Pin ostaje samo na sjedištu (jedan pružatelj = jedan pin).
+- Kategorije dvorana (`restorani-i-sale`, `konobe-i-prostori`, `najam-kuce`) uvijek imaju `city` + koordinate — import to garantira.
 
 ## GET /api/regions
 ```json

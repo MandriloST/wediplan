@@ -57,7 +57,9 @@ export default function VendorProfile({ data }: { data: VendorProfileData }) {
             <div>
               <h1>{vendor.name}</h1>
               <p className="sub" style={{ margin: "2px 0 0" }}>
-                {cat.name} · {vendor.city}, {region.name}
+                {cat.name} · {vendor.city ? `${vendor.city}, ` : ""}{region.name}
+                {vendor.coverage === "hr" && " · pokriva cijelu Hrvatsku"}
+                {vendor.coverageNote ? ` · ${vendor.coverageNote}` : ""}
               </p>
               <div className="badges" style={{ marginTop: 8 }}>
                 {vendor.verified && <span className="badge verified">✓ provjereno</span>}

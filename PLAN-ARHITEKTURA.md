@@ -83,7 +83,11 @@ Minimalan skup za faze 1–4. Imena tablica engleski, sadržaj hrvatski.
 
 ```
 vendors            id (uuid), slug (unique), name, category_slug, region_slug, city,
-                   lat, lng, price_kind (from|per_person|on_request), price_from, price_to,
+                   lat (nullable), lng (nullable),
+                   location_precision (exact|city|region),
+                   coverage_regions text[] (prazno = samo vlastita regija; ['hr'] = cijela HR),
+                   coverage_note text (nullable),
+                   price_kind (from|per_person|on_request), price_from, price_to,
                    style_tags text[], about, services text[], website, phone, email,
                    verified bool, live_calendar bool, claim_status (unclaimed|pending|claimed),
                    owner_user_id (nullable FK), is_published bool, opt_out bool,
@@ -124,6 +128,25 @@ Napomene:
   zapisa bez lat/lng (Nominatim uz rate limit, cache rezultata).
 - Svi importirani pružatelji kreću kao `claim_status = unclaimed`, `verified = false`.
   `verified = true` ostaje rezerviran za platformom provjerene pružatelje (postojeći badge).
+
+### 4.1 Sjedište vs. pokrivanje — IMPLEMENTIRANO u templateu i Node importu (rujan 2026.)
+
+Odluka **[ZA ODOBRENJE #7]** (implementirana na frontend/Excel razini; .NET je preuzima u Fazi 1):
+- **Sjedište** (`city, lat, lng, region_slug`) i **pokrivanje** (`coverage_regions`) su odvojeni
+  koncepti. Jedan pružatelj = jedan pin (na sjedištu); nikad više pinova, nikad izmišljena
+  koordinata.
+- `location_precision` se IZVODI pri importu: koordinate → `exact`; samo grad → `city`
+  (geokodiranje u Fazi 1: Nominatim, cache, rate limit — dotad bez pina); samo regija →
+  `region` (bez pina, vidljiv u listi regije, kartica prikazuje "pokriva regiju").
+- Dvorane (`restorani-i-sale`, `konobe-i-prostori`, `najam-kuce`) MORAJU imati grad i
+  koordinate — import ih inače odbija (lokacija im je bit ponude).
+- Filtar regije X: `region == X OR X ∈ coverage_regions OR 'hr' ∈ coverage_regions`.
+- Excel: novi stupci `pokriva_regije` ("Dalmacija; Kvarner" ili "cijela Hrvatska") i
+  `pokrivanje_napomena` (slobodni tekst, prikazuje se na profilu); `grad` i `koordinate`
+  više nisu obavezni (osim za dvorane). Primjeri svih rubnih slučajeva su u templateu.
+- Prazna polja profila: sekcija se ne prikazuje (ne "Nema podataka"); opis se može
+  generirati kao neutralna činjenična rečenica; mršavi unclaimed profili ističu CTA
+  "Preuzmite i dopunite profil" (akvizicijski lijevak) — UI dio slijedi u kasnijoj fazi.
 
 ---
 
@@ -264,6 +287,7 @@ Ugrađeno u arhitekturu od početka:
 | 4 | Import alat (§4) | .NET konzolna komanda umjesto Node skripte |
 | 5 | Email servis (§5) | Resend |
 | 6 | Redoslijed faza 3↔4 (§7) | Auth prije claima |
+| 7 | Sjedište vs. pokrivanje + location_precision (§4.1) | Implementirano u Excel/Node pipelineu — potvrditi prije .NET modela |
 
 Odobrenjem (ili izmjenom) ovih 6 stavki plan postaje izvršiv — sljedeći razgovor može
 početi rečenicom: "Kreni s fazom 0 prema PLAN-ARHITEKTURA.md".

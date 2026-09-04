@@ -32,7 +32,7 @@ export default function VendorCard({ vendor }: { vendor: Vendor }) {
           <Link href={`/pruzatelj/${vendor.slug}`} className="name" style={{ color: "inherit" }}>
             {vendor.name}
           </Link>{" "}
-          <span className="city">· {vendor.city}</span>
+          <span className="city">· {vendor.city || "pokriva regiju"}</span>
         </div>
         <div className="row2">
           <span className={isOnRequest(vendor.price) ? "price-upit" : "price"}>{formatPrice(vendor.price)}</span>{" "}

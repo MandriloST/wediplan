@@ -24,8 +24,10 @@ HEADERS = [
     ("naziv*", 26, "Puni naziv pružatelja"),
     ("kategorija*", 24, "Odaberi iz padajućeg izbornika"),
     ("regija*", 16, "Odaberi iz padajućeg izbornika"),
-    ("grad*", 14, None),
-    ("koordinate*", 20, 'Google Maps → desni klik na lokaciju → klik na koordinate (kopira "43.5081, 16.4402") → zalijepi ovdje'),
+    ("grad", 14, "SJEDIŠTE — jedan grad. Ako ih pružatelj navodi više, upiši glavni/prvi, ostale u pokrivanje_napomena. Prazno = poznata samo regija (bez pina na karti). OBAVEZNO za sale/konobe/kuće za proslavu."),
+    ("koordinate", 20, 'Google Maps → desni klik na lokaciju → klik na koordinate (kopira "43.5081, 16.4402") → zalijepi ovdje. Prazno = geokodira se iz grada (Faza 1). OBAVEZNO za sale/konobe/kuće za proslavu. Nikad ne izmišljaj koordinatu!'),
+    ("pokriva_regije", 22, "Gdje pružatelj RADI (uz svoju regiju). Više regija odvoji točka-zarezom: Dalmacija; Kvarner. Za cijelu državu upiši: cijela Hrvatska. Prazno = radi samo u svojoj regiji."),
+    ("pokrivanje_napomena", 26, "Slobodni tekst o pokrivanju, npr. 'radi u Splitu, Zadru i Šibeniku' ili 'po dogovoru i BiH'. Prikazuje se na profilu."),
     ("nacin_cijene*", 16, "od (paušal) = jedna cijena 'od X €'; po osobi (raspon) = X–Y €/os. (sale, catering)"),
     ("cijena_od*", 11, "Samo broj u €, bez oznake valute"),
     ("cijena_do", 11, "Samo za 'po osobi (raspon)'"),
@@ -71,6 +73,14 @@ lines = [
     ("KAKO RADITI:", True),
     ("1. Popunjavaj list 'Pružatelji' — stupci s * su obavezni. Ostalo može ostati prazno.", False),
     ("2. Koordinate: Google Maps → desni klik na lokaciju → klikni koordinate (automatski se kopiraju) → zalijepi u ćeliju.", False),
+    ("", False),
+    ("LOKACIJA I POKRIVANJE (sjedište ≠ područje rada):", True),
+    ("• grad + koordinate = SJEDIŠTE (jedna točka → jedan pin na karti). pokriva_regije = gdje pružatelj RADI.", False),
+    ("• Nema grada? Ostavi grad i koordinate prazno — pružatelj se prikazuje u listi svoje regije, bez pina. NIKAD ne izmišljaj koordinatu.", False),
+    ("• Više gradova (npr. Split, Zadar, Šibenik)? grad = glavni/prvi, ostali u pokrivanje_napomena. Jedan pružatelj = jedan pin.", False),
+    ("• Više regija? pokriva_regije = 'Dalmacija; Kvarner'. Cijela država? pokriva_regije = 'cijela Hrvatska'.", False),
+    ("• IZNIMKA: Restorani i sale, Konobe i prostori, Najam kuće — grad i koordinate su OBAVEZNI (lokacija im je bit ponude).", False),
+    ("• Koordinate fotografa/bendova ne moraš tražiti ručno — dovoljan je grad, geokodiranje radi skripta (Faza 1). Vrijeme uloži u točne koordinate dvorana.", False),
     ("3. Prenesene recenzije (tekstualne) upisuj u list 'Recenzije' — poveži ih točnim nazivom pružatelja.", False),
     ("4. Kad želiš podatke na stranici, spremi ovu datoteku i pokreni:  npm run import:vendors -- putanja/do/datoteke.xlsx", False),
     ("   Skripta provjerava svaki redak (koordinate, kategorije, cijene…) i ispisuje greške s brojem retka.", False),
@@ -124,21 +134,38 @@ for dv, col in [(dv_cat, "B"), (dv_reg, "C"), (dv_price, "F"), (dv_yn, "L"), (dv
 dv_yn2 = DataValidation(type="list", formula1='"DA,NE"', allow_blank=True)
 ws.add_data_validation(dv_cat); dv_cat.add(f"B2:B{MAXR}")
 ws.add_data_validation(dv_reg); dv_reg.add(f"C2:C{MAXR}")
-ws.add_data_validation(dv_price); dv_price.add(f"F2:F{MAXR}")
-ws.add_data_validation(dv_yn); dv_yn.add(f"L2:L{MAXR}")
-ws.add_data_validation(dv_yn2); dv_yn2.add(f"M2:M{MAXR}")
-ws.add_data_validation(dv_stat); dv_stat.add(f"T2:T{MAXR}")
+ws.add_data_validation(dv_price); dv_price.add(f"H2:H{MAXR}")
+ws.add_data_validation(dv_yn); dv_yn.add(f"N2:N{MAXR}")
+ws.add_data_validation(dv_yn2); dv_yn2.add(f"O2:O{MAXR}")
+ws.add_data_validation(dv_stat); dv_stat.add(f"V2:V{MAXR}")
 
 examples = [
-    ["PRIMJER — Villa Dalmacija", "Restorani i sale", "Dalmacija", "Split", "43.5147, 16.4102",
+    # 1) dvorana — puna lokacija (grad + koordinate OBAVEZNI za sale)
+    ["PRIMJER — Villa Dalmacija", "Restorani i sale", "Dalmacija", "Split", "43.5147, 16.4102", "", "",
      "po osobi (raspon)", 65, 95, 4.8, 57, "Google recenzije", "DA", "NE", "uz more, terasa",
      "Terasa uz more za do 220 gostiju, vlastita kuhinja i parking. Cijena po osobi uključuje meni od 5 slijedova.",
      "Meni po osobi, Osoblje, Osnovna dekoracija, Parking", "villa-dalmacija.hr", "021/555-123",
      "info@villa-dalmacija.hr", "Dozvola dobivena", "primjer — obriši ili ostavi (preskače se)"],
+    # 2) fotograf sa sjedištem koji pokriva 2 regije (više gradova → glavni u grad, ostali u napomenu)
     ["PRIMJER — Foto studio Anić", "Foto i Video", "Dalmacija", "Split", "43.5081, 16.4402",
+     "Dalmacija; Kvarner", "radi u Splitu, Zadru i Šibeniku, po dogovoru i šire",
      "od (paušal)", 850, None, 4.8, 31, "Google recenzije", "DA", "NE", "boho, film",
      "Vjenčanja fotografiramo od 2014. — reportažno, s naglaskom na svjetlo i emociju.",
      "", "fotostudio-anic.hr", "", "", "Kontaktirano", "primjer — preskače se pri importu"],
+    # 3) bend bez grada — poznata samo regija (bez pina, prikazuje se u listi regije)
+    ["PRIMJER — Bend Adria", "Glazba — bendovi", "Dalmacija", "", "", "", "",
+     "od (paušal)", 1200, None, None, None, "", "NE", "NE", "pop, rock",
+     "", "", "bend-adria.hr", "", "", "Istraženo", "primjer — bez grada/koordinata → bez pina"],
+    # 4) fotograf s gradom, ali bez koordinata — geokodira se iz grada u Fazi 1
+    ["PRIMJER — Ana Fotografija", "Foto i Video", "Istra", "Pula", "", "", "",
+     "na upit", None, None, None, None, "", "NE", "NE", "elegantno",
+     "", "", "", "", "", "Istraženo", "primjer — koordinate se geokodiraju iz grada"],
+    # 5) organizator koji pokriva cijelu Hrvatsku
+    ["PRIMJER — Perfect Day Weddings", "Organizatori vjenčanja", "Zagreb i okolica", "Zagreb", "45.8150, 15.9819",
+     "cijela Hrvatska", "organiziramo vjenčanja u cijeloj Hrvatskoj",
+     "na upit", None, None, 5.0, 12, "Google recenzije", "DA", "NE", "full service",
+     "Organiziramo vjenčanja od Istre do Slavonije — od koncepta do izvedbe.",
+     "", "perfectday.hr", "", "", "Dozvola dobivena", "primjer — pokriva cijelu HR"],
 ]
 for r, row in enumerate(examples, 2):
     for col, val in enumerate(row, 1):

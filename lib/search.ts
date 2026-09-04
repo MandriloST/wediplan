@@ -11,7 +11,13 @@ const norm = (s: string) =>
 export function queryVendors(q: VendorQuery): Paged<Vendor> {
   let items = VENDORS.slice();
 
-  if (q.region) items = items.filter((v) => v.region === q.region);
+  if (q.region)
+    items = items.filter(
+      (v) =>
+        v.region === q.region || // sjedište u regiji
+        v.coverage === "hr" || // pokriva cijelu Hrvatsku
+        (Array.isArray(v.coverage) && v.coverage.includes(q.region!)) // dolazi u regiju
+    );
   if (q.category) items = items.filter((v) => v.category === q.category);
   if (q.q) {
     const needle = norm(q.q);

@@ -29,10 +29,19 @@ export interface Vendor {
   slug: string;
   name: string;
   category: string; // Category.slug
+  /** regija SJEDIŠTA (gdje je pružatelj baziran) */
   region: RegionId;
+  /** grad sjedišta; "" = poznata samo regija */
   city: string;
-  lng: number;
-  lat: number;
+  /** null = koordinate nepoznate → bez pina na karti (nikad ne izmišljamo točku) */
+  lng: number | null;
+  lat: number | null;
+  /** exact = koordinate; city = grad bez koordinata (čeka geokodiranje); region = samo regija */
+  locationPrecision?: "exact" | "city" | "region";
+  /** POKRIVANJE — regije u kojima pružatelj RADI uz svoju; "hr" = cijela Hrvatska */
+  coverage?: RegionId[] | "hr";
+  /** slobodni tekst o pokrivanju, npr. "radi u Splitu, Zadru i Šibeniku" */
+  coverageNote?: string;
   price: PriceModel;
   rating: number;
   reviewCount: number;

@@ -78,6 +78,23 @@ for (const [id, name] of Object.entries(REGIONS)) {
 
 const yn = (v) => norm(v) === "da";
 
+// Kategorije kojima je fizička lokacija bit ponude — grad i koordinate OBAVEZNI
+const VENUE_CATEGORIES = new Set(["restorani-i-sale", "konobe-i-prostori", "najam-kuce"]);
+
+// "Dalmacija; Kvarner" | "cijela Hrvatska" → ["dalmacija","kvarner"] | "hr"
+function parseCoverage(raw, errFn) {
+  const s = String(raw ?? "").trim();
+  if (!s) return undefined;
+  if (["cijela hrvatska", "hrvatska", "hr", "sve"].includes(norm(s))) return "hr";
+  const ids = [];
+  for (const part of s.split(/[;,]/).map((p) => p.trim()).filter(Boolean)) {
+    const id = REG_LOOKUP.get(norm(part));
+    if (!id) errFn(`pokriva_regije: nepoznata regija „${part}” — dozvoljeno: ${Object.values(REGIONS).join(", ")} ili „cijela Hrvatska”`);
+    else if (!ids.includes(id)) ids.push(id);
+  }
+  return ids.length ? ids : undefined;
+}
+
 function parseCoords(raw) {
   const m = String(raw ?? "").replace(/;/g, ",").match(/(-?\d+[.,]?\d*)\s*,\s*(-?\d+[.,]?\d*)/);
   if (!m) return null;
@@ -143,11 +160,35 @@ rows.forEach((row, i) => {
   if (!region) err(`nepoznata regija „${regRaw}”`);
 
   const city = String(col(row, "grad")).trim();
-  if (!city) err("nedostaje grad");
+  const coordsRaw = String(col(row, "koordinate") ?? "").trim();
+  const isVenue = category && VENUE_CATEGORIES.has(category);
 
-  const coords = parseCoords(col(row, "koordinate"));
-  if (!coords) err(`neispravne koordinate „${col(row, "koordinate")}” — očekujem npr. „43.5081, 16.4402”`);
-  else if (coords.outOfCroatia) err(`koordinate (${coords.lat}, ${coords.lng}) izvan Hrvatske`);
+  let coords = null;
+  if (coordsRaw) {
+    coords = parseCoords(coordsRaw);
+    if (!coords) err(`neispravne koordinate „${coordsRaw}” — očekujem npr. „43.5081, 16.4402”`);
+    else if (coords.outOfCroatia) { err(`koordinate (${coords.lat}, ${coords.lng}) izvan Hrvatske`); coords = null; }
+  }
+
+  // sjedište ≠ pokrivanje: preciznost lokacije se IZVODI, nikad ne izmišljamo koordinatu
+  let locationPrecision;
+  if (coords) locationPrecision = "exact";
+  else if (city) {
+    locationPrecision = "city";
+    warn("grad bez koordinata — bez pina na karti dok se ne geokodira (Faza 1, .NET import)");
+  } else {
+    locationPrecision = "region";
+    warn("bez grada i koordinata — prikazuje se u listi regije, bez pina na karti");
+  }
+  if (isVenue && (!city || !coords)) {
+    err("sale/konobe/kuće za proslavu moraju imati grad I koordinate — lokacija im je bit ponude");
+  }
+
+  const coverage = parseCoverage(col(row, "pokriva_regije"), err);
+  const coverageNote = String(col(row, "pokrivanje_napomena") ?? "").trim();
+  if (coverage && Array.isArray(coverage) && region && coverage.length === 1 && coverage[0] === region) {
+    warn("pokriva_regije sadrži samo vlastitu regiju — polje može ostati prazno");
+  }
 
   const modeRaw = norm(col(row, "nacin_cijene"));
   const from = Number(col(row, "cijena_od"));
@@ -196,9 +237,12 @@ rows.forEach((row, i) => {
     name,
     category,
     region,
-    city,
-    lng: coords.lng,
-    lat: coords.lat,
+    city, // "" = poznata samo regija
+    lng: coords ? coords.lng : null,
+    lat: coords ? coords.lat : null,
+    locationPrecision,
+    ...(coverage && { coverage }),
+    ...(coverageNote && { coverageNote }),
     price,
     rating,
     reviewCount,

@@ -39,9 +39,10 @@ interface Props {
 function toFC(vendors: Vendor[]): GeoJSON.FeatureCollection {
   return {
     type: "FeatureCollection",
-    features: vendors.map((v) => ({
+    // pin samo za pružatelje s poznatim koordinatama — region/city preciznost ostaje u listi
+    features: vendors.filter((v) => v.lat != null && v.lng != null).map((v) => ({
       type: "Feature",
-      geometry: { type: "Point", coordinates: [v.lng, v.lat] },
+      geometry: { type: "Point", coordinates: [v.lng as number, v.lat as number] },
       properties: {
         id: v.id,
         slug: v.slug,
