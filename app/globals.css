@@ -430,6 +430,14 @@ select option:checked {
 .profile .page h1, .profile h1 { margin: 0; font-size: 29px; }
 
 .profile-head { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start; flex-wrap: wrap; }
+.socials { display: flex; gap: 8px; }
+.social-ico {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 9px;
+  border: 1px solid #e4ddcd; color: #6b6558; background: #fff;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+.social-ico:hover { color: #2470cc; border-color: #2470cc; background: #f4f8fe; }
 .head-price { text-align: right; }
 .head-price .price.big { font-size: 25px; }
 .head-price .rating .star { color: #d9a514; }

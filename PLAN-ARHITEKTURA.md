@@ -87,6 +87,7 @@ vendors            id (uuid), slug (unique), name, category_slug, region_slug, c
                    location_precision (exact|city|region),
                    coverage_regions text[] (prazno = samo vlastita regija; ['hr'] = cijela HR),
                    coverage_note text (nullable),
+                   instagram_url text (nullable), facebook_url text (nullable),   -- JAVNO (ikone na profilu)
                    price_kind (from|per_person|on_request), price_from, price_to,
                    style_tags text[], about, services text[], website, phone, email,
                    verified bool, live_calendar bool, claim_status (unclaimed|pending|claimed),

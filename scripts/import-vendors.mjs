@@ -78,6 +78,19 @@ for (const [id, name] of Object.entries(REGIONS)) {
 
 const yn = (v) => norm(v) === "da";
 
+// IG/FB: prihvati "@handle", "handle", "instagram.com/handle", puni URL → kanonski URL
+function socialUrl(raw, kind) {
+  let s = String(raw ?? "").trim();
+  if (!s) return undefined;
+  s = s.replace(/^@/, "").replace(/^https?:\/\//i, "").replace(/^www\./i, "");
+  const host = kind === "instagram" ? "instagram.com" : "facebook.com";
+  // već sadrži domenu (bilo koje varijante) → zadrži putanju
+  const m = s.match(/(?:instagram\.com|facebook\.com|fb\.com|fb\.me)\/(.+)/i);
+  const path = (m ? m[1] : s).replace(/^\/+/, "").replace(/\/+$/, "").split(/[?#]/)[0];
+  if (!path) return undefined;
+  return `https://${host}/${path}`;
+}
+
 // Kategorije kojima je fizička lokacija bit ponude — grad i koordinate OBAVEZNI
 const VENUE_CATEGORIES = new Set(["restorani-i-sale", "konobe-i-prostori", "najam-kuce"]);
 
@@ -225,6 +238,12 @@ rows.forEach((row, i) => {
   bySlug.set(slug, rowNo);
   byNormName.set(norm(name), slug);
 
+  const instagram = socialUrl(col(row, "instagram"), "instagram");
+  const facebook = socialUrl(col(row, "facebook"), "facebook");
+  const social = instagram || facebook
+    ? { ...(instagram && { instagram }), ...(facebook && { facebook }) }
+    : undefined;
+
   if (errors.length) return;
 
   const styleTags = String(col(row, "stil")).split(",").map((s) => s.trim()).filter(Boolean);
@@ -250,6 +269,7 @@ rows.forEach((row, i) => {
     verified: yn(col(row, "provjereno")),
     liveCalendar: yn(col(row, "kalendar_uzivo")),
     styleTags,
+    ...(social && { social }),
     // web/telefon/email NAMJERNO izostavljeni — interni podaci (feature #7: zasad ne)
   });
   if (about || services.length) {
