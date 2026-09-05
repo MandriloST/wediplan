@@ -151,11 +151,13 @@ const profiles = {};
 const bySlug = new Map();
 const byNormName = new Map();
 
+const hidden = [];
 rows.forEach((row, i) => {
   const rowNo = i + 2; // 1 = zaglavlje
   const name = String(col(row, "naziv")).trim();
   if (!name) return; // prazan redak
   if (norm(name).startsWith("primjer")) return;
+  if (norm(col(row, "status")) === "skriveno") { hidden.push(name); return; } // interno uklonjen — nikad javna negativna oznaka
 
   const err = (msg) => errors.push(`  red ${rowNo} (${name || "?"}): ${msg}`);
   const warn = (msg) => warnings.push(`  red ${rowNo} (${name}): ${msg}`);
@@ -334,5 +336,6 @@ const perRegion = {};
 for (const v of vendors) perRegion[v.region] = (perRegion[v.region] ?? 0) + 1;
 console.log(`\n✓ Uvezeno ${vendors.length} pružatelja → data/vendors.json (${img.withPhotos} sa stvarnim slikama)`);
 console.log(`✓ Profili (o pružatelju/usluge/recenzije): ${Object.keys(profiles).length} → data/profiles.json`);
+if (hidden.length) console.log(`  Skriveno (interno uklonjeno): ${hidden.length} — ${hidden.join(", ")}`);
 console.log("  Po regijama:", Object.entries(perRegion).map(([r, n]) => `${REGIONS[r]} ${n}`).join(" · "));
 console.log("\nSljedeće: pregledaj `npm run dev`, pa git commit data/*.json");

@@ -8,6 +8,7 @@ import { estimateCost, isOverBudget, vendorGroup } from "@/lib/budget";
 import type { Vendor } from "@/lib/types";
 import { useBudget, useCompare, useFavorites } from "@/stores";
 import { coverImage } from "@/lib/images";
+import { vendorBadges } from "@/lib/badges";
 import { GROUP_LABELS } from "@/lib/data";
 
 export default function VendorCard({ vendor }: { vendor: Vendor }) {
@@ -36,17 +37,19 @@ export default function VendorCard({ vendor }: { vendor: Vendor }) {
         </div>
         <div className="row2">
           <span className={isOnRequest(vendor.price) ? "price-upit" : "price"}>{formatPrice(vendor.price)}</span>{" "}
-          {vendor.reviewCount > 0 ? (
+          {vendor.reviewCount > 0 && (
             <span className="rating">
               · <span className="star">★</span> {formatRating(vendor.rating)}
               <span className="city"> ({vendor.reviewCount})</span>
             </span>
-          ) : (
-            <span className="city">· novo na Wediplanu</span>
           )}
         </div>
         <div className="badges">
-          {vendor.verified && <span className="badge verified">✓ provjereno</span>}
+          {vendorBadges(vendor).map((b) => (
+            <span key={b.id} className={`badge ${b.className}`} title={b.tooltip}>
+              {b.label}
+            </span>
+          ))}
           {vendor.liveCalendar ? (
             <span className="badge live">✓ kalendar uživo</span>
           ) : (

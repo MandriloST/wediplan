@@ -35,6 +35,10 @@ Lokacija i pokrivanje (sjedište ≠ područje rada):
 Društvene poveznice:
 - `social` (opcionalno): `{ instagram?, facebook? }`, normalizirani `https://` URL-ovi — JAVNO, prikazuju se kao ikone na profilu. Za razliku od `web`/`telefon`/`email` koji ostaju interni ("Direktan kontakt: zasad ne").
 
+Oznake (badgevi):
+- `claimStatus` (opcionalno): `"unclaimed" | "claimed"` — importi ga zasad ne šalju; `"claimed"` (faza claima) aktivira oznaku "✓ Verificirani profil".
+- Oznake se NE šalju kroz API — klijent ih izvodi iz `claimStatus`/`verified`/`rating`/`reviewCount` (pravila i pragovi: `lib/badges.ts`, javno objašnjeno na `/oznake`). .NET preuzima ista pravila bude li ih ikad računao server-side.
+
 ## GET /api/regions
 ```json
 [{ "id": "dalmacija", "name": "Dalmacija", "center": [16.4, 43.6],

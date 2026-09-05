@@ -54,6 +54,8 @@ export interface Vendor {
   styleTags: string[];
   /** javne društvene poveznice (portfolio) — normalizirani URL-ovi, prikazuju se kao ikone */
   social?: { instagram?: string; facebook?: string };
+  /** faza 3/4 (claim): "claimed" aktivira oznaku "✓ Verificirani profil" — importi ga zasad ne postavljaju */
+  claimStatus?: "unclaimed" | "claimed";
   /** imena datoteka u public/images/vendors/<slug>/ — puni ih import/sync skripta */
   photos?: string[];
 }

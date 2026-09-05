@@ -18,7 +18,7 @@ CATEGORIES = [
     "Dodaci za djevojačke i momačke", "Reveri, narukvice, podvezice i dodaci",
 ]
 REGIONS = ["Istra", "Kvarner", "Dalmacija", "Zagreb i okolica", "Slavonija"]
-STATUSES = ["Istraženo", "Kontaktirano", "Dozvola dobivena", "Objavljeno"]
+STATUSES = ["Istraženo", "Kontaktirano", "Dozvola dobivena", "Objavljeno", "Skriveno"]
 
 HEADERS = [
     ("naziv*", 26, "Puni naziv pružatelja"),
@@ -92,6 +92,10 @@ lines = [
     ("• Za objavu prenesenih recenzija, fotografija i ocjena zatraži suglasnost pružatelja (to je ujedno prvi kontakt za partnerstvo).", False),
     ("• Kolone web/telefon/email su samo za tvoju evidenciju — import ih NE stavlja na stranicu (Direktan kontakt: zasad ne).", False),
     ("• IZNIMKA: instagram i facebook SU javni — prikazuju se kao ikone na profilu pružatelja. Zalijepi @handle ili puni URL, ostalo sredi skripta.", False),
+    ("", False),
+    ("INTERNI STATUSI (nikad javne negativne oznake):", True),
+    ("• Sumnjaš da je pružatelj neaktivan, prijavljen je problem ili podaci ne valjaju? Status = Skriveno → import ga preskače (tiho uklanjanje s platforme).", False),
+    ("• Detalje sumnje zapiši u kolonu napomena. Kad provjeriš i potvrdiš da je sve u redu, vrati status i pružatelj se opet uvozi.", False),
     ("• Redci čiji naziv počinje s 'PRIMJER' se preskaču pri importu — slobodno ih ostavi ili obriši.", False),
     ("", False),
     ("SAVJET ZA POČETAK:", True),
