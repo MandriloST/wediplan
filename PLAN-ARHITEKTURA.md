@@ -149,6 +149,45 @@ Odluka **[ZA ODOBRENJE #7]** (implementirana na frontend/Excel razini; .NET je p
   generirati kao neutralna činjenična rečenica; mršavi unclaimed profili ističu CTA
   "Preuzmite i dopunite profil" (akvizicijski lijevak) — UI dio slijedi u kasnijoj fazi.
 
+### 4.2 Sustav oznaka (badgeva) — IMPLEMENTIRANO v1 (rujan 2026.)
+
+Odluka **[ZA ODOBRENJE #9]** — dogovoreni okvir: 2 slota, oznake se IZVODE iz podataka
+(nikad ručni unos), negativna stanja su interna, kriteriji javni na `/oznake`.
+
+- **Slot povjerenja** (najviše jedna, prioritet): ✓ Verificirani profil (`claim_status =
+  claimed`, faza 3/4) → ✓ Provjereni podaci (`provjereno = DA` u Excelu) → Novi na
+  WediPlanu (v1 proxy: `reviewCount == 0`; Faza 1 uvodi `created_at` pa proxy zamijeniti).
+- **Slot zasluge** (najjača): ★ Top ocijenjen — ocjena ≥ 4.8 i ≥ 20 recenzija, izvor
+  uvijek naveden. Kasnije u isti slot (uz tracking/CRM): Brzo odgovara, Popularan.
+- Pragovi i logika žive SAMO u `lib/badges.ts` (frontend) — .NET u Fazi 1 preuzima ista
+  pravila; pragovi se ne dupliciraju po komponentama.
+- Interna negativna stanja (moguće neaktivan, prijavljen problem): Excel status
+  **"Skriveno"** → import preskače redak (tiho uklanjanje). Nikad javne negativne oznake.
+- Kartica: oznake prve u redu badgeva (thumb je 86px — overlay na slici tek ako kartice
+  jednom dobiju velike slike). Profil: oznake u zaglavlju s tooltipom + link na `/oznake`.
+
+## §M Monetizacija — sponzorirani pružatelji [ZA ODOBRENJE #8]
+
+Načela (dogovoreno, implementacija od Faze 1+):
+1. **Sponzorstvo je treći kanal** — nikad ne utječe na oznake, ocjene ni organski
+   redoslijed. Uvijek označeno "Istaknuto"/"Sponzorirano" (EU obveza označavanja).
+2. **Karta ostaje organska** — sponzorirani pinovi se ne prodaju (karta je sidro
+   povjerenja i killer feature).
+3. Proizvodi, redom uvođenja:
+   a) **Istaknuti slotovi u rezultatima** — max 2 kartice na vrhu liste po kombinaciji
+      kategorija × regija, isti format kartice + oznaka "Istaknuto"; isti proizvod i u
+      "Slični pružatelji" (1 slot). Prvi naplativi proizvod.
+   b) **Izlog na naslovnici** ("Izdvojeno ovaj mjesec") — 4–6 kartica, mjesečna rotacija,
+      premium. Uvodi se kad landing dobije konačni oblik.
+   c) **Premium profil** — više fotografija, video, istaknuti portfolio; kasnije prioritet
+      na kalendar/CRM. Veže se na claim flow ("preuzmi → nadogradi").
+4. **"Vendor mjeseca" se NE prodaje** — zarađeno priznanje (dodjeljuje platforma, javni
+   kriterij, besplatno). Odvojeno od plaćenog "Izdvojeno".
+5. Nema posebne stranice "samo sponzori" — vidljivost tamo gdje korisnici već jesu.
+6. Model podataka: zaseban entitet `sponsorships` (vendor_id, scope: category_slug ×
+   region_slug | homepage | similar, slot, active_from, active_to, price) — NE stupac u
+   vendors Excelu i NE badge. Živi u bazi od Faze 1.
+
 ---
 
 ## 5. Auth (korisnici i pružatelji)
@@ -289,6 +328,8 @@ Ugrađeno u arhitekturu od početka:
 | 5 | Email servis (§5) | Resend |
 | 6 | Redoslijed faza 3↔4 (§7) | Auth prije claima |
 | 7 | Sjedište vs. pokrivanje + location_precision (§4.1) | Implementirano u Excel/Node pipelineu — potvrditi prije .NET modela |
+| 8 | Monetizacija: 3 proizvoda + zarađeni Vendor mjeseca (§M) | Dogovoreno načelno; sponsorships entitet od Faze 1 |
+| 9 | Sustav oznaka: 2 slota, pragovi Top ocijenjen 4.8/20 (§4.2) | Implementirano v1; pragove potvrditi na stvarnim podacima |
 
 Odobrenjem (ili izmjenom) ovih 6 stavki plan postaje izvršiv — sljedeći razgovor može
 početi rečenicom: "Kreni s fazom 0 prema PLAN-ARHITEKTURA.md".

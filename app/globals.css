@@ -271,6 +271,10 @@ select option:checked {
 }
 .badge.verified { border-color: var(--primary); color: var(--primary-deep); background: var(--primary-tint); }
 .badge.live { border-color: var(--success); color: var(--success); background: var(--success-tint); }
+.badge.new { border-color: var(--border-strong); color: var(--ink); background: var(--surface-2); }
+.badge.top { border-color: #d9a514; color: #8a6a00; background: #fdf6e0; }
+.badge-help { font-size: 11.5px; color: var(--muted); text-decoration: underline; align-self: center; }
+.badge-help:hover { color: var(--ink); }
 .badge.over-cap { border-color: var(--border-strong); color: var(--muted); background: var(--surface-2); }
 
 .empty {

@@ -10,6 +10,7 @@ import type { VendorProfileData } from "@/lib/types";
 import { useBudget, useCompare, useFavorites } from "@/stores";
 import AvailabilityCalendar from "./AvailabilityCalendar";
 import { vendorImages } from "@/lib/images";
+import { vendorBadges } from "@/lib/badges";
 import VendorCard from "./VendorCard";
 
 export default function VendorProfile({ data }: { data: VendorProfileData }) {
@@ -62,7 +63,11 @@ export default function VendorProfile({ data }: { data: VendorProfileData }) {
                 {vendor.coverageNote ? ` · ${vendor.coverageNote}` : ""}
               </p>
               <div className="badges" style={{ marginTop: 8 }}>
-                {vendor.verified && <span className="badge verified">✓ provjereno</span>}
+                {vendorBadges(vendor).map((b) => (
+                  <span key={b.id} className={`badge ${b.className}`} title={b.tooltip}>
+                    {b.label}
+                  </span>
+                ))}
                 {vendor.liveCalendar ? (
                   <span className="badge live">✓ kalendar uživo</span>
                 ) : (
@@ -73,6 +78,9 @@ export default function VendorProfile({ data }: { data: VendorProfileData }) {
                     {t}
                   </span>
                 ))}
+                <Link href="/oznake" className="badge-help" title="Javni kriteriji dodjele oznaka">
+                  Što znače oznake?
+                </Link>
               </div>
               {(vendor.social?.instagram || vendor.social?.facebook) && (
                 <div className="socials" style={{ marginTop: 10 }} aria-label="Društvene mreže">
@@ -117,7 +125,7 @@ export default function VendorProfile({ data }: { data: VendorProfileData }) {
                   </span>
                 </div>
               ) : (
-                <div className="muted" style={{ fontSize: 13.5 }}>novo na Wediplanu</div>
+                <div className="muted" style={{ fontSize: 13.5 }}>još bez recenzija</div>
               )}
             </div>
           </header>
