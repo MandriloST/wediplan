@@ -8,6 +8,7 @@
     "city": "Split",
     "lng": 16.451171229873047,
     "lat": 43.508496471742916,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -27,6 +28,7 @@
     "city": "Vodnjan",
     "lng": 13.8908782,
     "lat": 44.9660021,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -46,6 +48,7 @@
     "city": "Savudrija / Crveni Vrh",
     "lng": 13.5388,
     "lat": 45.4905,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -65,6 +68,7 @@
     "city": "Sveti Jakov / Mali Lošinj",
     "lng": 14.39306,
     "lat": 44.64075,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -84,6 +88,7 @@
     "city": "Viškovo / Marinići",
     "lng": 14.3950008,
     "lat": 45.3722697,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -103,6 +108,7 @@
     "city": "Labin / Ripenda Kras",
     "lng": 14.15041,
     "lat": 45.101773,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -122,6 +128,7 @@
     "city": "Bale",
     "lng": 13.785952668472635,
     "lat": 45.04539441878593,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -141,6 +148,7 @@
     "city": "Osijek",
     "lng": 18.72846487034348,
     "lat": 45.545812603029475,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -160,6 +168,7 @@
     "city": "Osijek",
     "lng": 18.63734,
     "lat": 45.56467,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -179,6 +188,7 @@
     "city": "Osijek",
     "lng": 18.6772784,
     "lat": 45.5518091,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -198,6 +208,7 @@
     "city": "Dubrovnik",
     "lng": 18.074506,
     "lat": 42.656403,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -217,6 +228,7 @@
     "city": "Dubrovnik",
     "lng": 18.113048,
     "lat": 42.641748,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -236,6 +248,7 @@
     "city": "Dubrovnik",
     "lng": 18.1141502,
     "lat": 42.6408496,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -255,6 +268,7 @@
     "city": "Dubrovnik",
     "lng": 18.102918,
     "lat": 42.6481827,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -274,6 +288,7 @@
     "city": "Zagreb",
     "lng": 15.9800529,
     "lat": 45.8015174,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -293,6 +308,7 @@
     "city": "Zagreb",
     "lng": 15.9682261,
     "lat": 45.8077261,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -312,6 +328,7 @@
     "city": "Sesvete",
     "lng": 16.112291026172564,
     "lat": 45.688773412150866,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -331,6 +348,7 @@
     "city": "Zagreb",
     "lng": 16.0084345,
     "lat": 45.8029051,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -350,6 +368,7 @@
     "city": "Zagreb",
     "lng": 15.96870042617802,
     "lat": 45.8095387840522,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -369,6 +388,7 @@
     "city": "Split",
     "lng": 16.47222836821845,
     "lat": 43.51328102301298,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -388,6 +408,7 @@
     "city": "Dugopolje / Split okolica",
     "lng": 16.4534387,
     "lat": 43.546399,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -407,6 +428,7 @@
     "city": "Split",
     "lng": 16.388611,
     "lat": 43.508333,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -426,6 +448,7 @@
     "city": "Split",
     "lng": 16.466460176268544,
     "lat": 43.51181423129992,
+    "locationPrecision": "exact",
     "price": {
       "kind": "perPerson",
       "from": 40,
@@ -448,6 +471,7 @@
     "city": "Velika Gorica",
     "lng": 16.079855934335264,
     "lat": 45.7138411403686,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -467,6 +491,7 @@
     "city": "Osijek",
     "lng": 18.695779367539384,
     "lat": 45.554711004652255,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -486,6 +511,7 @@
     "city": "Osijek",
     "lng": 18.718577623695705,
     "lat": 45.551380188878355,
+    "locationPrecision": "exact",
     "price": {
       "kind": "from",
       "from": 1250
@@ -507,6 +533,7 @@
     "city": "Osijek",
     "lng": 18.695779367539384,
     "lat": 45.554711004652255,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -527,6 +554,7 @@
     "city": "Split",
     "lng": 16.45184871258262,
     "lat": 43.51459542665039,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -546,6 +574,7 @@
     "city": "Zagreb",
     "lng": 16.024483982000998,
     "lat": 45.82191026154278,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -565,6 +594,7 @@
     "city": "Zagreb",
     "lng": 15.928551068506366,
     "lat": 45.79494581931543,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -584,6 +614,7 @@
     "city": "Split",
     "lng": 16.42931474326798,
     "lat": 43.55070395768302,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -603,6 +634,7 @@
     "city": "Zagreb",
     "lng": 15.982214314044352,
     "lat": 45.81355897369877,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -622,6 +654,7 @@
     "city": "Zadar",
     "lng": 15.230044684671324,
     "lat": 44.11904198700834,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -641,6 +674,7 @@
     "city": "Novska",
     "lng": 16.979213718988955,
     "lat": 45.33936602408229,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -660,6 +694,7 @@
     "city": "Split",
     "lng": 16.44449541179862,
     "lat": 43.51476954211381,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -679,6 +714,7 @@
     "city": "Zagreb",
     "lng": 15.982214314044352,
     "lat": 45.81355897369877,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
@@ -698,6 +734,7 @@
     "city": "Vinkovci",
     "lng": 18.806884700099072,
     "lat": 45.288048367359096,
+    "locationPrecision": "exact",
     "price": {
       "kind": "onRequest"
     },
