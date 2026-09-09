@@ -29,6 +29,8 @@ export interface Vendor {
   slug: string;
   name: string;
   category: string; // Category.slug
+  /** SVE kategorije [primarna, ...dodatne] (§4.3) — izostanak = samo primarna. Listinzi/brojači/usporedba čitaju ovo; slika/budžet/breadcrumb čitaju category. */
+  categories?: string[]; // Category.slug[]
   /** regija SJEDIŠTA (gdje je pružatelj baziran) */
   region: RegionId;
   /** grad sjedišta; "" = poznata samo regija */

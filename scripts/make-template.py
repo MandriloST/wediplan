@@ -23,6 +23,7 @@ STATUSES = ["Istraženo", "Kontaktirano", "Dozvola dobivena", "Objavljeno", "Skr
 HEADERS = [
     ("naziv*", 26, "Puni naziv pružatelja"),
     ("kategorija*", 24, "Odaberi iz padajućeg izbornika"),
+    ("dodatne_kategorije", 22, "Najviše 2 dodatne kategorije iz šifrarnika, odvojene točka-zarezom (npr. DJ; Catering). NE ponavljati primarnu. Više od 3 ukupno: zahtjev adminu (nakon claima)."),
     ("regija*", 16, "Odaberi iz padajućeg izbornika"),
     ("grad", 14, "SJEDIŠTE — jedan grad. Ako ih pružatelj navodi više, upiši glavni/prvi, ostale u pokrivanje_napomena. Prazno = poznata samo regija (bez pina na karti). OBAVEZNO za sale/konobe/kuće za proslavu."),
     ("koordinate", 20, 'Google Maps → desni klik na lokaciju → klik na koordinate (kopira "43.5081, 16.4402") → zalijepi ovdje. Prazno = geokodira se iz grada (Faza 1). OBAVEZNO za sale/konobe/kuće za proslavu. Nikad ne izmišljaj koordinatu!'),
@@ -75,6 +76,9 @@ lines = [
     ("KAKO RADITI:", True),
     ("1. Popunjavaj list 'Pružatelji' — stupci s * su obavezni. Ostalo može ostati prazno.", False),
     ("2. Koordinate: Google Maps → desni klik na lokaciju → klikni koordinate (automatski se kopiraju) → zalijepi u ćeliju.", False),
+    ("", False),
+    ("KATEGORIJE:", True),
+    ("• kategorija = PRIMARNA (određuje sliku, budžetsku grupu, slične). dodatne_kategorije = još najviše 2, odvojene ; — pružatelj se pojavljuje u svim svojim kategorijama.", False),
     ("", False),
     ("LOKACIJA I POKRIVANJE (sjedište ≠ područje rada):", True),
     ("• grad + koordinate = SJEDIŠTE (jedna točka → jedan pin na karti). pokriva_regije = gdje pružatelj RADI.", False),
@@ -140,35 +144,35 @@ for dv, col in [(dv_cat, "B"), (dv_reg, "C"), (dv_price, "F"), (dv_yn, "L"), (dv
 # DataValidation objekti se ne smiju dijeliti za više raspona istog tipa različitih stupaca — kreiraj zasebno
 dv_yn2 = DataValidation(type="list", formula1='"DA,NE"', allow_blank=True)
 ws.add_data_validation(dv_cat); dv_cat.add(f"B2:B{MAXR}")
-ws.add_data_validation(dv_reg); dv_reg.add(f"C2:C{MAXR}")
-ws.add_data_validation(dv_price); dv_price.add(f"H2:H{MAXR}")
-ws.add_data_validation(dv_yn); dv_yn.add(f"N2:N{MAXR}")
-ws.add_data_validation(dv_yn2); dv_yn2.add(f"O2:O{MAXR}")
-ws.add_data_validation(dv_stat); dv_stat.add(f"X2:X{MAXR}")
+ws.add_data_validation(dv_reg); dv_reg.add(f"D2:D{MAXR}")
+ws.add_data_validation(dv_price); dv_price.add(f"I2:I{MAXR}")
+ws.add_data_validation(dv_yn); dv_yn.add(f"O2:O{MAXR}")
+ws.add_data_validation(dv_yn2); dv_yn2.add(f"P2:P{MAXR}")
+ws.add_data_validation(dv_stat); dv_stat.add(f"Y2:Y{MAXR}")
 
 examples = [
     # 1) dvorana — puna lokacija (grad + koordinate OBAVEZNI za sale)
-    ["PRIMJER — Villa Dalmacija", "Restorani i sale", "Dalmacija", "Split", "43.5147, 16.4102", "", "",
+    ["PRIMJER — Villa Dalmacija", "Restorani i sale", "", "Dalmacija", "Split", "43.5147, 16.4102", "", "",
      "po osobi (raspon)", 65, 95, 4.8, 57, "Google recenzije", "DA", "NE", "uz more, terasa",
      "Terasa uz more za do 220 gostiju, vlastita kuhinja i parking. Cijena po osobi uključuje meni od 5 slijedova.",
      "Meni po osobi, Osoblje, Osnovna dekoracija, Parking", "@villa.dalmacija", "facebook.com/villadalmacija", "villa-dalmacija.hr", "021/555-123",
      "info@villa-dalmacija.hr", "Dozvola dobivena", "primjer — obriši ili ostavi (preskače se)"],
     # 2) fotograf sa sjedištem koji pokriva 2 regije (više gradova → glavni u grad, ostali u napomenu)
-    ["PRIMJER — Foto studio Anić", "Foto i Video", "Dalmacija", "Split", "43.5081, 16.4402",
+    ["PRIMJER — Foto studio Anić", "Foto i Video", "Audio, foto kabine i selfie mirror", "Dalmacija", "Split", "43.5081, 16.4402",
      "Dalmacija; Kvarner", "radi u Splitu, Zadru i Šibeniku, po dogovoru i šire",
      "od (paušal)", 850, None, 4.8, 31, "Google recenzije", "DA", "NE", "boho, film",
      "Vjenčanja fotografiramo od 2014. — reportažno, s naglaskom na svjetlo i emociju.",
      "", "https://instagram.com/foto.anic", "", "fotostudio-anic.hr", "", "", "Kontaktirano", "primjer — preskače se pri importu"],
     # 3) bend bez grada — poznata samo regija (bez pina, prikazuje se u listi regije)
-    ["PRIMJER — Bend Adria", "Glazba — bendovi", "Dalmacija", "", "", "", "",
+    ["PRIMJER — Bend Adria", "Glazba — bendovi", "DJ", "Dalmacija", "", "", "", "",
      "od (paušal)", 1200, None, None, None, "", "NE", "NE", "pop, rock",
      "", "", "", "", "bend-adria.hr", "", "", "Istraženo", "primjer — bez grada/koordinata → bez pina"],
     # 4) fotograf s gradom, ali bez koordinata — geokodira se iz grada u Fazi 1
-    ["PRIMJER — Ana Fotografija", "Foto i Video", "Istra", "Pula", "", "", "",
+    ["PRIMJER — Ana Fotografija", "Foto i Video", "", "Istra", "Pula", "", "", "",
      "na upit", None, None, None, None, "", "NE", "NE", "elegantno",
      "", "", "", "", "", "", "", "Istraženo", "primjer — koordinate se geokodiraju iz grada"],
     # 5) organizator koji pokriva cijelu Hrvatsku
-    ["PRIMJER — Perfect Day Weddings", "Organizatori vjenčanja", "Zagreb i okolica", "Zagreb", "45.8150, 15.9819",
+    ["PRIMJER — Perfect Day Weddings", "Organizatori vjenčanja", "", "Zagreb i okolica", "Zagreb", "45.8150, 15.9819",
      "cijela Hrvatska", "organiziramo vjenčanja u cijeloj Hrvatskoj",
      "na upit", None, None, 5.0, 12, "Google recenzije", "DA", "NE", "full service",
      "Organiziramo vjenčanja od Istre do Slavonije — od koncepta do izvedbe.",

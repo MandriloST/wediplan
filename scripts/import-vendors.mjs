@@ -170,6 +170,19 @@ rows.forEach((row, i) => {
   }
   if (!category) err(`nepoznata kategorija „${catRaw}”`);
 
+  // §4.3: dodatne kategorije — max 2, iz šifrarnika, bez ponavljanja primarne
+  const extraCategories = [];
+  const extraRaw = String(col(row, "dodatne_kategorije") ?? "").trim();
+  if (extraRaw) {
+    for (const part of extraRaw.split(";").map((p) => p.trim()).filter(Boolean)) { // SAMO ';' — imena kategorija sadrže zareze
+      const c = CAT_LOOKUP.get(norm(part)) ?? MERGED.get(norm(part));
+      if (!c) err(`dodatne_kategorije: nepoznata kategorija „${part}”`);
+      else if (c === category) warn(`dodatne_kategorije ponavlja primarnu („${part}”) — preskačem`);
+      else if (!extraCategories.includes(c)) extraCategories.push(c);
+    }
+    if (extraCategories.length > 2) err(`dodatne_kategorije: najviše 2 (uneseno ${extraCategories.length}) — više od 3 ukupno ide preko admin odobrenja`);
+  }
+
   const regRaw = col(row, "regija");
   const region = REG_LOOKUP.get(norm(regRaw));
   if (!region) err(`nepoznata regija „${regRaw}”`);
@@ -256,7 +269,8 @@ rows.forEach((row, i) => {
     id: slug,
     slug,
     name,
-    category,
+    category, // primarna (§4.3)
+    ...(extraCategories.length && { categories: [category, ...extraCategories] }),
     region,
     city, // "" = poznata samo regija
     lng: coords ? coords.lng : null,
