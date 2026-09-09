@@ -82,12 +82,18 @@ na Azure kasnije je trivijalna jer je sve u Dockeru.
 Minimalan skup za faze 1–4. Imena tablica engleski, sadržaj hrvatski.
 
 ```
-vendors            id (uuid), slug (unique), name, category_slug, region_slug, city,
+vendors            id (uuid), slug (unique), name, category_slug (PRIMARNA, v. §4.3),
+                   region_slug, city,
                    lat (nullable), lng (nullable),
                    location_precision (exact|city|region),
                    coverage_regions text[] (prazno = samo vlastita regija; ['hr'] = cijela HR),
                    coverage_note text (nullable),
                    instagram_url text (nullable), facebook_url text (nullable),   -- JAVNO (ikone na profilu)
+vendor_categories  vendor_id, category_slug, is_primary (bool) — M2M, v. §4.3
+events             v. §A — analitika (Faza 1)
+daily_stats        v. §A — agregati za reporte i premium statistiku
+sponsorships       v. §M.4 (Faza 1, prazan do naplate)
+subscriptions      v. §M.4 (faza 3/4 — uz claim)
                    price_kind (from|per_person|on_request), price_from, price_to,
                    style_tags text[], about, services text[], website, phone, email,
                    verified bool, live_calendar bool, claim_status (unclaimed|pending|claimed),
@@ -166,27 +172,125 @@ Odluka **[ZA ODOBRENJE #9]** — dogovoreni okvir: 2 slota, oznake se IZVODE iz 
 - Kartica: oznake prve u redu badgeva (thumb je 86px — overlay na slici tek ako kartice
   jednom dobiju velike slike). Profil: oznake u zaglavlju s tooltipom + link na `/oznake`.
 
-## §M Monetizacija — sponzorirani pružatelji [ZA ODOBRENJE #8]
+### 4.3 Više kategorija po pružatelju [odluka #10 — ODOBRENO]
 
-Načela (dogovoreno, implementacija od Faze 1+):
+Many-to-many s **jednom primarnom** kategorijom (model Google Businessa). Limit **3
+kategorije ukupno**; više od 3 samo uz odobrenje admina (zahtjev u provider dashboardu,
+faza 4). Nakon claima pružatelj sam uređuje kategorije unutar limita.
+
+Točna podjela odgovornosti (ovo su pravila koja komponente MORAJU slijediti):
+- **PRIMARNA određuje:** default sliku, breadcrumb profila, grupu u kalkulatoru budžeta
+  (jedan pružatelj se broji u TOČNO jednu budžetsku omotnicu — nikad dvostruko),
+  "Slične pružatelje".
+- **SVE kategorije određuju:** pojavljivanje u listinzima/filtrima i brojače kategorija.
+  Posljedica: zbroj brojača po kategorijama > broj pružatelja — to je očekivano, ne bug.
+- **Usporedba:** uspoređivati se smiju samo pružatelji koji dijele ≥ 1 kategoriju
+  (inače atributi nisu usporedivi). UI onemogućuje dodavanje neusporedivog.
+- Cijena ostaje jedna po pružatelju (v1 pojednostavljenje); cijena po kategoriji je
+  premium mogućnost (§M.1).
+
+Excel: novi stupac **`dodatne_kategorije`** (odmah nakon `kategorija`) — imena iz
+šifrarnika odvojena `;`, najviše 2, ne smije ponavljati primarnu. Import validira i
+zapisuje `categories = [primarna, ...dodatne]`; postojeći `category` ostaje primarna
+(unatrag kompatibilno). DB (Faza 1): tablica `vendor_categories` (vendor_id,
+category_slug, is_primary) uz zadržani `vendors.category_slug` kao denormaliziranu
+primarnu radi jednostavnosti upita.
+
+### §A Analitika i event tracking [odluka #11 — ODOBRENO]
+
+Odluka: **vlastiti first-party event tracking u Postgresu — agregatno, nikad
+individualno.** Bez heatmapa, session-snimki i vanjskih trackera. Cilj: reporti
+("što se najviše pretražuje, kada, gdje"), sezonalnost za §M.2, i "Statistika
+profila" kao premium (§M.1).
+
+Privatnost (uvjeti pod kojima je odluka donesena — ne mijenjati bez rasprave):
+- Bez PII: ne pohranjuje se IP, user id se NE veže na evente ni kad auth dođe.
+- `session_hash`: nasumičan ID generiran na klijentu (sessionStorage), bez kolačića,
+  ne preživljava zatvaranje taba; služi samo za "sesija = niz eventa".
+- Poštivati Do Not Track / Global Privacy Control (ne slati evente).
+- Dokumentirati u Pravilima privatnosti (§9); cookie notice ostaje minimalan.
+
+Model (Faza 1, uz ostale entitete):
+```
+events   id bigserial, ts timestamptz, event_name text, session_hash text,
+         page text, props jsonb
+         indeksi: (ts), (event_name, ts); rollup job → daily_stats
+daily_stats  day, event_name, category_slug, region_slug, vendor_slug, count
+             (materijalizirano dnevno — reporti čitaju SAMO ovo, nikad sirove evente)
+```
+
+API: `POST /api/events` — prima batch (max 20), whitelist `event_name`, rate limit
+po IP-u (IP se koristi za limit, NE pohranjuje), tihi 204 (nikad ne ruši UX).
+
+Katalog eventa v1 (whitelist — proširenja se dodaju ovdje pa u kod):
+`page_view`, `search_performed {q?, category?, region?, filters}`,
+`vendor_viewed {slug, category, region}`, `map_region_clicked {region}`,
+`map_pin_clicked {slug}`, `compare_added {slug}`, `compare_viewed {slugs, category}`,
+`budget_calculated {guests, region}`, `outbound_click {slug, target: web|instagram|facebook}`,
+`favorite_added {slug}`.
+Napomena: `outbound_click` je ujedno izvor za premium "Statistiku profila" — najvrjedniji
+event za dokaz vrijednosti pružateljima.
+
+Klijent: `lib/analytics.ts` — `track(name, props)`, automatski `page_view`, red čekanja
+s `sendBeacon`/batch flushom, nikad blokira render, fail-silent.
+
+## §M Monetizacija — ODOBRENO uz dopune (rujan 2026.) [odluka #8]
+
+Strategija: **prvo publika i partneri, pa naplata.** Do tada sve besplatno; podaci
+(analitika, §A) se skupljaju od prvog dana da naplata krene informirana.
+
+Načela (trajna, ne krše se ni u jednom proizvodu):
 1. **Sponzorstvo je treći kanal** — nikad ne utječe na oznake, ocjene ni organski
    redoslijed. Uvijek označeno "Istaknuto"/"Sponzorirano" (EU obveza označavanja).
-2. **Karta ostaje organska** — sponzorirani pinovi se ne prodaju (karta je sidro
-   povjerenja i killer feature).
-3. Proizvodi, redom uvođenja:
-   a) **Istaknuti slotovi u rezultatima** — max 2 kartice na vrhu liste po kombinaciji
-      kategorija × regija, isti format kartice + oznaka "Istaknuto"; isti proizvod i u
-      "Slični pružatelji" (1 slot). Prvi naplativi proizvod.
-   b) **Izlog na naslovnici** ("Izdvojeno ovaj mjesec") — 4–6 kartica, mjesečna rotacija,
-      premium. Uvodi se kad landing dobije konačni oblik.
-   c) **Premium profil** — više fotografija, video, istaknuti portfolio; kasnije prioritet
-      na kalendar/CRM. Veže se na claim flow ("preuzmi → nadogradi").
-4. **"Vendor mjeseca" se NE prodaje** — zarađeno priznanje (dodjeljuje platforma, javni
-   kriterij, besplatno). Odvojeno od plaćenog "Izdvojeno".
-5. Nema posebne stranice "samo sponzori" — vidljivost tamo gdje korisnici već jesu.
-6. Model podataka: zaseban entitet `sponsorships` (vendor_id, scope: category_slug ×
-   region_slug | homepage | similar, slot, active_from, active_to, price) — NE stupac u
-   vendors Excelu i NE badge. Živi u bazi od Faze 1.
+2. **Karta ostaje organska — POTVRĐENO.** Sponzorirani/obojani pinovi se ne prodaju.
+   Eventualna buduća promjena zahtijeva eksplicitnu izmjenu ove odluke (ne tihu) i
+   stroge uvjete: ista veličina pina, oznaka "Istaknuto" u popupu, limit po prikazu,
+   nula utjecaja na brojače i klasteriranje, mjerenje utjecaja na povjerenje.
+3. **Nikako, trajno:** skrivanje cijena iza plaćanja pružatelja; naplata parovima.
+   Alati za parove (budžet, usporedba, karta, favoriti) ostaju besplatni — to je
+   akvizicijski jarak platforme.
+
+### M.1 Freemium profil (prvi proizvod, veže se na claim flow §6)
+
+Granica: **free = sve što paru treba za odluku; premium = sve što pružatelja prodaje
+bolje.** Prazni profili štete platformi, ne pružatelju — zato je osnovno uvijek besplatno.
+
+- **FREE:** naziv, primarna + dodatne kategorije (do limita, §4.3), regija + pokrivanje,
+  **cijena (uvijek vidljiva)**, osnovni opis (~300 znakova), 1 fotografija, poveznice
+  web/Instagram/Facebook, sve zarađene oznake (§4.2 — oznake se nikad ne kupuju).
+- **PREMIUM (pretplata, mjesečno/godišnje):** galerija s više fotografija, video,
+  prošireni opis, kalendar dostupnosti uživo (kad dođe, faza 5/6), cijena po kategoriji
+  (za višekategorijske pružatelje), **"Statistika profila"** — pregledi, spremanja u
+  favorite, pojavljivanja u pretrazi, outbound klikovi na web/IG/FB (izravno iz §A;
+  pružatelju opipljiv dokaz vrijednosti). Kasnije: odgovaranje na recenzije.
+- **"Founding partner":** ograničen broj besplatnih premiuma za privlačenje partnera —
+  **vremenski ograničeno (12 mj) i imenovano**, ne trajno pravo. Admin dodjeljuje.
+
+### M.2 Istaknuti slotovi (naknadno)
+
+- Max 2 kartice "Istaknuto" na vrhu liste, **samo na općem pregledu kategorije ILI
+  regije** — čim postoji ključna riječ ili dodatni filteri (pretraga s namjerom),
+  rezultati su 100% organski. Isti proizvod i u "Slični pružatelji" (1 slot).
+- **Izlog na naslovnici** ("Izdvojeno ovaj mjesec", 4–6 kartica, mjesečna rotacija) —
+  kad landing dobije konačni oblik.
+- Sezonske cijene sponzorstva (npr. skuplje u mjesecima vršne aktivnosti) — TEK nakon
+  ≥ 12 mjeseci podataka iz §A; do tada flat cjenik.
+
+### M.3 Zarađeno priznanje
+
+**"Vendor mjeseca" se NE prodaje** — dodjeljuje platforma po javnom kriteriju,
+besplatno, odvojeno od plaćenog "Izdvojeno". Marketinški alat (mjesečna objava,
+povod za kontakt s pružateljima).
+
+### M.4 Model podataka
+
+- `sponsorships` (vendor_id, scope: category_slug × region_slug | homepage | similar,
+  slot, active_from, active_to, price) — zaseban entitet, NE stupac u vendors Excelu,
+  NE badge. Od Faze 1.
+- `subscriptions` (vendor_id, plan: free|premium|founding, active_from, active_to,
+  granted_by za founding) — od faze claima (3/4). Premium mogućnosti se čitaju iz
+  ovoga, nikad hardkodirano po vendoru.
+- Nema posebne stranice "samo sponzori" — vidljivost tamo gdje korisnici već jesu.
 
 ---
 
@@ -240,14 +344,19 @@ Web API projekt, EF Core + Npgsql, Docker Compose (api + postgres) za lokalni ra
 health endpoint, CI-friendly struktura. Definition of done: `docker compose up` digne
 API koji vraća prazan `/api/vendors` odgovor u ispravnom obliku iz `API.md`.
 
-**Faza 1 — model + migracije + import.** Entiteti iz §3, EF migracije, import komanda
-za Excel s 2500 pružatelja (idempotentna, s čišćenjem iz §4). DoD: baza puna,
+**Faza 1 — model + migracije + import.** Entiteti iz §3 (uklj. vendor_categories §4.3,
+events + daily_stats §A, prazan sponsorships §M.4), EF migracije, import komanda
+za Excel s 2500 pružatelja (idempotentna, s čišćenjem iz §4, uklj. dodatne_kategorije,
+pokrivanje §4.1 i geokodiranje gradova bez koordinata). `POST /api/events` + rollup job.
+DoD: baza puna,
 `/api/vendors` s filtrima (q, region, category, page) vraća stvarne podatke identično
 mock obliku; `pg_trgm` typeahead za `/api/suggest`.
 
 **Faza 2 — spajanje frontenda.** `rewrites` na .NET API, gašenje mock ruta (ostaju u
 repou kao referenca dok sve ne prođe), regresijska provjera: karta, filtri, usporedba,
-budžet, profili, sitemap. DoD: frontend na Vercel previewu radi nad pravim API-jem.
+budžet, profili, sitemap. U ovoj fazi i `lib/analytics.ts` klijent (§A) s eventima
+uključenim u postojeće komponente. DoD: frontend na Vercel previewu radi nad pravim
+API-jem; eventi se tiho pune u bazu.
 
 **Faza 3 — auth.** §5 u cijelosti + migracija localStorage → account. DoD: prijava
 sva tri načina radi, favoriti/plan sinkronizirani, odjava/istek sesije uredni.
@@ -328,8 +437,10 @@ Ugrađeno u arhitekturu od početka:
 | 5 | Email servis (§5) | Resend |
 | 6 | Redoslijed faza 3↔4 (§7) | Auth prije claima |
 | 7 | Sjedište vs. pokrivanje + location_precision (§4.1) | Implementirano u Excel/Node pipelineu — potvrditi prije .NET modela |
-| 8 | Monetizacija: 3 proizvoda + zarađeni Vendor mjeseca (§M) | Dogovoreno načelno; sponsorships entitet od Faze 1 |
+| 8 | Monetizacija (§M) | ✅ ODOBRENO s dopunama: freemium granica M.1, Founding partner, karta trajno organska |
 | 9 | Sustav oznaka: 2 slota, pragovi Top ocijenjen 4.8/20 (§4.2) | Implementirano v1; pragove potvrditi na stvarnim podacima |
+| 10 | Više kategorija: M2M + primarna, limit 3 (§4.3) | ✅ ODOBRENO — Excel/import implementiran, UI pravila za sljedeću sesiju |
+| 11 | Analitika: vlastiti first-party, agregatno bez PII (§A) | ✅ ODOBRENO — implementacija Faza 1-2 |
 
 Odobrenjem (ili izmjenom) ovih 6 stavki plan postaje izvršiv — sljedeći razgovor može
 početi rečenicom: "Kreni s fazom 0 prema PLAN-ARHITEKTURA.md".
