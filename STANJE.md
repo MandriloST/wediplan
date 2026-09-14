@@ -4,7 +4,7 @@
 > Ažurira se na kraju SVAKE radne sesije (kratko, činjenično). Novije sesije na vrhu.
 > Uvijek provjeriti i stvarni `git log` — repo je izvor istine, ovo je sažetak.
 
-## Trenutna faza: **Zadatak A — ZAVRŠEN** → sljedeće: Faza 1 (Zadatak B: backend + import 3178 pružatelja)
+## Trenutna faza: **Zadatak A ✅ + sve odluke za Fazu 1 potvrđene (2026-09-14)** → sljedeće: Zadatak B (Faza 1 backend + import 3178)
 
 ## Stalna pravila predaje (vrijede svaku sesiju)
 - Rad isključivo na `develop` (ili `claude/*` → develop). `main` se ne dira.
@@ -13,6 +13,22 @@
   **patch/bundle** + točne git naredbe za merge.
 - Build mora proći prije predaje: `npm run build` (frontend), `dotnet build` (backend).
 - Ažurirati ovaj dokument (i PLAN-ARHITEKTURA.md ako se arhitektura mijenja) u istom commitu.
+
+---
+
+## ODLUKE POTVRĐENE 2026-09-14 (vlasnik)
+1. **Import podataka:** opcija (b) — .NET import u Fazi 1 (ne Node sada). Frontend do Faze 2
+   ostaje na mock JSON-u. Geokodiranje radi import (vlasnik NE popunjava koordinate ručno).
+2. **Import alat:** .NET konzolna komanda.
+3. **Baza/pretraga:** Postgres + pg_trgm (potvrđeno).
+4. **GDPR kontakti:** uvezi u bazu, NE izlaži javno u `/api/vendors` (na klik kasnije).
+5. **NOVO — Category-first (§L, odluka #12):** landing ne prikazuje sve pružatelje;
+   pregledavanje po JEDNOJ kategoriji; paginacija pageSize 24 + "Učitaj još"; karta samo
+   odabrane kategorije + jitter oko centroida. Defaulti a-d prihvaćeni. Novi endpoint
+   `GET /api/categories`. Zapisano u PLAN §L, API.md, §7 Faza 1, §11 #12-#13.
+
+## PREOSTALE OTVORENE ODLUKE (nisu blokeri za Fazu 1)
+Hosting (#1), slike/R2 (#3), email/Resend (#5), pragovi oznaka (#9), potvrda §4.1 modela (#7).
 
 ---
 
@@ -41,18 +57,8 @@ ali chipovi u `ExploreShell` trenutno NE prikazuju brojeve (nije mijenjano — n
 187 pružatelja ima `dodatne_kategorije`; 2298 telefon, 1751 email (GDPR — v. Zadatak B).
 Odluka gdje ide (regeneracija JSON-a sada vs. .NET import u Fazi 1) čeka vlasnika (v. dolje).
 
-## ODLUKE KOJE ČEKAM OD VLASNIKA (prije/na početku Faze 1 = Zadatak B)
-1. **Kamo s novim Excelom (3178) i kada frontend prikazuje pravih 3178?**
-   (a) odmah pokrenuti postojeći Node import → `data/vendors.json` (frontend odmah pun,
-   ali bez geokodiranja gradova); (b) čekati .NET import u Fazi 1 (čišće, geokodiranje
-   uključeno, ali frontend do Faze 2 ostaje na 37 mock vendora). **Preporuka: (b).**
-2. **Import alat** (plan §4/§11 #4): .NET konzolna komanda (preporuka) vs. zadržati Node.
-3. **Hosting/baza/email/slike** (plan §11 #1,#2,#3,#5) — potvrditi preporuke da Faza 1
-   krene bez zastoja (za Fazu 1 nužni su samo #2 baza=Postgres+pg_trgm, ostalo može kasnije).
-4. **GDPR kontakti pri importu:** telefon/email fizičkih osoba (obrti) — po §8/§9 NE
-   prikazivati u listi i ne objavljivati mobitele bez claima. Potvrditi: uvoziti ih u
-   bazu ali NE serIjalizirati u javni `/api/vendors` (učitavaju se na klik, faza kasnije)?
-   **Preporuka: da — uvezi, ne izlaži javno.**
+## ODLUKE IZ ZADATKA A — RIJEŠENE 2026-09-14 (v. blok "ODLUKE POTVRĐENE" na vrhu)
+Sve 4 pitanja iz Zadatka A potvrđena + dodan category-first (§L). Detalji na vrhu dokumenta.
 
 
 
@@ -77,14 +83,27 @@ prikazati i dodatne kategorije (diskretno, npr. "· također: Video"). (5) Budž
 NE diraju — koriste primarnu (`category`), već ispravno. DoD: build prolazi; vendor s 2
 kategorije vidljiv u obje liste, brojači točni, usporedba blokira nekompatibilne.
 
-**Zadatak B — Faza 1 backend (po §7 Faza 1, sad uključuje):** entiteti §3 + §4.3
+**Zadatak B — Faza 1 backend (po §7 Faza 1 + §L, sve odobreno 2026-09-14):** entiteti §3 + §4.3
 (`vendor_categories`) + §A (`events`, `daily_stats`) + prazan `sponsorships`; EF
-migracije; .NET import komanda koja replicira SVA pravila Node importa
-(`scripts/import-vendors.mjs` je referentna implementacija: pokrivanje, precision,
-venue-pravilo, Skriveno, social normalizacija, dodatne kategorije) + Nominatim
-geokodiranje za `precision=city` (cache, 1 req/s); `POST /api/events` (batch ≤ 20,
-whitelist iz §A, rate limit, 204, bez IP-a u bazi); noćni rollup u `daily_stats`.
+migracije (moraju se primijeniti na praznu bazu); **.NET konzolna import komanda** koja
+replicira SVA pravila Node importa (`scripts/import-vendors.mjs` je referentna
+implementacija: pokrivanje, precision, venue-pravilo, Skriveno, social normalizacija,
+dodatne kategorije) + Nominatim geokodiranje za `precision=city` (cache, 1 req/s);
+idempotentno po slugu. **Kontakti (telefon/email/web) uvoze se u bazu ali se NE vraćaju u
+`/api/vendors`** (odluka #13). `/api/vendors` filtri (q, region, category, page, pageSize
+default 24 cap 50). **NOVO `GET /api/categories?region=`** s brojačima po svim kategorijama
+(§L). `pg_trgm` typeahead za `/api/suggest`. `POST /api/events` (batch ≤ 20, whitelist §A,
+rate limit, 204, bez IP-a u bazi); noćni rollup u `daily_stats`. Ulaz: `data/vendors-live.xlsx`
+(3178 redova) — vlasnik dostavlja na početku sesije (nije u repou; sadrži kontakte).
 DoD iz §7 Faza 1.
+⚠️ Sandbox nema pristup nuget.org → .NET build s EF/Npgsql/xlsx paketima i migracije se
+NE mogu izvršiti u sandboxu; verifikacija (`dotnet build`, `dotnet run --import`, migracije)
+je na vlasnikovom stroju. Model predaje kod + točne korake.
+
+**Zadatak D — category-first frontend (§L; uz ili nakon Faze 2):** landing = grid kategorija
++ tražilica; lista/karta tek nakon odabira kategorije; `pageSize` 24 + "Učitaj još" +
+`rel=next/prev`; karta samo odabrane kategorije + deterministički jitter oko centroida;
+`/api/categories` za brojače. Ne dirati cjenovnu transparentnost ni slugove.
 
 **Zadatak C — analytics klijent (uz Fazu 2 spajanje):** `lib/analytics.ts` po §A
 (track + auto page_view + sendBeacon batch + DNT/GPC opt-out, fail-silent); ugraditi

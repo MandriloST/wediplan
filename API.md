@@ -4,6 +4,9 @@ Mock implementacija živi u `app/api/*` — .NET servis treba vratiti identične
 
 ## GET /api/vendors
 Query: `q, region, category, date, page (1+), pageSize (≤50)`
+Napomene (§L, §8-§9): `pageSize` default 24, hard cap 50; frontend na landingu ne poziva
+bez `category` (category-first). Kontakti (`phone`, `email`, `web`) se NE vraćaju u listi —
+učitavaju se zasebnim pozivom na klik (kasnija faza).
 ```json
 { "items": [], "total": 53, "page": 1, "pageSize": 24 }
 ```
@@ -43,6 +46,13 @@ Oznake (badgevi):
 ```json
 [{ "id": "dalmacija", "name": "Dalmacija", "center": [16.4, 43.6],
    "bounds": [[14.5, 42.35], [18.6, 44.6]], "count": 18 }]
+```
+
+## GET /api/categories?region=
+Brojači po SVIM kategorijama (§4.3 — zbroj > broj pružatelja je očekivan). Opcionalni
+`region` sužava brojače na regiju (sjedište ili pokrivanje). Za category-first landing (§L).
+```json
+[{ "slug": "foto-i-video", "name": "Foto i Video", "group": "foto", "count": 112 }]
 ```
 
 ## GET /api/suggest?q=

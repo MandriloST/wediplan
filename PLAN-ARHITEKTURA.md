@@ -333,6 +333,37 @@ zaseban `/admin` dio Next.js aplikacije zaštićen `admin` rolom — ne treba po
 
 ---
 
+### §L Category-first pregledavanje i paginacija [odluka #12 — ODOBRENO 2026-09-14]
+
+Razlog: katalog naraste na ~3200 pružatelja (~110 po kategoriji). Prikaz "svih" je
+nepregledan, a karta bi imala pretjeran broj pinova. Zato se pregledavanje sužava na
+JEDNU kategoriju.
+
+Pravila (komponente ih moraju slijediti):
+- **Landing** ne izlistava sve pružatelje. Hero = tražilica + **grid kategorija** (29,
+  grupiran po budžetskim omotnicama) + odabir regije. Lista i karta se pune **tek nakon
+  odabira kategorije** (odluka a).
+- **Rezultati** su uvijek u opsegu jedne kategorije (opcionalno + regija). URL ostaje
+  `/regija/kategorija` (SEO/shareable — nepromijenjeno).
+- **Paginacija** (odluka b, c): `pageSize` default **24**, cap 50 (već u ugovoru);
+  UI "Učitaj još" (load-more) + `?page=` linkovi s `rel=next/prev` za crawlere; ukupan
+  broj vidljiv ("214 rezultata").
+- **Karta** (odluka d): pinovi samo odabrane kategorije; zbog geokodiranja po gradu
+  (centroid) dodati **mali deterministički jitter** po slugu oko centroida da se pinovi
+  ne slažu jedan na drugi; klasteri i dalje rade.
+
+API posljedica (Faza 1): NOVI **`GET /api/categories?region=`** → `[{slug,name,group,count}]`
+(count po SVIM kategorijama §4.3; opcionalno region-scoped). Klijent više nema sve
+pružatelje lokalno pa ne može sam brojati. `/api/vendors`: category ostaje opcionalan u
+ugovoru (SEO/robusnost), ali frontend ga na landingu ne zove bez kategorije.
+
+**Geokodiranje (napomena za import):** u trenutnom Excelu 5 redova ima koordinate, 3172
+samo grad (→ Nominatim, precision=city, jitter na karti), 1 samo regiju (bez pina).
+Geokodiranje je jednokratni korak importa (1 req/s + cache); vlasnik NE popunjava
+koordinate ručno.
+
+---
+
 ## 7. Faze rada (svaka faza ≈ jedna radna sesija s modelom)
 
 > Za svaku fazu: raditi na `develop` (ili kratkoživućoj `claude/*` grani mergeanoj u
@@ -345,12 +376,14 @@ health endpoint, CI-friendly struktura. Definition of done: `docker compose up` 
 API koji vraća prazan `/api/vendors` odgovor u ispravnom obliku iz `API.md`.
 
 **Faza 1 — model + migracije + import.** Entiteti iz §3 (uklj. vendor_categories §4.3,
-events + daily_stats §A, prazan sponsorships §M.4), EF migracije, import komanda
-za Excel s 2500 pružatelja (idempotentna, s čišćenjem iz §4, uklj. dodatne_kategorije,
-pokrivanje §4.1 i geokodiranje gradova bez koordinata). `POST /api/events` + rollup job.
-DoD: baza puna,
-`/api/vendors` s filtrima (q, region, category, page) vraća stvarne podatke identično
-mock obliku; `pg_trgm` typeahead za `/api/suggest`.
+events + daily_stats §A, prazan sponsorships §M.4), EF migracije, .NET konzolna import
+komanda (odluka #4) za Excel s ~3200 pružatelja (idempotentna po slugu, s čišćenjem iz §4,
+uklj. dodatne_kategorije, pokrivanje §4.1 i geokodiranje gradova bez koordinata — 1 req/s
++ cache). Kontakti (telefon/email) uvoze se u bazu ali se NE serijaliziraju u javni
+`/api/vendors` (odluka #13 / §8-§9). `POST /api/events` + rollup job. NOVI `GET /api/categories`
+s brojačima (§L). DoD: baza puna; `/api/vendors` s filtrima (q, region, category, page,
+pageSize default 24 cap 50) vraća stvarne podatke identično mock obliku bez kontakata;
+`pg_trgm` typeahead za `/api/suggest`; `/api/categories` i `/api/regions` vraćaju brojače.
 
 **Faza 2 — spajanje frontenda.** `rewrites` na .NET API, gašenje mock ruta (ostaju u
 repou kao referenca dok sve ne prođe), regresijska provjera: karta, filtri, usporedba,
@@ -428,19 +461,20 @@ Ugrađeno u arhitekturu od početka:
 
 ## 11. Odluke koje čekaju odobrenje vlasnika (sažetak)
 
-| # | Odluka | Preporuka |
+| # | Odluka | Preporuka / Status |
 |---|---|---|
-| 1 | Hosting backenda (§2.1) | Hetzner VPS + Docker |
-| 2 | Pretraga (§2.2) | Postgres pg_trgm + FTS, bez Typesensea |
-| 3 | Pohrana slika (§2.3) | Cloudflare R2 + WebP varijante + žig |
-| 4 | Import alat (§4) | .NET konzolna komanda umjesto Node skripte |
-| 5 | Email servis (§5) | Resend |
+| 1 | Hosting backenda (§2.1) | Hetzner VPS + Docker (nije nužno za Fazu 1) |
+| 2 | Pretraga (§2.2) | ✅ ODOBRENO 2026-09-14 — Postgres pg_trgm + FTS, bez Typesensea |
+| 3 | Pohrana slika (§2.3) | Cloudflare R2 + WebP + žig (Faza 5) |
+| 4 | Import alat (§4) | ✅ ODOBRENO 2026-09-14 — .NET konzolna komanda |
+| 5 | Email servis (§5) | Resend (Faza 3) |
 | 6 | Redoslijed faza 3↔4 (§7) | Auth prije claima |
 | 7 | Sjedište vs. pokrivanje + location_precision (§4.1) | Implementirano u Excel/Node pipelineu — potvrditi prije .NET modela |
 | 8 | Monetizacija (§M) | ✅ ODOBRENO s dopunama: freemium granica M.1, Founding partner, karta trajno organska |
 | 9 | Sustav oznaka: 2 slota, pragovi Top ocijenjen 4.8/20 (§4.2) | Implementirano v1; pragove potvrditi na stvarnim podacima |
-| 10 | Više kategorija: M2M + primarna, limit 3 (§4.3) | ✅ ODOBRENO — Excel/import implementiran, UI pravila za sljedeću sesiju |
+| 10 | Više kategorija: M2M + primarna, limit 3 (§4.3) | ✅ ODOBRENO — Excel/import + UI (Zadatak A) implementirani |
 | 11 | Analitika: vlastiti first-party, agregatno bez PII (§A) | ✅ ODOBRENO — implementacija Faza 1-2 |
+| 12 | Category-first pregledavanje + paginacija (§L) | ✅ ODOBRENO 2026-09-14 (defaulti a-d) — v. §L |
+| 13 | GDPR kontakti pri importu: uvezi u bazu, NE izlaži javno (§8/§9) | ✅ ODOBRENO 2026-09-14 |
 
-Odobrenjem (ili izmjenom) ovih 6 stavki plan postaje izvršiv — sljedeći razgovor može
-početi rečenicom: "Kreni s fazom 0 prema PLAN-ARHITEKTURA.md".
+Preostale otvorene: #1, #3, #5, #7, #9 (nisu blokeri za Fazu 1). Faza 1 može krenuti.
