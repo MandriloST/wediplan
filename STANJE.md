@@ -4,7 +4,7 @@
 > Ažurira se na kraju SVAKE radne sesije (kratko, činjenično). Novije sesije na vrhu.
 > Uvijek provjeriti i stvarni `git log` — repo je izvor istine, ovo je sažetak.
 
-## Trenutna faza: **0 — ZAVRŠENA** → sljedeće: Faza 1 (model + migracije + import)
+## Trenutna faza: **Zadatak A — ZAVRŠEN** → sljedeće: Faza 1 (Zadatak B: backend + import 3178 pružatelja)
 
 ## Stalna pravila predaje (vrijede svaku sesiju)
 - Rad isključivo na `develop` (ili `claude/*` → develop). `main` se ne dira.
@@ -16,7 +16,45 @@
 
 ---
 
-## Sesija 2026-09-09 — odluke #7–#11, Excel pipeline proširen (bez backend koda) ✅
+## Sesija 2026-09-14 — Zadatak A: M2M kategorije u UI-ju (frontend-only) ✅
+
+**Implementirano (frontend, bez backenda):**
+- `lib/categories.ts` (NOVO) — jedno mjesto istine za §4.3: `vendorCategories`,
+  `extraCategories`, `hasCategory`, `categoryCounts` (broji po SVIM kategorijama),
+  `compareCommonCategories` + `canAddToCompare` (usporediva samo ako dijele ≥1 kategoriju),
+  `COMPARE_INCOMPATIBLE_HINT`.
+- `lib/search.ts` — filter kategorije sada `hasCategory(v, cat)` (hvata primarnu I dodatne).
+- `components/VendorCard.tsx` + `components/VendorProfile.tsx` — checkbox "usporedi"
+  onemogućen (disabled + tooltip) kad pružatelj ne dijeli kategoriju s već odabranima.
+- `components/VendorProfile.tsx` — uz primarnu diskretno "· također: <dodatne>".
+- `app/globals.css` — stil `.compare-box.disabled` (opacity + not-allowed).
+- Budžet, slika, breadcrumb, "Slične" NISU dirani — koriste primarnu (`vendor.category`),
+  što je ispravno po §4.3.
+
+**Verificirano:** `npm run build` prolazi; algoritam (filtriranje/brojači/blokada usporedbe)
+testiran na sintetičkim višekategorijskim vendorima — svih 12 provjera prolazi.
+Napomena: `data/vendors.json` u repou (37 mock vendora) NEMA višekategorijskih, pa efekt
+nije vidljiv dok se ne uveze pravi Excel (v. dolje). Brojači kategorija: helper spreman,
+ali chipovi u `ExploreShell` trenutno NE prikazuju brojeve (nije mijenjano — nema regresije).
+
+**Uploadani Excel (`vendors-live.xlsx`, 3178 pružatelja) — provjeren, NIJE commitan:**
+187 pružatelja ima `dodatne_kategorije`; 2298 telefon, 1751 email (GDPR — v. Zadatak B).
+Odluka gdje ide (regeneracija JSON-a sada vs. .NET import u Fazi 1) čeka vlasnika (v. dolje).
+
+## ODLUKE KOJE ČEKAM OD VLASNIKA (prije/na početku Faze 1 = Zadatak B)
+1. **Kamo s novim Excelom (3178) i kada frontend prikazuje pravih 3178?**
+   (a) odmah pokrenuti postojeći Node import → `data/vendors.json` (frontend odmah pun,
+   ali bez geokodiranja gradova); (b) čekati .NET import u Fazi 1 (čišće, geokodiranje
+   uključeno, ali frontend do Faze 2 ostaje na 37 mock vendora). **Preporuka: (b).**
+2. **Import alat** (plan §4/§11 #4): .NET konzolna komanda (preporuka) vs. zadržati Node.
+3. **Hosting/baza/email/slike** (plan §11 #1,#2,#3,#5) — potvrditi preporuke da Faza 1
+   krene bez zastoja (za Fazu 1 nužni su samo #2 baza=Postgres+pg_trgm, ostalo može kasnije).
+4. **GDPR kontakti pri importu:** telefon/email fizičkih osoba (obrti) — po §8/§9 NE
+   prikazivati u listi i ne objavljivati mobitele bez claima. Potvrditi: uvoziti ih u
+   bazu ali NE serIjalizirati u javni `/api/vendors` (učitavaju se na klik, faza kasnije)?
+   **Preporuka: da — uvezi, ne izlaži javno.**
+
+
 
 **Odlučeno i zapisano u PLAN-ARHITEKTURA.md:** §4.1 sjedište/pokrivanje, §4.2 oznake,
 §4.3 više kategorija (M2M + primarna, limit 3), §M monetizacija (freemium granica,

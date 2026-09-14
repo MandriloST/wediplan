@@ -257,6 +257,8 @@ select option:checked {
 .vcard .badges { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
 .vcard .compare-box { display: flex; align-items: center; gap: 6px; margin-top: 7px; font-size: 13.5px; cursor: pointer; color: var(--muted); }
 .vcard .compare-box input { width: 16px; height: 16px; accent-color: var(--primary); cursor: pointer; }
+.compare-box.disabled { opacity: .45; cursor: not-allowed; }
+.compare-box.disabled input { cursor: not-allowed; }
 .vcard .fav {
   position: absolute; top: 8px; right: 8px; border: 0; background: none;
   font-size: 17px; color: var(--border-strong); min-width: 34px; min-height: 34px; line-height: 1;

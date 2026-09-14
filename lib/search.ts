@@ -1,5 +1,6 @@
 import { CATEGORIES, CATEGORY_BY_SLUG, REGIONS, VENDORS } from "./data";
 import type { Paged, Vendor, VendorQuery } from "./types";
+import { hasCategory } from "./categories";
 
 const norm = (s: string) =>
   s
@@ -18,7 +19,7 @@ export function queryVendors(q: VendorQuery): Paged<Vendor> {
         v.coverage === "hr" || // pokriva cijelu Hrvatsku
         (Array.isArray(v.coverage) && v.coverage.includes(q.region!)) // dolazi u regiju
     );
-  if (q.category) items = items.filter((v) => v.category === q.category);
+  if (q.category) items = items.filter((v) => hasCategory(v, q.category!));
   if (q.q) {
     const needle = norm(q.q);
     items = items.filter((v) => {

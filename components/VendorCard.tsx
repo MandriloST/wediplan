@@ -10,6 +10,7 @@ import { useBudget, useCompare, useFavorites } from "@/stores";
 import { coverImage } from "@/lib/images";
 import { vendorBadges } from "@/lib/badges";
 import { GROUP_LABELS } from "@/lib/data";
+import { canAddToCompare, COMPARE_INCOMPATIBLE_HINT } from "@/lib/categories";
 
 export default function VendorCard({ vendor }: { vendor: Vendor }) {
   const { ids, toggle } = useCompare();
@@ -18,6 +19,7 @@ export default function VendorCard({ vendor }: { vendor: Vendor }) {
   const over = isOverBudget(vendor, plan);
   const cat = CATEGORY_BY_SLUG[vendor.category];
   const checked = ids.includes(vendor.id);
+  const compareDisabled = !checked && !canAddToCompare(vendor, ids);
   const fav = favorites.ids.includes(vendor.id);
   const img = coverImage(vendor);
 
@@ -62,8 +64,16 @@ export default function VendorCard({ vendor }: { vendor: Vendor }) {
           )}
           {!over && cat?.short && <span className="badge">{cat.short}</span>}
         </div>
-        <label className="compare-box">
-          <input type="checkbox" checked={checked} onChange={() => toggle(vendor.id)} />
+        <label
+          className={`compare-box${compareDisabled ? " disabled" : ""}`}
+          title={compareDisabled ? COMPARE_INCOMPATIBLE_HINT : undefined}
+        >
+          <input
+            type="checkbox"
+            checked={checked}
+            disabled={compareDisabled}
+            onChange={() => toggle(vendor.id)}
+          />
           usporedi
         </label>
       </div>

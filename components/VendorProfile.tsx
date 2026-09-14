@@ -12,6 +12,11 @@ import AvailabilityCalendar from "./AvailabilityCalendar";
 import { vendorImages } from "@/lib/images";
 import { vendorBadges } from "@/lib/badges";
 import VendorCard from "./VendorCard";
+import {
+  canAddToCompare,
+  COMPARE_INCOMPATIBLE_HINT,
+  extraCategories,
+} from "@/lib/categories";
 
 export default function VendorProfile({ data }: { data: VendorProfileData }) {
   const { vendor, about, services, importedReviews } = data;
@@ -58,7 +63,14 @@ export default function VendorProfile({ data }: { data: VendorProfileData }) {
             <div>
               <h1>{vendor.name}</h1>
               <p className="sub" style={{ margin: "2px 0 0" }}>
-                {cat.name} · {vendor.city ? `${vendor.city}, ` : ""}{region.name}
+                {cat.name}
+                {(() => {
+                  const extra = extraCategories(vendor)
+                    .map((s) => CATEGORY_BY_SLUG[s]?.short ?? CATEGORY_BY_SLUG[s]?.name)
+                    .filter(Boolean);
+                  return extra.length ? ` · također: ${extra.join(", ")}` : "";
+                })()}
+                {" · "}{vendor.city ? `${vendor.city}, ` : ""}{region.name}
                 {vendor.coverage === "hr" && " · pokriva cijelu Hrvatsku"}
                 {vendor.coverageNote ? ` · ${vendor.coverageNote}` : ""}
               </p>
@@ -147,8 +159,22 @@ export default function VendorProfile({ data }: { data: VendorProfileData }) {
           )}
 
           <div className="profile-actions">
-            <label className="compare-box big">
-              <input type="checkbox" checked={ids.includes(vendor.id)} onChange={() => toggle(vendor.id)} />
+            <label
+              className={`compare-box big${
+                !ids.includes(vendor.id) && !canAddToCompare(vendor, ids) ? " disabled" : ""
+              }`}
+              title={
+                !ids.includes(vendor.id) && !canAddToCompare(vendor, ids)
+                  ? COMPARE_INCOMPATIBLE_HINT
+                  : undefined
+              }
+            >
+              <input
+                type="checkbox"
+                checked={ids.includes(vendor.id)}
+                disabled={!ids.includes(vendor.id) && !canAddToCompare(vendor, ids)}
+                onChange={() => toggle(vendor.id)}
+              />
               Dodaj u usporedbu
             </label>
             <button
