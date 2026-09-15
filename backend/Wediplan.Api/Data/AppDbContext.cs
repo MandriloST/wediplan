@@ -97,7 +97,7 @@ public class AppDbContext : DbContext
         // snake_case za sve stupce (Postgres konvencija)
         foreach (var entity in b.Model.GetEntityTypes())
             foreach (var prop in entity.GetProperties())
-                prop.SetColumnName(ToSnake(prop.GetColumnName()));
+                prop.SetColumnName(ToSnake(prop.GetColumnName() ?? prop.Name));
     }
 
     private static string ToSnake(string name)

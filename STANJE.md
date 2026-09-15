@@ -4,7 +4,7 @@
 > Ažurira se na kraju SVAKE radne sesije (kratko, činjenično). Novije sesije na vrhu.
 > Uvijek provjeriti i stvarni `git log` — repo je izvor istine, ovo je sažetak.
 
-## Trenutna faza: **Zadatak B1 ✅ (model + read endpointi)** → sljedeće: B2 (import 3178 + /api/events + rollup)
+## Trenutna faza: **Zadatak B2 ✅ (import + analitika, kod predan)** → sljedeće: Faza 2 (spajanje frontenda) + Zadatak D (category-first UI)
 
 ## Stalna pravila predaje (vrijede svaku sesiju)
 - Rad isključivo na `develop` (ili `claude/*` → develop). `main` se ne dira.
@@ -29,6 +29,41 @@
 
 ## PREOSTALE OTVORENE ODLUKE (nisu blokeri za Fazu 1)
 Hosting (#1), slike/R2 (#3), email/Resend (#5), pragovi oznaka (#9), potvrda §4.1 modela (#7).
+
+---
+
+## Sesija 2026-09-14 (3) — Zadatak B2: import + analitika ✅ (kod predan, .NET verifikacija na vlasniku)
+
+**Dodano (`backend/Wediplan.Api/Import/` + kontroleri):**
+- `ImportRules.cs` — vjeran port pravila `scripts/import-vendors.mjs` (norm, slugify,
+  cat/reg lookup + merged, social URL, coords parse+auto-swap, coverage, venue set).
+- `ExcelImporter.cs` — čita xlsx (ClosedXML), OTPORAN NA GREŠKE (uveze valjane, preskoči
+  neispravne uz `import-report.txt`), IDEMPOTENTAN po slugu (upsert + zamjena kategorija/
+  recenzija), geokodira gradove bez koordinata. `--dry-run` = validacija bez pisanja/mreže.
+- `Geocoder.cs` — Nominatim + trajni JSON cache, 1 req/s (662 jedinstvena grada ≈ 11 min prvi put).
+- `EventsController.cs` — `POST /api/events` (batch ≤20, whitelist §A, in-memory rate limit
+  po IP-u koji se NE pohranjuje, tihi 204, fail-silent).
+- `Rollup.cs` + `--rollup [datum]` — events → daily_stats (idempotentno po danu; dimenzije iz props).
+- `Program.cs` CLI grane `--import`/`--rollup`; `csproj` + ClosedXML 0.104.1; API.md /api/events.
+
+**Verificirano nad STVARNIM Excelom (3178) + pravi Postgres 16:** pravila portana i puštena
+na cijeli set → **3091 uvezeno, 82 preskočeno** (48 prazna regija + 31 „Simbolični matičar"
++ par duplikata/koord.), 3309 kategorija-veza. Read-upiti (/api/categories s coverage,
+category+region, /api/regions, /api/suggest, M2M spajanje) i rollup provjereni i točni.
+⚠️ `dotnet build`/geokodiranje/pokretanje NISU izvršeni (sandbox bez nuget/mreže) — na vlasniku.
+
+**NALAZI IZ STVARNIH PODATAKA (bitno):** pod strogim Node pravilima bilo bi 2214 grešaka
+(2123× prazan nacin_cijene, 48× prazna regija, 31× „Simbolični matičar", 2× krivi koord.).
+B2 defaulti: prazan nacin_cijene → onRequest (warn); import otporan (skip+report).
+
+## ODLUKE KOJE ČEKAM (za čist 100% uvoz — import radi i bez njih, ali te retke preskače)
+1. **„Simbolični matičar" (31 vendora)** — dodati novu kategoriju? Ako DA, dodajem
+   `{ slug:"simbolicni-maticar", name:"Simbolični matičar", group:"ostalo" }` u
+   `Catalog.cs` (backend) I `lib/data.ts` (frontend, +opcionalno short). Potvrdi slug/naziv/grupu.
+2. **48 pružatelja bez regije** — popis je u `import-report.txt` (na tvom stroju nakon
+   --dry-run); ti ispuniš regiju u Excelu pa reimportaš (idempotentno). Alternativa: mogu
+   dodati mapiranje grad→regija da se izvede automatski — reci ako to želiš.
+3. **Prazan nacin_cijene → onRequest** — potvrđuješ default? (2123 vendora)
 
 ---
 

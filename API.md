@@ -73,6 +73,17 @@ Profil pružatelja (implementirano, mock):
   "importedReviews": [{ "author": "Marija i Ivan", "rating": 5, "text": "…", "source": "Google recenzije", "year": 2025 }] }
 ```
 
+## POST /api/events
+First-party analitika (§A). Batch max 20, whitelist `event_name`, tihi **204**.
+IP se koristi samo za rate limit (ne pohranjuje se); bez PII. `session_hash` s klijenta.
+```json
+[{ "name": "search_performed", "sessionHash": "ab12…", "page": "/",
+   "props": { "category": "foto-i-video", "region": "dalmacija" } }]
+```
+Whitelist v1: page_view, search_performed, vendor_viewed, map_region_clicked,
+map_pin_clicked, compare_added, compare_viewed, budget_calculated, outbound_click,
+favorite_added. Rollup: `dotnet run -- --rollup [YYYY-MM-DD]` → daily_stats.
+
 ## Kasnije (Coming soon)
 - `GET /api/vendors/{id}/availability?month=YYYY-MM` → `{ "days": { "2026-09-05": "free|busy" } }` — do tada frontend koristi deterministički mock iz `lib/availability.ts` (ista logika na profilu i u usporedbi)
 - `POST /api/plan` (sync plana uz auth), `POST /api/reviews` (registrirani korisnici)

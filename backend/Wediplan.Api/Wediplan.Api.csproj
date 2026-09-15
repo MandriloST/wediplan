@@ -14,6 +14,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <!-- Excel čitanje za import komandu (B2) -->
+    <PackageReference Include="ClosedXML" Version="0.104.1" />
   </ItemGroup>
 
 </Project>

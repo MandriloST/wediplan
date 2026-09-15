@@ -97,3 +97,38 @@ kojem je kod pisan (nema pristupa nuget.org). Umjesto toga, cijela shema i SVI u
 kontroleri generiraju (M2M brojači, coverage filter, q ILIKE, sort/paginacija, pg_trgm
 typeahead, tsvector, oblik VendorDto JSON-a) verificirani su nad pravim Postgresom 16 i
 uzorkom od 80 stvarnih pružatelja. `dotnet build`, migracija i pokretanje su na vama.
+
+---
+
+## Faza 1 — B2 (import + analitika) — dodano 2026-09-14
+
+**Import komanda** (`Import/`): čita Excel (ClosedXML), primjenjuje pravila iz
+`scripts/import-vendors.mjs` (norm/slugify/kategorije/regije/coverage/precision/cijena/
+social/dodatne kategorije), **otporan na greške** (uveze valjane, preskoči neispravne uz
+`import-report.txt`), **idempotentan po slugu**, geokodira gradove bez koordinata
+(Nominatim, ~1/s + trajni cache `geocode-cache.json`). Kontakti se uvoze u bazu ali se ne
+izlažu u API.
+
+```bash
+cd backend/Wediplan.Api
+export WEDIPLAN_DB="Host=localhost;Port=5433;Database=wediplan;Username=wediplan;Password=wediplan"
+
+# 1) NAJPRIJE dry-run — vidi što će se uvesti/preskočiti, bez pisanja i bez mreže:
+dotnet run -- --import /put/do/vendors-live.xlsx --dry-run
+
+# 2) pravi uvoz (geokodira ~662 grada, ~11 min prvi put, poslije cache):
+dotnet run -- --import /put/do/vendors-live.xlsx
+#   (bez geokodiranja: dodaj --no-geocode)
+```
+⚠️ U `Import/Geocoder.cs` zamijenite kontakt-email u User-Agentu (Nominatim politika).
+
+**Analitika (§A):** `POST /api/events` (batch ≤20, whitelist, tihi 204, IP se ne pohranjuje).
+Dnevni rollup: `dotnet run -- --rollup [YYYY-MM-DD]` (default: jučer) → `daily_stats`.
+Postavi noćni cron/systemd timer da ga zove.
+
+### Verifikacija B2 (sandbox)
+`.NET`/Nominatim se NE mogu pokrenuti u okruženju gdje je kod pisan (nema nuget/mreže).
+Umjesto toga pravila importa portana su i puštena na CIJELI stvarni Excel (3178), rezultat
+(3091 uvezeno, 82 preskočeno) učitan u pravi Postgres 16 i provjereni SVI read-upiti
+(kategorije, category+coverage, regije, suggest, M2M spajanje) te rollup. `dotnet build`,
+geokodiranje i pokretanje su na vama; `--dry-run` daje isti izvještaj na vašem stroju.
