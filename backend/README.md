@@ -48,3 +48,52 @@ curl "http://localhost:5080/api/vendors?page=2&pageSize=999"
   ne mijenjati, frontend ovisi o tome.
 - `pageSize ≤ 50` — anti-scraping pravilo, ne dizati.
 - Commit poruke hrvatski, `feat:`/`fix:` prefiks; rad na `develop`.
+
+---
+
+## Faza 1 — B1 (model + read endpointi) — dodano 2026-09-14
+
+Entiteti (`Domain/Entities.cs`), EF konfiguracija (`Data/AppDbContext.cs`), šifrarnik
+kategorija/regija/budžeta (`Data/Catalog.cs`, vjeran port `lib/data.ts`/`lib/budget.ts`),
+mapper bez kontakata (`Data/VendorMapper.cs`) i kontroleri:
+`/api/vendors` (filtri q/region+coverage/category-M2M/page, pageSize 24 cap 50, sort
+rating→reviewCount→id), `/api/vendors/{slug}`, `/api/categories?region=` (brojači po svim
+kategorijama), `/api/regions`, `/api/suggest` (šifrarnik + pg_trgm), `/api/budget-defaults`.
+Kontakti (telefon/email/web) se uvoze u bazu ali se NE vraćaju u API (§8-§9).
+
+### Kreiranje baze i migracija (na vašem stroju — treba .NET 8 SDK + Postgres)
+```bash
+# 1) digni Postgres (compose iz backend/ digne ga na :5433)
+docker compose up -d postgres
+
+# 2) EF alat (jednom)
+dotnet tool install -g dotnet-ef            # ako već nije
+
+# 3) generiraj i primijeni migraciju
+cd Wediplan.Api
+export WEDIPLAN_DB="Host=localhost;Port=5433;Database=wediplan;Username=wediplan;Password=wediplan"
+dotnet ef migrations add InitFaza1
+dotnet ef database update
+
+# 4) pokreni API
+dotnet run   # http://localhost:5080
+```
+Alternativa bez EF-a (brzi pregled/test sheme): `db/schema.sql` je referentna shema koja
+zrcali EF model (učitaj s `psql -f db/schema.sql`). Izvor istine ostaje EF migracija —
+usporedite generiranu migraciju sa `db/schema.sql`.
+
+### Provjera (DoD B1) — baza je prazna dok ne odradite import (B2)
+```bash
+curl "http://localhost:5080/api/vendors?category=foto-i-video&region=dalmacija&pageSize=24"
+#   → {"items":[...bez telefona/emaila...],"total":N,"page":1,"pageSize":24}
+curl "http://localhost:5080/api/categories?region=dalmacija"   # brojači po kategorijama
+curl "http://localhost:5080/api/regions"                        # brojači po regijama
+curl "http://localhost:5080/api/suggest?q=foto"                 # typeahead
+curl "http://localhost:5080/api/vendors/<slug>"                 # profil
+```
+
+⚠️ **Verifikacija u sandboxu:** `.NET build`/`dotnet ef` se NE mogu izvršiti u okruženju u
+kojem je kod pisan (nema pristupa nuget.org). Umjesto toga, cijela shema i SVI upiti koje
+kontroleri generiraju (M2M brojači, coverage filter, q ILIKE, sort/paginacija, pg_trgm
+typeahead, tsvector, oblik VendorDto JSON-a) verificirani su nad pravim Postgresom 16 i
+uzorkom od 80 stvarnih pružatelja. `dotnet build`, migracija i pokretanje su na vama.

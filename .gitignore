@@ -6,3 +6,4 @@ backend/**/bin/
 backend/**/obj/
 backend/**/.vs/
 backend/**/*.user
+/.vs

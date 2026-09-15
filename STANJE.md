@@ -4,7 +4,7 @@
 > Ažurira se na kraju SVAKE radne sesije (kratko, činjenično). Novije sesije na vrhu.
 > Uvijek provjeriti i stvarni `git log` — repo je izvor istine, ovo je sažetak.
 
-## Trenutna faza: **Zadatak A ✅ + sve odluke za Fazu 1 potvrđene (2026-09-14)** → sljedeće: Zadatak B (Faza 1 backend + import 3178)
+## Trenutna faza: **Zadatak B1 ✅ (model + read endpointi)** → sljedeće: B2 (import 3178 + /api/events + rollup)
 
 ## Stalna pravila predaje (vrijede svaku sesiju)
 - Rad isključivo na `develop` (ili `claude/*` → develop). `main` se ne dira.
@@ -29,6 +29,47 @@
 
 ## PREOSTALE OTVORENE ODLUKE (nisu blokeri za Fazu 1)
 Hosting (#1), slike/R2 (#3), email/Resend (#5), pragovi oznaka (#9), potvrda §4.1 modela (#7).
+
+---
+
+## Sesija 2026-09-14 (2) — Zadatak B1: model + read endpointi ✅
+
+**Dodano (backend, `backend/Wediplan.Api/`):**
+- `Domain/Entities.cs` — Vendor (+kontakti koji se NE izlažu), VendorCategory (M2M §4.3),
+  VendorPhoto, ImportedReview, Event, DailyStat, Sponsorship. (auth/favorites/user_reviews
+  ostaju za Fazu 3/4 — zasebne migracije.)
+- `Data/AppDbContext.cs` — snake_case, unique slug, pg_trgm ekstenzija + GIN trgm indeksi
+  (name, city), generirani `tsvector` (name+city+about) + GIN, FK/cascade, composite ključevi.
+- `Data/Catalog.cs` — vjeran port `lib/data.ts` (28 kategorija + short/group), 5 regija
+  (center/bounds), budžetske raspodjele (`lib/budget.ts`). SLUGOVI = ugovor, ne mijenjati.
+- `Data/VendorMapper.cs` — Vendor→VendorDto BEZ kontakata; coverage kao "hr"|string[];
+  categories samo kad >1; price objekt po kind.
+- `Contracts/Contracts.cs` — VendorDto proširen na PUNI frontend oblik (categories, coverage,
+  locationPrecision, social, claimStatus, ratingSource) + CategoryDto.
+- Kontroleri: `VendorsController` (lista: q/region+coverage/category-M2M/page, pageSize 24
+  cap 50, sort rating→reviewCount→id; + profil `{slug}`), `CategoriesController`
+  (`/api/categories?region=` brojači po svim kategorijama §L), `RegionsController`,
+  `SuggestController` (šifrarnik + pg_trgm ILIKE, diacritic-insensitivan za nazive iz koda),
+  `BudgetDefaultsController`. Health ostaje iz Faze 0.
+- `Data/DesignTimeDbContextFactory.cs` (za `dotnet ef`), `db/schema.sql` (referentna shema).
+
+**Verificirano:** cijela shema + SVI upiti kontrolera pokrenuti nad PRAVIM Postgresom 16
+i uzorkom od 80 stvarnih pružatelja (26 s dodatnim kategorijama): M2M brojači (zbroj 115 >
+80 vendora ✓), coverage region filter, category-M2M filter, q ILIKE, sort+paginacija,
+pg_trgm typeahead (fuzzy), tsvector FTS, i rekonstruiran VendorDto JSON (točan oblik, bez
+kontakata, coverage unija, categories primarna-prva). ⚠️ `dotnet build`/`dotnet ef`/migracija
+NISU pokrenuti (sandbox nema nuget.org) — na vlasniku (standardni EF/Npgsql kod).
+
+**Poznati manji gap (za B2):** q pretraga u SQL-u je ILIKE bez diacritic-foldinga na
+podacima (nazivi iz šifrarnika JESU diacritic-insensitivni). U B2, tijekom importa, upisati
+normalizirane (lowercase+unaccent) pomoćne vrijednosti pa q gađa njih — tada puna paritet s
+`lib/search.ts`.
+
+**Sljedeće (B2):** .NET import komanda (`dotnet run -- --import <xlsx>`) koja replicira sva
+pravila `scripts/import-vendors.mjs` (idempotentno po slugu, dodatne_kategorije→vendor_categories,
+coverage/precision, venue-pravilo, Skriveno→is_published, social normalizacija) + Nominatim
+geokodiranje (precision=city, 1 req/s + cache); `POST /api/events` (§A) + noćni rollup.
+Vlasnik na početku B2 dostavlja `data/vendors-live.xlsx` (3178, sadrži kontakte — ne u repo).
 
 ---
 
