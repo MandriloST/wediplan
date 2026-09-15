@@ -11,10 +11,16 @@ builder.Services.AddControllers().AddJsonOptions(o =>
     o.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 });
 
-var connectionString = builder.Configuration.GetConnectionString("Default")
-    ?? Environment.GetEnvironmentVariable("WEDIPLAN_DB")
+// Prioritet: WEDIPLAN_DB (env) > appsettings ConnectionStrings:Default > lokalni default.
+// Env NADJAČAVA appsettings da se ops-postavka lako mijenja bez rebuilda.
+var connectionString = Environment.GetEnvironmentVariable("WEDIPLAN_DB")
+    ?? builder.Configuration.GetConnectionString("Default")
     ?? "Host=localhost;Port=5433;Database=wediplan;Username=wediplan;Password=wediplan";
-builder.Services.AddDbContext<AppDbContext>(o => o.UseNpgsql(connectionString));
+
+builder.Services.AddDbContext<AppDbContext>(o =>
+    o.UseNpgsql(connectionString, npg =>
+        // Više Include kolekcija (Categories+Photos+…) → SplitQuery izbjegava kartezijev umnožak.
+        npg.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
 
 const string CorsPolicy = "frontend";
 builder.Services.AddCors(o => o.AddPolicy(CorsPolicy, p => p
@@ -38,8 +44,9 @@ if (args.Contains("--rollup"))
     var day = DateOnly.TryParse(dayArg, out var d) ? d
         : DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-1)); // default: jučer
     using var scope = app.Services.CreateScope();
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    await Wediplan.Api.Import.Rollup.RunAsync(db, day, CancellationToken.None);
+    var rdb = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    if (!await EnsureDbAsync(rdb)) { Environment.ExitCode = 1; return; }
+    await Wediplan.Api.Import.Rollup.RunAsync(rdb, day, CancellationToken.None);
     return;
 }
 
@@ -62,10 +69,43 @@ static async Task RunImportAsync(WebApplication app, string[] args)
     using var scope = app.Services.CreateScope();
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
+    // Fail-fast: provjeri bazu PRIJE (dugog) geokodiranja. Dry-run ne piše, ali svejedno
+    // pokušava upsert na kraju, pa i za njega ima smisla provjeriti.
+    if (!dryRun && !await EnsureDbAsync(db)) { Environment.ExitCode = 1; return; }
+
     Geocoder? geocoder = noGeocode || dryRun
         ? null
         : new Geocoder(Path.Combine(Directory.GetCurrentDirectory(), "geocode-cache.json"));
 
     var importer = new ExcelImporter(db, geocoder, dryRun);
     await importer.RunAsync(path, CancellationToken.None);
+}
+
+// Provjeri da je baza dostupna I da su tablice tu (migracije primijenjene). Jasna poruka.
+static async Task<bool> EnsureDbAsync(AppDbContext db)
+{
+    var cs = db.Database.GetConnectionString();
+    try
+    {
+        if (!await db.Database.CanConnectAsync())
+        {
+            Console.Error.WriteLine("GREŠKA: ne mogu se spojiti na bazu.");
+            Console.Error.WriteLine($"  Connection: {cs}");
+            Console.Error.WriteLine("  Provjeri: (1) Postgres radi (npr. `docker compose up -d postgres` u backend/),");
+            Console.Error.WriteLine("            (2) rola i baza 'wediplan' postoje, (3) port se poklapa (docker = 5433).");
+            Console.Error.WriteLine("  Bazu možeš pokazati i preko: set WEDIPLAN_DB=Host=localhost;Port=5433;Database=wediplan;Username=wediplan;Password=wediplan");
+            return false;
+        }
+        // probni upit — otkriva 'tablice ne postoje' (migracije nisu primijenjene)
+        await db.Vendors.CountAsync();
+        return true;
+    }
+    catch (Exception ex)
+    {
+        Console.Error.WriteLine("GREŠKA: baza je dostupna, ali shema nije spremna.");
+        Console.Error.WriteLine($"  Connection: {cs}");
+        Console.Error.WriteLine("  Vjerojatno migracije nisu primijenjene — pokreni: dotnet ef database update");
+        Console.Error.WriteLine($"  Detalj: {ex.GetType().Name}: {ex.Message}");
+        return false;
+    }
 }

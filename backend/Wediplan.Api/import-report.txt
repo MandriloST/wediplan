@@ -1,4 +1,4 @@
-# Wediplan import izvještaj — 2026-09-15 14:14:24Z
+# Wediplan import izvještaj — 2026-09-15 16:53:05Z
 
 ## Preskočeni retci (greške)
 red 318 (Angels35 Wedding Studio): nepoznata/prazna regija „”
